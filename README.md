@@ -1,42 +1,49 @@
-# sv
+# ewan's docs
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+Central documentation hub for all of ewan's projects. Posts are written in Markdown and published to the AT Protocol automatically via [Sequoia](https://sequoia.pub).
 
-## Creating a project
+Built with SvelteKit, Tailwind CSS (typography plugin), and `marked`. Deployed on Vercel.
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Adding a post
 
-```sh
-# create a new project
-npx sv create my-app
+Create a Markdown file in `src/content/documentation/`:
+
+```md
+---
+title: My Post
+description: A short description.
+date: 2025-01-01
+tags: [example]
+draft: false
+---
+
+Content goes here.
 ```
 
-To recreate this project with the same configuration:
+Posts with `draft: true` are excluded from the build. The filename becomes the URL slug — `my-post.md` → `/projects/my-post`.
+
+Headings (`##`, `###`) are automatically picked up for the per-post table of contents.
+
+## Development
 
 ```sh
-# recreate this project
-pnpm dlx sv create --template minimal --types ts --add prettier tailwindcss="plugins:typography" sveltekit-adapter="adapter:auto" --install pnpm ./
+pnpm install
+pnpm dev
 ```
 
-## Developing
+## Deployment
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+Deployed to Vercel via `@sveltejs/adapter-vercel`. Every push to `main` triggers a redeploy. All routes prerender at build time — the content files are read during the Vercel build, not at runtime.
 
 ```sh
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+pnpm build      # production build
+pnpm preview    # preview the build locally
 ```
 
-## Building
-
-To create a production version of your app:
+## Other commands
 
 ```sh
-npm run build
+pnpm check      # svelte-check type checking
+pnpm format     # prettier
+pnpm lint       # prettier --check
 ```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
