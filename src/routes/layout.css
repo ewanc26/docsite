@@ -1,2 +1,197 @@
 @import 'tailwindcss';
 @plugin '@tailwindcss/typography';
+
+/* ─── design tokens ──────────────────────────────────────────────────────── */
+:root {
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --color-crust:     #0d1210;
+  --color-mantle:    #141c19;
+  --color-base:      #1a2420;
+  --color-surface-0: #243028;
+  --color-surface-1: #2e3d34;
+  --color-overlay-0: #4d6b58;
+  --color-text:      #cdd6f4;
+  --color-subtext-0: #93b09a;
+  --color-green:     #a6e3a1;
+  --color-red:       #f38ba8;
+  --color-yellow:    #f9e2af;
+  --color-shadow:    #000000;
+}
+
+/* ─── base ───────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  min-height: 100dvh;
+  font-family: var(--font-mono);
+  font-size: clamp(13px, 3.5vw, 15px);
+  line-height: 1.6;
+  background-color: var(--color-crust);
+  color: var(--color-text);
+}
+
+/* ─── layout shell ───────────────────────────────────────────────────────── */
+.shell {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+    "titlebar titlebar"
+    "sidebar  main"
+    "footer   footer";
+  min-height: 100dvh;
+}
+
+@media (max-width: 640px) {
+  .shell {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "titlebar"
+      "sidebar"
+      "main"
+      "footer";
+  }
+}
+
+/* ─── titlebar ───────────────────────────────────────────────────────────── */
+.titlebar {
+  grid-area: titlebar;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1.2rem;
+  background-color: var(--color-surface-0);
+  border-bottom: 1px solid color-mix(in srgb, var(--color-green) 15%, transparent);
+  color: var(--color-green);
+  font-size: 0.8em;
+}
+
+.titlebar-dots { display: flex; gap: 0.4rem; }
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background-color: color-mix(in srgb, var(--color-green) 25%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-green) 40%, transparent);
+}
+
+.titlebar-title { margin-left: 0.25rem; }
+
+/* ─── sidebar ────────────────────────────────────────────────────────────── */
+.sidebar {
+  grid-area: sidebar;
+  padding: 1.4rem 1rem;
+  border-right: 1px solid color-mix(in srgb, var(--color-green) 12%, transparent);
+  background-color: var(--color-mantle);
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+.nav-group-label {
+  font-size: 0.7em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-green);
+  margin-bottom: 0.5rem;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.nav-links li::before {
+  content: '→ ';
+  color: var(--color-green);
+  opacity: 0.5;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--color-subtext-0);
+  font-size: 0.88em;
+  transition: color 0.15s;
+}
+
+.nav-links a:hover,
+.nav-links a[aria-current="page"] {
+  color: var(--color-green);
+}
+
+/* ─── main content ───────────────────────────────────────────────────────── */
+.main {
+  grid-area: main;
+  padding: clamp(1.5rem, 4vw, 3rem) clamp(1.2rem, 4vw, 3rem);
+  max-width: 760px;
+}
+
+/* ─── prose overrides (typography plugin base) ───────────────────────────── */
+.prose {
+  --tw-prose-body:    var(--color-text);
+  --tw-prose-lead:    var(--color-subtext-0);
+  --tw-prose-headings: var(--color-green);
+  --tw-prose-links:   var(--color-green);
+  --tw-prose-code:    var(--color-green);
+  --tw-prose-pre-bg:  var(--color-surface-0);
+  --tw-prose-hr:      color-mix(in srgb, var(--color-green) 15%, transparent);
+  --tw-prose-quotes:  var(--color-subtext-0);
+  --tw-prose-bold:    var(--color-text);
+  --tw-prose-counters: var(--color-overlay-0);
+  --tw-prose-bullets: var(--color-overlay-0);
+  color: var(--color-text);
+  font-family: var(--font-mono);
+}
+
+/* ─── section label (reusable) ───────────────────────────────────────────── */
+.section-label {
+  font-size: 0.72em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-green);
+  margin-bottom: 0.7rem;
+}
+
+/* ─── divider ────────────────────────────────────────────────────────────── */
+.divider {
+  border: none;
+  border-top: 1px solid color-mix(in srgb, var(--color-green) 12%, transparent);
+  margin: 1.2rem 0;
+}
+
+/* ─── callout card ───────────────────────────────────────────────────────── */
+.callout {
+  border: 1px solid color-mix(in srgb, var(--color-green) 20%, transparent);
+  border-radius: 0.5rem;
+  background-color: var(--color-mantle);
+  padding: 1rem 1.2rem;
+  font-size: 0.88em;
+  color: var(--color-subtext-0);
+}
+
+.callout.warn  { border-color: color-mix(in srgb, var(--color-yellow) 30%, transparent); }
+.callout.error { border-color: color-mix(in srgb, var(--color-red) 30%, transparent); }
+
+/* ─── footer ─────────────────────────────────────────────────────────────── */
+.footer {
+  grid-area: footer;
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.75em;
+  color: color-mix(in srgb, var(--color-green) 35%, transparent);
+  border-top: 1px solid color-mix(in srgb, var(--color-green) 10%, transparent);
+}
+
+.footer a {
+  text-decoration: underline;
+  color: inherit;
+}
+
+.footer a:hover { color: var(--color-green); }

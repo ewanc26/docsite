@@ -13,8 +13,12 @@
 		"lint": "prettier --check .",
 		"format": "prettier --write ."
 	},
+	"dependencies": {
+		"gray-matter": "^4.0.3",
+		"marked": "^15.0.12"
+	},
 	"devDependencies": {
-		"@sveltejs/adapter-auto": "^7.0.0",
+		"@sveltejs/adapter-static": "^3.0.0",
 		"@sveltejs/kit": "^2.50.2",
 		"@sveltejs/vite-plugin-svelte": "^6.2.4",
 		"@tailwindcss/typography": "^0.5.19",
