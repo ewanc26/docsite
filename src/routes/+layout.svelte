@@ -1,7 +1,7 @@
 <script lang="ts">
 	import './layout.css';
 	import { page } from '$app/stores';
-	import { Menu, X, Coffee } from '@lucide/svelte';
+	import { Menu, X, Coffee, Globe } from '@lucide/svelte';
 	import type { LayoutData } from './$types';
 
 	let { children, data }: { children: any; data: LayoutData } = $props();
@@ -88,6 +88,10 @@
 		</div>
 
 		<div class="nav-kofi">
+			<a href="https://ewancroft.uk" target="_blank" rel="noopener" class="kofi-btn">
+				<Globe size={14} />
+				my website
+			</a>
 			<a href="https://ko-fi.com/ewancroft" target="_blank" rel="noopener" class="kofi-btn">
 				<Coffee size={14} />
 				tip me on ko-fi
@@ -96,13 +100,17 @@
 	</nav>
 
 	<main class="main">
-		{@render children()}
+		<div class="content-wrap">
+			{@render children()}
+		</div>
 	</main>
 
 	<footer class="footer">
-		published via
-		<a href="https://sequoia.pub" target="_blank" rel="noopener">sequoia</a>
+		<a href="https://ewancroft.uk" target="_blank" rel="noopener">ewancroft.uk</a>
 		·
 		<a href="https://github.com/ewanc26" target="_blank" rel="noopener">github</a>
+		·
+		published via
+		<a href="https://sequoia.pub" target="_blank" rel="noopener">sequoia</a>
 	</footer>
 </div>

@@ -14,16 +14,15 @@
 </svelte:head>
 
 <div class="section-label">projects</div>
-<h1 style="color: var(--color-green); font-size: 1.4em; margin-bottom: 0.4rem;">documentation</h1>
-<p style="color: var(--color-subtext-0); font-size: 0.88em; margin-bottom: 1.6rem;">
-	Published to ATProto via <a href="https://sequoia.pub" target="_blank" rel="noopener"
-		style="color: var(--color-green);">Sequoia</a>.
+<h1 class="page-title">documentation</h1>
+<p class="page-desc">
+	Published to ATProto via <a href="https://sequoia.pub" target="_blank" rel="noopener" class="accent-link">Sequoia</a>.
 </p>
 
 <hr class="divider" />
 
 {#if data.posts.length === 0}
-	<p style="color: var(--color-overlay-0); font-size: 0.88em; font-style: italic;">
+	<p class="empty-state">
 		no docs yet — add markdown files to <code>src/content/documentation/</code>.
 	</p>
 {:else}
@@ -32,9 +31,7 @@
 			<li>
 				<a href="/projects/{post.slug}">{post.title}</a>
 				{#if post.date}
-					<span style="color: var(--color-overlay-0); font-size: 0.8em; margin-left: 0.6rem;">
-						{formatDate(post.date)}
-					</span>
+					<span class="inline-date">{formatDate(post.date)}</span>
 				{/if}
 			</li>
 		{/each}
