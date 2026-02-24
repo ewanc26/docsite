@@ -1,7 +1,7 @@
 ---
 title: mastodon-markov
 description: A Mastodon bot that generates and posts Markov chain text based on a source account. Unmaintained.
-date: 2025-02-24
+date: 2026-02-24
 tags: [mastodon, bot, python, markov, unmaintained]
 draft: false
 atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfkzidej7625"

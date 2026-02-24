@@ -1,7 +1,7 @@
 ---
 title: bluesky-markov
 description: A Bluesky bot that generates and posts Markov chain text based on a source account's posts. Unmaintained.
-date: 2025-02-24
+date: 2026-02-24
 tags: [bluesky, bot, python, markov, unmaintained]
 draft: false
 atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfkzih6mgg25"

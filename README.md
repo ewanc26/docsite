@@ -12,7 +12,7 @@ Create a Markdown file in `src/content/documentation/`:
 ---
 title: My Post
 description: A short description.
-date: 2025-01-01
+date: 2026-01-01
 tags: [example]
 draft: false
 ---

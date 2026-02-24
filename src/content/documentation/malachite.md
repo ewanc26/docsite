@@ -1,7 +1,7 @@
 ---
 title: Malachite
 description: Import your Last.fm and Spotify listening history to the AT Protocol network using the fm.teal.alpha.feed.play lexicon.
-date: 2025-02-24
+date: 2026-02-24
 tags: [malachite, atproto, lastfm, spotify, tools]
 draft: false
 atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfkzidriag25"
@@ -120,7 +120,7 @@ Example Last.fm record:
   "trackName": "Paint My Masterpiece",
   "artists": [{ "artistName": "Cjbeards", "artistMbId": "c8d4f4bf-..." }],
   "releaseName": "Masquerade",
-  "playedTime": "2025-11-13T23:49:36Z",
+  "playedTime": "2026-11-13T23:49:36Z",
   "originUrl": "https://www.last.fm/music/Cjbeards/_/Paint+My+Masterpiece",
   "submissionClientAgent": "malachite/v0.9.3",
   "musicServiceBaseDomain": "last.fm"

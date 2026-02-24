@@ -1,7 +1,7 @@
 ---
 title: platformer-collab
 description: A simple Godot 4 C# platformer made collaboratively.
-date: 2025-02-24
+date: 2026-02-24
 tags: [godot, csharp, game, collaboration]
 draft: false
 atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfkzibtbyw25"

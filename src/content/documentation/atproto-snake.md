@@ -1,7 +1,7 @@
 ---
 title: atproto-snake
 description: Classic Snake with AT Protocol OAuth login and high score saving to your PDS.
-date: 2025-02-24
+date: 2026-02-24
 tags: [atproto, sveltekit, game]
 draft: false
 atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfkzijoyow25"

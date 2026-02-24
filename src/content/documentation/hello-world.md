@@ -1,7 +1,7 @@
 ---
 title: Hello from the docs hub
 description: First post on the central project docs site, published to ATProto via Sequoia.
-date: 2025-02-23
+date: 2026-02-23
 tags: [meta]
 draft: false
 atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfkziknyuw25"

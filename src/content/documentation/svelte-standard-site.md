@@ -1,7 +1,7 @@
 ---
 title: svelte-standard-site
 description: A SvelteKit library for reading and writing AT Protocol longform content via site.standard.* records.
-date: 2025-02-24
+date: 2026-02-24
 tags: [atproto, sveltekit, library, standard-site]
 draft: false
 atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfkzibc65o25"

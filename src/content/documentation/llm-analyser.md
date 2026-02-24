@@ -1,7 +1,7 @@
 ---
 title: llm-analyser
 description: Analyse .docx files and generate essays using a local Ollama model.
-date: 2025-02-24
+date: 2026-02-24
 tags: [python, ollama, ai, tools]
 draft: false
 atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfkzie6m5w25"

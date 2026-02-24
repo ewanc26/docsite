@@ -1,7 +1,7 @@
 ---
 title: pds-backup
 description: A Bash script for automated, resumable PDS backups via rsync over SSH with change detection and cron scheduling.
-date: 2025-02-24
+date: 2026-02-24
 tags: [atproto, pds, bash, self-hosting, tools]
 draft: false
 atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfkzicfc6g25"

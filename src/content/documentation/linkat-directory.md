@@ -1,7 +1,7 @@
 ---
 title: linkat-directory
 description: An alternate SvelteKit frontend for Linkat showing a curated directory of AT Protocol user profiles. Unmaintained.
-date: 2025-02-24
+date: 2026-02-24
 tags: [atproto, sveltekit, linkat, unmaintained]
 draft: false
 atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfkzielbgo25"
