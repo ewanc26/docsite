@@ -71,7 +71,7 @@
 	.doc-body {
 		flex: 1;
 		min-width: 0;
-		max-width: 760px;
+		max-width: 860px;
 	}
 
 	.toc {
