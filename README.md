@@ -40,6 +40,16 @@ pnpm build      # production build
 pnpm preview    # preview the build locally
 ```
 
+## Publishing to AT Protocol
+
+Content is published to the AT Protocol via the [Sequoia CLI](https://sequoia.pub/cli-reference#cli-reference). Make sure you have it installed, then run:
+
+```sh
+sequoia publish
+```
+
+See the [Sequoia CLI reference](https://sequoia.pub/cli-reference#cli-reference) for the full list of available commands and options.
+
 ## Other commands
 
 ```sh
