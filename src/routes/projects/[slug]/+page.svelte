@@ -22,16 +22,16 @@
 <div class="doc-layout">
 	<div class="doc-body">
 		<div class="section-label">projects</div>
-		<h1 style="color: var(--color-green); font-size: 1.4em; margin-bottom: 0.25rem;">{data.post.title}</h1>
+		<h1 class="page-title">{data.post.title}</h1>
 
 		{#if data.post.date}
-			<p style="color: var(--color-overlay-0); font-size: 0.8em; margin-bottom: 1.2rem;">{formatDate(data.post.date)}</p>
+			<p class="page-date">{formatDate(data.post.date)}</p>
 		{/if}
 
 		{#if data.post.tags.length}
-			<div style="display:flex; gap:0.4rem; flex-wrap:wrap; margin-bottom:1.2rem;">
+			<div class="tag-list">
 				{#each data.post.tags as tag}
-					<span style="font-size:0.75em; color:var(--color-green); opacity:0.7;"># {tag}</span>
+					<span class="tag"># {tag}</span>
 				{/each}
 			</div>
 		{/if}
@@ -41,7 +41,7 @@
 		<div class="prose">{@html data.html}</div>
 
 		<hr class="divider" />
-		<a href="/projects" style="color:var(--color-subtext-0); font-size:0.85em; text-decoration:none;">← all docs</a>
+		<a href="/projects" class="back-link">← all docs</a>
 	</div>
 
 	{#if data.toc.length > 1}
@@ -59,71 +59,3 @@
 		</aside>
 	{/if}
 </div>
-
-<style>
-	.doc-layout {
-		display: flex;
-		gap: 2.5rem;
-		align-items: flex-start;
-		width: 100%;
-	}
-
-	.doc-body {
-		flex: 1;
-		min-width: 0;
-		max-width: 860px;
-	}
-
-	.toc {
-		flex-shrink: 0;
-		width: 180px;
-		position: sticky;
-		top: 1.5rem;
-		max-height: calc(100dvh - 3rem);
-		overflow-y: auto;
-		padding-left: 1.2rem;
-		border-left: 1px solid color-mix(in srgb, var(--color-green) 12%, transparent);
-	}
-
-	.toc-label {
-		font-size: 0.7em;
-		font-weight: 700;
-		text-transform: uppercase;
-		letter-spacing: 0.12em;
-		color: var(--color-green);
-		margin-bottom: 0.6rem;
-	}
-
-	.toc-list {
-		list-style: none;
-		padding: 0;
-		margin: 0;
-		display: flex;
-		flex-direction: column;
-		gap: 0.25rem;
-	}
-
-	.toc-item a {
-		font-size: 0.8em;
-		text-decoration: none;
-		color: var(--color-subtext-0);
-		line-height: 1.4;
-		display: block;
-		transition: color 0.15s;
-	}
-
-	.toc-item a:hover {
-		color: var(--color-green);
-	}
-
-	.toc-h3 a {
-		padding-left: 0.75rem;
-		opacity: 0.75;
-	}
-
-	@media (max-width: 900px) {
-		.toc {
-			display: none;
-		}
-	}
-</style>
