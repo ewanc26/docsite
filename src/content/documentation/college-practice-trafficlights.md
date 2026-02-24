@@ -1,7 +1,7 @@
 ---
 title: college-practice-trafficlights
 description: A VB.NET Windows Forms UK traffic light simulator, made as a college practice project.
-date: 2025-02-24
+date: 2026-02-24
 tags: [vbnet, windows-forms, college, historical]
 draft: false
 atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfkzife7bw25"

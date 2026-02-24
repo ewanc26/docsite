@@ -1,7 +1,7 @@
 ---
 title: bluesky-ollama
 description: An AI-powered Bluesky bot that uses a local Ollama model to generate posts in the style of a source account.
-date: 2025-02-24
+date: 2026-02-24
 tags: [bluesky, bot, python, ollama, ai]
 draft: false
 atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfkzigafmw25"

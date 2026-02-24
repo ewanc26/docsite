@@ -1,7 +1,7 @@
 ---
 title: mc-server
 description: A personal PaperMC Minecraft server in Docker Compose with DuckDNS dynamic DNS and management scripts.
-date: 2025-02-24
+date: 2026-02-24
 tags: [minecraft, docker, self-hosting]
 draft: false
 atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfkzicumfw25"

@@ -1,7 +1,7 @@
 ---
 title: bluesky-awoo-bot
 description: A simple Bluesky bot that posts random wolf noises at random intervals. Unmaintained.
-date: 2025-02-24
+date: 2026-02-24
 tags: [bluesky, bot, typescript, unmaintained]
 draft: false
 atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfkzii7rx625"

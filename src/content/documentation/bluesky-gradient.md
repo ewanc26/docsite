@@ -1,7 +1,7 @@
 ---
 title: bluesky-gradient
 description: Generate 24 sky-gradient images (one per hour) for use as Bluesky avatars or banners.
-date: 2025-02-24
+date: 2026-02-24
 tags: [python, bluesky, image-generation, tools]
 draft: false
 atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfkzihpod625"

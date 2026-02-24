@@ -1,7 +1,7 @@
 ---
 title: tangled-sync
 description: Automate mirroring GitHub repositories to Tangled and publishing sh.tangled.repo ATProto records.
-date: 2025-02-24
+date: 2026-02-24
 tags: [atproto, tangled, github, automation, typescript]
 draft: false
 atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfkziamlpw25"

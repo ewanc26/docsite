@@ -1,7 +1,7 @@
 ---
 title: website
 description: Source code for ewancroft.uk — a personal site powered by AT Protocol, built with SvelteKit 5 and Tailwind CSS 4.
-date: 2025-02-24
+date: 2026-02-24
 tags: [atproto, sveltekit, personal-site, standard-site, teal-fm]
 draft: false
 atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfkzi7jhp625"
