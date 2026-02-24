@@ -181,7 +181,7 @@ html, body {
 .main {
   grid-area: main;
   padding: clamp(1.5rem, 4vw, 3rem) clamp(1.2rem, 4vw, 3rem);
-  max-width: 760px;
+  min-width: 0;
 }
 
 /* ─── prose overrides (typography plugin base) ───────────────────────────── */
