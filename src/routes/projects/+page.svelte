@@ -1,7 +1,17 @@
 <script lang="ts">
+	import { formatDate } from '$lib/format';
 	import type { PageData } from './$types';
 	let { data }: { data: PageData } = $props();
 </script>
+
+<svelte:head>
+	<title>projects | ewan's docs</title>
+	<meta name="description" content="All projects and documentation published by ewan." />
+	<meta property="og:title" content="projects | ewan's docs" />
+	<meta property="og:description" content="All projects and documentation published by ewan." />
+	<meta name="twitter:title" content="projects | ewan's docs" />
+	<meta name="twitter:description" content="All projects and documentation published by ewan." />
+</svelte:head>
 
 <div class="section-label">projects</div>
 <h1 style="color: var(--color-green); font-size: 1.4em; margin-bottom: 0.4rem;">documentation</h1>
@@ -23,7 +33,7 @@
 				<a href="/projects/{post.slug}">{post.title}</a>
 				{#if post.date}
 					<span style="color: var(--color-overlay-0); font-size: 0.8em; margin-left: 0.6rem;">
-						{post.date}
+						{formatDate(post.date)}
 					</span>
 				{/if}
 			</li>

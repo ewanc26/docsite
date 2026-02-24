@@ -1,3 +1,12 @@
+<svelte:head>
+	<title>home | ewan's docs</title>
+	<meta name="description" content="Central documentation hub for ewan's projects." />
+	<meta property="og:title" content="home | ewan's docs" />
+	<meta property="og:description" content="Central documentation hub for ewan's projects." />
+	<meta name="twitter:title" content="home | ewan's docs" />
+	<meta name="twitter:description" content="Central documentation hub for ewan's projects." />
+</svelte:head>
+
 <div class="prompt-line" style="margin-bottom:0.3rem">
 	<span class="user-marker">ewan@ewancroft.uk</span><span class="prompt-path">:~/projects</span><span class="prompt-char"> $</span>
 </div>
@@ -19,6 +28,5 @@
 <div class="section-label">quick links</div>
 <ul class="link-list">
 	<li><a href="/projects">all projects</a></li>
-	<li><a href="https://tangled.org/ewancroft.uk" target="_blank" rel="noopener">tangled repos</a></li>
-	<li><a href="https://pds.ewancroft.uk" target="_blank" rel="noopener">pds.ewancroft.uk</a></li>
+	<li><a href="https://github.com/ewanc26" target="_blank" rel="noopener">github</a></li>
 </ul>

@@ -17,6 +17,12 @@ export interface Post extends PostMeta {
 
 const POSTS_DIR = resolve('src/content/documentation');
 
+function toISODate(raw: unknown): string {
+	if (!raw) return '';
+	if (raw instanceof Date) return raw.toISOString().slice(0, 10);
+	return String(raw).slice(0, 10);
+}
+
 function slugFrom(filename: string) {
 	return filename.replace(/\.mdx?$/, '');
 }
@@ -31,7 +37,7 @@ export function listPosts(): PostMeta[] {
 				slug: slugFrom(filename),
 				title: data.title ?? slugFrom(filename),
 				description: data.description ?? '',
-				date: data.date ? String(data.date).slice(0, 10) : '',
+				date: toISODate(data.date),
 				tags: data.tags ?? [],
 				draft: data.draft ?? false
 			};
@@ -47,7 +53,7 @@ export function getPost(slug: string): Post {
 		slug,
 		title: data.title ?? slug,
 		description: data.description ?? '',
-		date: data.date ? String(data.date).slice(0, 10) : '',
+		date: toISODate(data.date),
 		tags: data.tags ?? [],
 		draft: data.draft ?? false,
 		content
