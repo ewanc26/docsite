@@ -1,12 +1,8 @@
 <script lang="ts">
-	import { marked } from 'marked';
-	import { formatDate, extractToc, makeRenderer } from '$lib/format';
+	import { formatDate } from '$lib/format';
 	import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();
-
-	const toc = $derived(extractToc(data.post.content));
-	const html = $derived(marked(data.post.content, { renderer: makeRenderer() }));
 </script>
 
 <svelte:head>
@@ -42,18 +38,18 @@
 
 		<hr class="divider" />
 
-		<div class="prose">{@html html}</div>
+		<div class="prose">{@html data.html}</div>
 
 		<hr class="divider" />
 		<a href="/projects" style="color:var(--color-subtext-0); font-size:0.85em; text-decoration:none;">← all docs</a>
 	</div>
 
-	{#if toc.length > 1}
+	{#if data.toc.length > 1}
 		<aside class="toc">
 			<div class="toc-label">on this page</div>
 			<nav>
 				<ul class="toc-list">
-					{#each toc as entry}
+					{#each data.toc as entry}
 						<li class="toc-item" class:toc-h3={entry.level === 3}>
 							<a href="#{entry.id}">{entry.text}</a>
 						</li>
