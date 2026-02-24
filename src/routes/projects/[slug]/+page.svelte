@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { marked } from 'marked';
+	import { formatDate } from '$lib/format';
 	import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();
@@ -7,8 +8,16 @@
 </script>
 
 <svelte:head>
-	<title>{data.post.title}</title>
+	<title>{data.post.title} | ewan's docs</title>
 	<meta name="description" content={data.post.description} />
+	<meta property="og:title" content="{data.post.title} | ewan's docs" />
+	<meta property="og:description" content={data.post.description} />
+	<meta property="og:type" content="article" />
+	{#if data.post.date}<meta property="article:published_time" content={data.post.date} />{/if}
+	{#if data.post.tags.length}{#each data.post.tags as tag}<meta property="article:tag" content={tag} />{/each}{/if}
+	<meta name="twitter:card" content="summary" />
+	<meta name="twitter:title" content="{data.post.title} | ewan's docs" />
+	<meta name="twitter:description" content={data.post.description} />
 	<!-- sequoia inject stamps the at-uri link tag here -->
 </svelte:head>
 
@@ -16,7 +25,7 @@
 <h1 style="color: var(--color-green); font-size: 1.4em; margin-bottom: 0.25rem;">{data.post.title}</h1>
 
 {#if data.post.date}
-	<p style="color: var(--color-overlay-0); font-size: 0.8em; margin-bottom: 1.2rem;">{data.post.date}</p>
+	<p style="color: var(--color-overlay-0); font-size: 0.8em; margin-bottom: 1.2rem;">{formatDate(data.post.date)}</p>
 {/if}
 
 {#if data.post.tags.length}

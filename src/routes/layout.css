@@ -48,7 +48,6 @@ html, body {
     grid-template-columns: 1fr;
     grid-template-areas:
       "titlebar"
-      "sidebar"
       "main"
       "footer";
   }
@@ -78,7 +77,31 @@ html, body {
   border: 1px solid color-mix(in srgb, var(--color-green) 40%, transparent);
 }
 
-.titlebar-title { margin-left: 0.25rem; }
+.titlebar-title { margin-left: 0.25rem; flex: 1; }
+
+/* ─── hamburger button ───────────────────────────────────────────────────── */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: 1px solid color-mix(in srgb, var(--color-green) 30%, transparent);
+  color: var(--color-green);
+  font-family: var(--font-mono);
+  font-size: 1em;
+  line-height: 1;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  margin-left: auto;
+  transition: background-color 0.15s;
+}
+
+.menu-toggle:hover {
+  background-color: color-mix(in srgb, var(--color-green) 12%, transparent);
+}
+
+@media (max-width: 640px) {
+  .menu-toggle { display: block; }
+}
 
 /* ─── sidebar ────────────────────────────────────────────────────────────── */
 .sidebar {
@@ -89,6 +112,35 @@ html, body {
   display: flex;
   flex-direction: column;
   gap: 1.4rem;
+}
+
+/* Mobile: slide-in drawer */
+@media (max-width: 640px) {
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 80vw;
+    max-width: 300px;
+    height: 100dvh;
+    z-index: 200;
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+    border-right: 1px solid color-mix(in srgb, var(--color-green) 20%, transparent);
+    overflow-y: auto;
+    padding-top: 3.5rem;
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .nav-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 199;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
 }
 
 .nav-group-label {
@@ -178,6 +230,34 @@ html, body {
 
 .callout.warn  { border-color: color-mix(in srgb, var(--color-yellow) 30%, transparent); }
 .callout.error { border-color: color-mix(in srgb, var(--color-red) 30%, transparent); }
+
+/* ─── ko-fi button ──────────────────────────────────────────────────────── */
+.nav-kofi {
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid color-mix(in srgb, var(--color-green) 12%, transparent);
+}
+
+.kofi-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  width: 100%;
+  padding: 0.45rem 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.82em;
+  text-decoration: none;
+  color: var(--color-green);
+  border: 1px solid color-mix(in srgb, var(--color-green) 30%, transparent);
+  border-radius: 0.35rem;
+  background-color: color-mix(in srgb, var(--color-green) 8%, transparent);
+  transition: background-color 0.15s, color 0.15s;
+}
+
+.kofi-btn:hover {
+  background-color: color-mix(in srgb, var(--color-green) 18%, transparent);
+  color: var(--color-text);
+}
 
 /* ─── footer ─────────────────────────────────────────────────────────────── */
 .footer {
