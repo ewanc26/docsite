@@ -16,25 +16,30 @@
   --color-green:     #a6e3a1;
   --color-red:       #f38ba8;
   --color-yellow:    #f9e2af;
-  --color-shadow:    #000000;
 }
 
-/* ─── base ───────────────────────────────────────────────────────────────── */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-html, body {
-  min-height: 100dvh;
-  font-family: var(--font-mono);
-  font-size: clamp(13px, 3.5vw, 15px);
-  line-height: 1.6;
-  background-color: var(--color-crust);
-  color: var(--color-text);
+  html {
+    overflow-x: hidden;
+    font-family: var(--font-mono);
+    font-size: clamp(13px, 3.5vw, 15px);
+    line-height: 1.6;
+    background-color: var(--color-crust);
+    color: var(--color-text);
+  }
+
+  body {
+    overflow-x: hidden;
+    min-height: 100dvh;
+  }
 }
 
-/* ─── layout shell ───────────────────────────────────────────────────────── */
+/* ─── shell grid (grid-template-areas can't be done with Tailwind utilities) */
 .shell {
   display: grid;
-  grid-template-columns: 220px 1fr;
+  grid-template-columns: 220px minmax(0, 1fr);
   grid-template-rows: auto 1fr auto;
   grid-template-areas:
     "titlebar titlebar"
@@ -45,7 +50,7 @@ html, body {
 
 @media (max-width: 640px) {
   .shell {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     grid-template-areas:
       "titlebar"
       "main"
@@ -53,78 +58,15 @@ html, body {
   }
 }
 
-/* ─── titlebar ───────────────────────────────────────────────────────────── */
-.titlebar {
-  grid-area: titlebar;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.55rem 1.2rem;
-  background-color: var(--color-surface-0);
-  border-bottom: 1px solid color-mix(in srgb, var(--color-green) 15%, transparent);
-  color: var(--color-green);
-  font-size: 0.8em;
-}
+/* ─── grid area assignments ───────────────────────────────────────────────── */
+.area-titlebar { grid-area: titlebar; }
+.area-sidebar  { grid-area: sidebar; }
+.area-main     { grid-area: main; min-width: 0; }
+.area-footer   { grid-area: footer; }
 
-.titlebar-dots { display: flex; gap: 0.4rem; }
-
-.dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  flex-shrink: 0;
-  background-color: color-mix(in srgb, var(--color-green) 25%, transparent);
-  border: 1px solid color-mix(in srgb, var(--color-green) 40%, transparent);
-}
-
-.titlebar-title { margin-left: 0.25rem; flex: 1; }
-
-/* ─── hamburger button ───────────────────────────────────────────────────── */
-.menu-toggle {
-  display: none;
-  background: none;
-  border: 1px solid color-mix(in srgb, var(--color-green) 50%, transparent);
-  color: var(--color-green);
-  font-family: var(--font-mono);
-  font-size: 1em;
-  line-height: 1;
-  padding: 0.2rem 0.5rem;
-  border-radius: 0.25rem;
-  cursor: pointer;
-  margin-left: auto;
-  opacity: 1;
-  transition: background-color 0.15s, border-color 0.15s;
-}
-
-.menu-toggle:hover {
-  background-color: color-mix(in srgb, var(--color-green) 12%, transparent);
-}
-
-.menu-toggle[aria-expanded='true'] {
-  border-color: var(--color-green);
-  background-color: color-mix(in srgb, var(--color-green) 10%, transparent);
-}
-
-
-
+/* ─── sidebar mobile slide drawer (requires JS class toggle) ─────────────── */
 @media (max-width: 640px) {
-  .menu-toggle { display: block; }
-}
-
-/* ─── sidebar ────────────────────────────────────────────────────────────── */
-.sidebar {
-  grid-area: sidebar;
-  padding: 1.4rem 1rem;
-  border-right: 1px solid color-mix(in srgb, var(--color-green) 12%, transparent);
-  background-color: var(--color-mantle);
-  display: flex;
-  flex-direction: column;
-  gap: 1.4rem;
-}
-
-/* Mobile: slide-in drawer */
-@media (max-width: 640px) {
-  .sidebar {
+  .area-sidebar {
     position: fixed;
     top: 0;
     left: 0;
@@ -134,72 +76,16 @@ html, body {
     z-index: 200;
     transform: translateX(-100%);
     transition: transform 0.25s ease;
-    border-right: 1px solid color-mix(in srgb, var(--color-green) 20%, transparent);
     overflow-y: auto;
     padding-top: 3.5rem;
   }
 
-  .sidebar.open {
+  .area-sidebar.open {
     transform: translateX(0);
   }
-
-  .nav-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 199;
-    background-color: rgba(0, 0, 0, 0.5);
-  }
 }
 
-.nav-group-label {
-  font-size: 0.7em;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--color-green);
-  margin-bottom: 0.5rem;
-}
-
-.nav-links {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 0.2rem;
-}
-
-.nav-links li::before {
-  content: '→ ';
-  color: var(--color-green);
-  opacity: 0.5;
-}
-
-.nav-links a {
-  text-decoration: none;
-  color: var(--color-subtext-0);
-  font-size: 0.88em;
-  transition: color 0.15s;
-}
-
-.nav-links a:hover,
-.nav-links a[aria-current="page"] {
-  color: var(--color-green);
-}
-
-/* ─── main content ───────────────────────────────────────────────────────── */
-.main {
-  grid-area: main;
-  min-width: 0;
-  display: flex;
-  justify-content: center;
-}
-
-.content-wrap {
-  width: 100%;
-  max-width: 1200px;
-  padding: clamp(1.5rem, 4vw, 3rem) clamp(1.2rem, 4vw, 3rem);
-}
-
-/* ─── prose overrides (typography plugin base) ───────────────────────────── */
+/* ─── prose theming (CSS custom properties only — can't be utilities) ────── */
 .prose {
   --tw-prose-body:       var(--color-text);
   --tw-prose-lead:       var(--color-subtext-0);
@@ -214,385 +100,20 @@ html, body {
   --tw-prose-bullets:    var(--color-overlay-0);
   --tw-prose-th-borders: color-mix(in srgb, var(--color-green) 20%, transparent);
   --tw-prose-td-borders: color-mix(in srgb, var(--color-green) 10%, transparent);
-  color: var(--color-text);
   font-family: var(--font-mono);
-  max-width: none;
-}
-
-/* ─── prose: headings ────────────────────────────────────────────────────── */
-.prose h2 {
-  font-size: 1.1em;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  margin-top: 2.2rem;
-  margin-bottom: 0.7rem;
-  padding-bottom: 0.3rem;
-  border-bottom: 1px solid color-mix(in srgb, var(--color-green) 15%, transparent);
-  color: var(--color-green);
-}
-
-.prose h3 {
-  font-size: 0.97em;
-  font-weight: 700;
-  margin-top: 1.6rem;
-  margin-bottom: 0.4rem;
-  color: var(--color-green);
-  opacity: 0.85;
-}
-
-/* ─── prose: tables ──────────────────────────────────────────────────────── */
-.prose table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 0.82em;
-  margin: 1.4rem 0;
+  max-width: none !important;
+  overflow-wrap: break-word;
 }
 
 .prose :where(table) {
-  overflow-x: auto;
   display: block;
-  white-space: nowrap;
+  overflow-x: auto;
+  max-width: 100%;
 }
 
-.prose thead tr {
-  background-color: var(--color-surface-0);
-  border-bottom: 1px solid color-mix(in srgb, var(--color-green) 20%, transparent);
-}
-
-.prose th {
-  padding: 0.45rem 0.8rem;
-  text-align: left;
-  font-weight: 700;
-  color: var(--color-green);
-  white-space: nowrap;
-}
-
-.prose td {
-  padding: 0.4rem 0.8rem;
-  border-bottom: 1px solid color-mix(in srgb, var(--color-green) 8%, transparent);
-  vertical-align: top;
-  white-space: normal;
-}
-
-.prose tr:hover td {
-  background-color: color-mix(in srgb, var(--color-green) 4%, transparent);
-}
-
-/* ─── prose: code blocks ─────────────────────────────────────────────────── */
 .prose pre {
-  background-color: var(--color-surface-0) !important;
-  border: 1px solid color-mix(in srgb, var(--color-green) 12%, transparent);
-  border-radius: 0.4rem;
-  padding: 1rem 1.2rem;
+  max-width: 100%;
   overflow-x: auto;
-  font-size: 0.85em;
-  line-height: 1.65;
-  margin: 1.2rem 0;
 }
 
-.prose :not(pre) > code {
-  background-color: var(--color-surface-0);
-  border: 1px solid color-mix(in srgb, var(--color-green) 15%, transparent);
-  border-radius: 0.25rem;
-  padding: 0.1em 0.35em;
-  font-size: 0.88em;
-  color: var(--color-green);
-}
-
-/* ─── prose: lists ───────────────────────────────────────────────────────── */
-.prose ul, .prose ol {
-  padding-left: 1.5rem;
-  margin: 0.7rem 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-
-.prose li {
-  color: var(--color-text);
-  font-size: 0.9em;
-  line-height: 1.65;
-}
-
-.prose ul li::marker { color: var(--color-overlay-0); content: '›  '; }
-.prose ol li::marker { color: var(--color-overlay-0); }
-
-/* ─── prose: blockquote ──────────────────────────────────────────────────── */
-.prose blockquote {
-  border-left: 3px solid color-mix(in srgb, var(--color-green) 35%, transparent);
-  margin-left: 0;
-  padding-left: 1rem;
-  color: var(--color-subtext-0);
-  font-style: italic;
-}
-
-/* ─── prose: links ───────────────────────────────────────────────────────── */
-.prose a {
-  color: var(--color-green);
-  text-underline-offset: 3px;
-}
-
-.prose a:hover {
-  opacity: 0.8;
-}
-
-/* ─── prose: paragraphs ──────────────────────────────────────────────────── */
-.prose p {
-  font-size: 0.9em;
-  line-height: 1.75;
-  margin: 0.6rem 0;
-  color: var(--color-subtext-0);
-}
-
-/* ─── section label (reusable) ───────────────────────────────────────────── */
-.section-label {
-  font-size: 0.72em;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--color-green);
-  margin-bottom: 0.7rem;
-}
-
-/* ─── divider ────────────────────────────────────────────────────────────── */
-.divider {
-  border: none;
-  border-top: 1px solid color-mix(in srgb, var(--color-green) 12%, transparent);
-  margin: 1.2rem 0;
-}
-
-/* ─── callout card ───────────────────────────────────────────────────────── */
-.callout {
-  border: 1px solid color-mix(in srgb, var(--color-green) 20%, transparent);
-  border-radius: 0.5rem;
-  background-color: var(--color-mantle);
-  padding: 1rem 1.2rem;
-  font-size: 0.88em;
-  color: var(--color-subtext-0);
-}
-
-.callout.warn  { border-color: color-mix(in srgb, var(--color-yellow) 30%, transparent); }
-.callout.error { border-color: color-mix(in srgb, var(--color-red) 30%, transparent); }
-
-/* ─── ko-fi button ──────────────────────────────────────────────────────── */
-.nav-kofi {
-  margin-top: auto;
-  padding-top: 1rem;
-  border-top: 1px solid color-mix(in srgb, var(--color-green) 12%, transparent);
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-}
-
-.kofi-btn {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  width: 100%;
-  padding: 0.45rem 0.75rem;
-  font-family: var(--font-mono);
-  font-size: 0.82em;
-  text-decoration: none;
-  color: var(--color-green);
-  border: 1px solid color-mix(in srgb, var(--color-green) 30%, transparent);
-  border-radius: 0.35rem;
-  background-color: color-mix(in srgb, var(--color-green) 8%, transparent);
-  transition: background-color 0.15s, color 0.15s;
-}
-
-.kofi-btn:hover {
-  background-color: color-mix(in srgb, var(--color-green) 18%, transparent);
-  color: var(--color-text);
-}
-
-/* ─── page header ───────────────────────────────────────────────────────────── */
-.page-title {
-  color: var(--color-green);
-  font-size: 1.4em;
-  font-weight: 700;
-  margin-bottom: 0.25rem;
-  line-height: 1.3;
-}
-
-.page-date {
-  color: var(--color-overlay-0);
-  font-size: 0.8em;
-  margin-bottom: 1.2rem;
-}
-
-/* inline date next to a list item title */
-.inline-date {
-  color: var(--color-overlay-0);
-  font-size: 0.8em;
-  margin-left: 0.6rem;
-}
-
-.empty-state {
-  color: var(--color-overlay-0);
-  font-size: 0.88em;
-  font-style: italic;
-}
-
-.page-desc {
-  color: var(--color-subtext-0);
-  font-size: 0.88em;
-  line-height: 1.7;
-  margin-bottom: 1.4rem;
-}
-
-.tag-list {
-  display: flex;
-  gap: 0.4rem;
-  flex-wrap: wrap;
-  margin-bottom: 1.2rem;
-}
-
-.tag {
-  font-size: 0.75em;
-  color: var(--color-green);
-  opacity: 0.7;
-}
-
-.back-link {
-  color: var(--color-subtext-0);
-  font-size: 0.85em;
-  text-decoration: none;
-  transition: color 0.15s;
-}
-.back-link:hover { color: var(--color-green); }
-
-.accent-link {
-  color: var(--color-green);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-
-/* ─── home page prompt ───────────────────────────────────────────────────────── */
-.prompt-line {
-  margin-bottom: 0.3rem;
-  font-size: 0.9em;
-}
-.user-marker { color: var(--color-green); }
-.prompt-path { color: var(--color-subtext-0); }
-.prompt-char { color: var(--color-overlay-0); }
-.tagline {
-  color: var(--color-subtext-0);
-  font-size: 0.88em;
-  margin-bottom: 1.2rem;
-}
-
-/* ─── doc layout (article + toc) ────────────────────────────────────────────── */
-.doc-layout {
-  display: flex;
-  gap: 2.5rem;
-  align-items: flex-start;
-  width: 100%;
-}
-
-.doc-body {
-  flex: 1;
-  min-width: 0;
-  max-width: 860px;
-}
-
-.toc {
-  flex-shrink: 0;
-  width: 180px;
-  position: sticky;
-  top: 1.5rem;
-  max-height: calc(100dvh - 3rem);
-  overflow-y: auto;
-  padding-left: 1.2rem;
-  border-left: 1px solid color-mix(in srgb, var(--color-green) 12%, transparent);
-}
-
-.toc-label {
-  font-size: 0.7em;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--color-green);
-  margin-bottom: 0.6rem;
-}
-
-.toc-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-
-.toc-item a {
-  font-size: 0.8em;
-  text-decoration: none;
-  color: var(--color-subtext-0);
-  line-height: 1.4;
-  display: block;
-  transition: color 0.15s;
-}
-.toc-item a:hover { color: var(--color-green); }
-
-.toc-h3 a {
-  padding-left: 0.75rem;
-  opacity: 0.75;
-}
-
-@media (max-width: 900px) {
-  .toc { display: none; }
-}
-
-@media (max-width: 640px) {
-  .content-wrap {
-    padding: 1rem 0.9rem;
-  }
-
-  .doc-layout {
-    flex-direction: column;
-    gap: 0;
-  }
-}
-
-/* ─── link list ─────────────────────────────────────────────────────────────── */
-.link-list {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-  margin: 0.8rem 0;
-}
-
-.link-list li::before {
-  content: '→ ';
-  color: var(--color-green);
-  opacity: 0.5;
-}
-
-.link-list a {
-  text-decoration: none;
-  color: var(--color-subtext-0);
-  font-size: 0.88em;
-  transition: color 0.15s;
-}
-
-.link-list a:hover {
-  color: var(--color-green);
-}
-
-/* ─── footer ─────────────────────────────────────────────────────────────── */
-.footer {
-  grid-area: footer;
-  text-align: center;
-  padding: 1rem;
-  font-size: 0.75em;
-  color: color-mix(in srgb, var(--color-green) 35%, transparent);
-  border-top: 1px solid color-mix(in srgb, var(--color-green) 10%, transparent);
-}
-
-.footer a {
-  text-decoration: underline;
-  color: inherit;
-}
-
-.footer a:hover { color: var(--color-green); }
+.prose ul li::marker { content: '›  '; }
