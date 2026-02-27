@@ -7,17 +7,51 @@ draft: false
 atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfkzidriag25"
 ---
 
-[Malachite](https://github.com/ewanc26/malachite) is a CLI tool for importing your Last.fm and Spotify listening history to the AT Protocol network as `fm.teal.alpha.feed.play` records. It's designed to be safe, resumable, and smart about rate limits — so you don't accidentally hammer your PDS.
+[Malachite](https://github.com/ewanc26/malachite) is a tool for importing your Last.fm and Spotify listening history to the AT Protocol network as `fm.teal.alpha.feed.play` records. It's designed to be safe, resumable, and smart about rate limits — so you don't accidentally hammer your PDS.
 
 The name is a deliberate nod to the `teal` lexicon it publishes to: malachite is a greenish-blue copper mineral associated with preservation and transformation, sitting squarely in that teal/green colour range.
 
-## Quick Start
+## Usage Options
+
+Malachite comes in two forms:
+
+**Web interface** — the easiest way to get started. Visit [malachite.ewancroft.uk](https://malachite.ewancroft.uk), sign in with your ATProto handle and an app password, upload your export files, and import. Everything runs locally in your browser — no data is sent to any server other than your own PDS.
+
+**CLI** — a Node.js command-line tool for local use. Useful if you want full control over batch settings, need to automate imports, or simply prefer the terminal. Requires cloning the repository and building from source.
+
+## Web Interface
+
+No installation required. Open [malachite.ewancroft.uk](https://malachite.ewancroft.uk) and follow the steps:
+
+1. **Choose a mode** — Last.fm, Spotify, combined, sync, or deduplicate
+2. **Sign in** — your ATProto handle and an app password (never stored)
+3. **Upload your export** — CSV or JSON, parsed entirely in the browser
+4. **Import** — records are published directly to your PDS with automatic rate-limit handling
+
+## CLI
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org) v18 or later
+- [pnpm](https://pnpm.io) (recommended) — or npm / yarn
+
+### Install & Build
 
 ```bash
-# Install dependencies and build
-pnpm install
-pnpm build
+# Clone the repository
+git clone https://github.com/ewanc26/malachite.git
+cd malachite
 
+# Install dependencies
+pnpm install
+
+# Build
+pnpm build
+```
+
+### Quick Start
+
+```bash
 # Run in interactive mode (recommended for first-time use)
 pnpm start
 
@@ -26,6 +60,28 @@ pnpm start -i lastfm.csv -h alice.bsky.social -p xxxx-xxxx-xxxx-xxxx -y
 ```
 
 Interactive mode walks you through everything: choosing a mode, entering credentials, picking files, and setting optional flags.
+
+### Common Invocations
+
+```bash
+# Import from Last.fm CSV
+pnpm start -i lastfm.csv -h alice.bsky.social -p xxxx-xxxx-xxxx-xxxx -y
+
+# Import from Spotify JSON export
+pnpm start -i spotify-export/ -m spotify -h alice.bsky.social -p xxxx-xxxx-xxxx-xxxx -y
+
+# Merge both sources
+pnpm start -i lastfm.csv --spotify-input spotify-export/ -m combined -h alice.bsky.social -p xxxx-xxxx-xxxx-xxxx -y
+
+# Sync (skip already-imported records)
+pnpm start -i lastfm.csv -m sync -h alice.bsky.social -p xxxx-xxxx-xxxx-xxxx -y
+
+# Remove duplicates from your Teal feed
+pnpm start -m deduplicate -h alice.bsky.social -p xxxx-xxxx-xxxx-xxxx
+
+# Preview without publishing
+pnpm start -i lastfm.csv --dry-run
+```
 
 ## Import Modes
 
@@ -88,7 +144,7 @@ Malachite handles this automatically:
 - Pauses 24 hours between days for large imports
 - Scales immediately back to maximum speed after a quota reset
 
-You can also check your current rate limit status at any time:
+You can also check your current rate limit status at any time (CLI only):
 
 ```bash
 npm run check-limits
@@ -96,7 +152,7 @@ npm run check-limits
 
 ## File Storage
 
-All data is stored in `~/.malachite/`:
+All CLI data is stored in `~/.malachite/`:
 
 ```
 ~/.malachite/
