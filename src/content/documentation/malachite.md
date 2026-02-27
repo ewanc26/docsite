@@ -35,7 +35,7 @@ No installation required. Open [malachite.ewancroft.uk](https://malachite.ewancr
 - [Node.js](https://nodejs.org) v18 or later
 - [pnpm](https://pnpm.io) (recommended) — or npm / yarn
 
-### Install & Build
+### Install and Build
 
 ```bash
 # Clone the repository
