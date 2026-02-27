@@ -61,12 +61,13 @@ export function extractToc(markdown: string): TocEntry[] {
 			.filter((c) => c.type === 'text' || c.type === 'inlineCode')
 			.map((c) => ('value' in c ? c.value : ''))
 			.join('');
-		// rehype-slug uses the same GitHub-flavoured slugification
+		// Match github-slugger exactly (used by rehype-slug):
+		// replace each whitespace char individually (no collapse), strip non-word chars
 		const id = text
 			.toLowerCase()
 			.replace(/[^\w\s-]/g, '')
 			.trim()
-			.replace(/[\s_]+/g, '-');
+			.replace(/\s/g, '-');
 		entries.push({ level: node.depth, text, id });
 	}
 
