@@ -4,7 +4,7 @@ description: An early Python experiment — unmaintained and kept for historical
 date: 2026-02-24
 tags: [python, historical, unmaintained]
 draft: false
-atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfkzij7miw25"
+atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfyqfpra3w25"
 ---
 
 [bean-dumper](https://github.com/ewanc26/bean-dumper) is an early Python learning project, kept in the archive for historical interest. It is not maintained and not intended for use.

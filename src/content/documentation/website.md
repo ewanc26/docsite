@@ -4,7 +4,7 @@ description: Source code for ewancroft.uk — a personal site powered by AT Prot
 date: 2026-02-24
 tags: [atproto, sveltekit, personal-site, standard-site, teal-fm]
 draft: false
-atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfkzi7jhp625"
+atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfyqfgh24625"
 ---
 
 [website](https://github.com/ewanc26/website) is the source code for [ewancroft.uk](https://ewancroft.uk). It's a fully AT Protocol-integrated personal site built with SvelteKit 5, Tailwind CSS 4, and Svelte 5 Runes. While the repository includes Ewan-specific configuration, the codebase is designed to be adapted for anyone running their own AT Protocol-powered site.

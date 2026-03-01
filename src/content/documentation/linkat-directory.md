@@ -4,7 +4,7 @@ description: An alternate SvelteKit frontend for Linkat showing a curated direct
 date: 2026-02-24
 tags: [atproto, sveltekit, linkat, unmaintained]
 draft: false
-atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfkzielbgo25"
+atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfyqfkzgog25"
 ---
 
 [linkat-directory](https://github.com/ewanc26/linkat-directory) is a SvelteKit application that renders a curated directory of [Linkat](https://linkat.blue) user profiles. It fetches profile data — DID, handle, display name, avatar, description, and links — from AT Protocol and displays them as cards.

@@ -4,7 +4,7 @@ description: A Bluesky bot that generates and posts Markov chain text based on a
 date: 2026-02-24
 tags: [bluesky, bot, python, markov, unmaintained]
 draft: false
-atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfkzih6mgg25"
+atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfyqfo6i3625"
 ---
 
 [bluesky-markov](https://github.com/ewanc26/bluesky-markov) is a Python bot that fetches posts from a source Bluesky account, trains a Markov chain on them, generates new text, and posts it to a destination account at random intervals.

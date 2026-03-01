@@ -4,7 +4,7 @@ description: Classic Snake with AT Protocol OAuth login and high score saving to
 date: 2026-02-24
 tags: [atproto, sveltekit, game]
 draft: false
-atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfkzijoyow25"
+atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfyqfq7cc625"
 ---
 
 [atproto-snake](https://github.com/ewanc26/atproto-snake) is a browser-based Snake game built with SvelteKit that uses AT Protocol for authentication and saves your high score directly to your PDS.

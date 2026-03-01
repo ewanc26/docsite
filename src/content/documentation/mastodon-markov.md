@@ -4,7 +4,7 @@ description: A Mastodon bot that generates and posts Markov chain text based on 
 date: 2026-02-24
 tags: [mastodon, bot, python, markov, unmaintained]
 draft: false
-atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfkzidej7625"
+atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfyqfjn5oo25"
 ---
 
 [mastodon-markov](https://github.com/ewanc26/mastodon-markov) is a Python bot that fetches posts from a source Mastodon account, trains a Markov chain on them, generates new text, and posts it to a destination account at random intervals between 30 minutes and 3 hours. It also periodically refreshes its dataset.

@@ -4,7 +4,7 @@ description: Automate mirroring GitHub repositories to Tangled and publishing sh
 date: 2026-02-24
 tags: [atproto, tangled, github, automation, typescript]
 draft: false
-atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfkziamlpw25"
+atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfyqfhi6no25"
 ---
 
 [tangled-sync](https://github.com/ewanc26/tangled-sync) is a TypeScript tool that clones all repositories under a GitHub user, pushes them to [Tangled](https://tangled.sh) mirrors, updates their READMEs with a Tangled mirror link, and publishes `sh.tangled.repo` records to AT Protocol for each one — keeping your GitHub projects discoverable via the AT Protocol ecosystem.

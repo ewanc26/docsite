@@ -4,7 +4,7 @@ description: A simple Godot 4 C# platformer made collaboratively.
 date: 2026-02-24
 tags: [godot, csharp, game, collaboration]
 draft: false
-atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfkzibtbyw25"
+atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfyqfi7vgw25"
 ---
 
 [platformer-collab](https://github.com/ewanc26/platformer-collab) is a simple 2D platformer made in Godot 4 (Mono/C#) as a two-person collaboration. It uses free assets from [Kenney](https://kenney.nl).

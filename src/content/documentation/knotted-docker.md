@@ -4,7 +4,7 @@ description: A Dockerised Tangled knot server with optional Cloudflare Tunnel ro
 date: 2026-02-24
 tags: [tangled, atproto, docker, self-hosting]
 draft: false
-atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfkziexuqw25"
+atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfyqfllmpg25"
 ---
 
 [knotted-docker](https://github.com/ewanc26/knotted-docker) is an unofficial Dockerised setup for running a [Tangled](https://tangled.sh) knot server — the AT Protocol-native git hosting layer. Tangled uses "knot servers" as repository hosts rather than a user PDS. This repo wraps the official knot server in Docker Compose with optional Cloudflare Tunnel support for exposing it publicly.

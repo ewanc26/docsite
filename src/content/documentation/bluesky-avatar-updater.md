@@ -4,7 +4,7 @@ description: Automatically update your Bluesky avatar (and banner) every hour ba
 date: 2026-02-24
 tags: [bluesky, atproto, python, automation]
 draft: false
-atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfkziioxcg25"
+atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfyqfpgwyo25"
 ---
 
 [bluesky-avatar-updater](https://github.com/ewanc26/bluesky-avatar-updater) is a Python script that swaps your Bluesky profile avatar — and optionally your banner — based on the current hour. Each hour maps to a blob CID stored in a JSON config file. The script sets up its own cron job to run hourly, handles log rotation, and performs an API health check on each run.

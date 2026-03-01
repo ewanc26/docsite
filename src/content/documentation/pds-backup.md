@@ -4,7 +4,7 @@ description: A Bash script for automated, resumable PDS backups via rsync over S
 date: 2026-02-24
 tags: [atproto, pds, bash, self-hosting, tools]
 draft: false
-atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfkzicfc6g25"
+atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfyqfiozsw25"
 ---
 
 [pds-backup](https://github.com/ewanc26/pds-backup) is a Bash script that automates backups of your AT Protocol Personal Data Server. It stops the PDS service, creates a timestamped `.tar.gz` archive of `/pds`, compares SHA-256 checksums against the most recent remote backup to skip unchanged runs, transfers via rsync over SSH (with up to 3 retries), then restarts the PDS. Cron jobs are installed automatically for twice-daily runs at midnight and noon.
