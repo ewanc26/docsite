@@ -3,6 +3,6 @@
   "contentDir": "./src/content/documentation",
   "publicDir": "./static",
   "outputDir": "./dist",
-  "pathPrefix": "./projects/",
+  "pathPrefix": "/projects",
   "publicationUri": "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.publication/3mfkugqyt3w25"
 }
