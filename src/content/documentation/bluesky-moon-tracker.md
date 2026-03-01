@@ -4,7 +4,7 @@ description: A Bluesky bot that posts daily moon phase updates with a lycanthrop
 date: 2026-02-24
 tags: [bluesky, bot, typescript, unmaintained]
 draft: false
-atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfkzigpc6w25"
+atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfyqfntcno25"
 ---
 
 [bluesky-moon-tracker](https://github.com/ewanc26/bluesky-moon-tracker) is a TypeScript bot that posts daily moon phase updates to Bluesky at 00:00 UTC. Messages are tailored to the lunar phase and current month, with a slightly lycanthropic flavour, British references, and occasional Pride references in June. Moon phase data comes from the Farmsense API.

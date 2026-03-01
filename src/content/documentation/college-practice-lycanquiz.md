@@ -4,7 +4,7 @@ description: A VB.NET Windows Forms quiz about werewolf mythology, made as a col
 date: 2026-02-24
 tags: [vbnet, windows-forms, college, historical]
 draft: false
-atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfkzifrf5w25"
+atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfyqfmrudo25"
 ---
 
 [college-practice-lycanquiz](https://github.com/ewanc26/college-practice-lycanquiz) is a Windows Forms quiz application built in VB.NET as a college practice exercise. It tests basic werewolf mythology knowledge across five true/false questions and calculates a score at the end.

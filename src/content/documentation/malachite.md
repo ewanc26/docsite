@@ -4,7 +4,7 @@ description: Import your Last.fm and Spotify listening history to the AT Protoco
 date: 2026-02-24
 tags: [malachite, atproto, lastfm, spotify, tools]
 draft: false
-atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfkzidriag25"
+atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfyqfjxlo625"
 ---
 
 [Malachite](https://github.com/ewanc26/malachite) is a tool for importing your Last.fm and Spotify listening history to the AT Protocol network as `fm.teal.alpha.feed.play` records. It's designed to be safe, resumable, and smart about rate limits — so you don't accidentally hammer your PDS.

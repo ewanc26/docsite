@@ -4,7 +4,7 @@ description: A SvelteKit library for reading and writing AT Protocol longform co
 date: 2026-02-24
 tags: [atproto, sveltekit, library, standard-site]
 draft: false
-atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfkzibc65o25"
+atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfyqfhun3o25"
 ---
 
 [svelte-standard-site](https://github.com/ewanc26/svelte-standard-site) is a SvelteKit component library for the [Standard.site](https://standard.site/) protocol — a spec for storing longform content on AT Protocol. It supports both reading content from AT Protocol and publishing to it, along with federated Bluesky comments, content verification, and a complete design system.

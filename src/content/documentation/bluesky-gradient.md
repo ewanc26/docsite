@@ -4,7 +4,7 @@ description: Generate 24 sky-gradient images (one per hour) for use as Bluesky a
 date: 2026-02-24
 tags: [python, bluesky, image-generation, tools]
 draft: false
-atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfkzihpod625"
+atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfyqfon4t625"
 ---
 
 [bluesky-gradient](https://github.com/ewanc26/bluesky-gradient) is a Python image generation script that produces a set of 24 gradient images — one for each hour of the day — based on configurable sky colours. Each image fades from the hour's sky colour to a monochrome shade derived from the average RGB value, with a text overlay of your project name. Designed as a companion to [bluesky-avatar-updater](./bluesky-avatar-updater), it was also inspired by [@dame.is](https://bsky.app/profile/dame.is)'s dynamic avatar post.

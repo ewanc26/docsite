@@ -4,7 +4,7 @@ description: An AI-powered Bluesky bot that uses a local Ollama model to generat
 date: 2026-02-24
 tags: [bluesky, bot, python, ollama, ai]
 draft: false
-atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfkzigafmw25"
+atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfyqfneyng25"
 ---
 
 [bluesky-ollama](https://github.com/ewanc26/bluesky-ollama) is a Python bot that fetches recent posts from a source Bluesky account, feeds them to a locally-running Ollama model, and posts the AI-generated result to a destination account. It combines the Bluesky API integration from [bluesky-markov](./bluesky-markov) with local LLM generation.

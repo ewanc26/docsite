@@ -4,7 +4,7 @@ description: Analyse .docx files and generate essays using a local Ollama model.
 date: 2026-02-24
 tags: [python, ollama, ai, tools]
 draft: false
-atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfkzie6m5w25"
+atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfyqfkfxmw25"
 ---
 
 [llm-analyser](https://github.com/ewanc26/llm-analyser) is a Python CLI tool that reads all `.docx` files in a given directory and uses a locally-running Ollama model to generate analytical essays for each one. Output essays are saved to a new folder named `<directory>_essays` in the project root.

@@ -4,7 +4,7 @@ description: A server-side AT Protocol link shortener powered by your Linkat boa
 date: 2026-02-24
 tags: [atproto, sveltekit, linkat, tools]
 draft: false
-atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfkzik5y6o25"
+atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfyqfqkvf625"
 ---
 
 [atproto-shortlink](https://github.com/ewanc26/atproto-shortlink) is a SvelteKit service that turns your [Linkat](https://linkat.blue) board into a link shortener. There's no database — links are fetched live from AT Protocol, and shortcodes are deterministic base62 hashes derived from each URL.

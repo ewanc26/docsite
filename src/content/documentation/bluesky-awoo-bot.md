@@ -4,7 +4,7 @@ description: A simple Bluesky bot that posts random wolf noises at random interv
 date: 2026-02-24
 tags: [bluesky, bot, typescript, unmaintained]
 draft: false
-atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfkzii7rx625"
+atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfyqfoxqo625"
 ---
 
 [bluesky-awoo-bot](https://github.com/ewanc26/bluesky-awoo-bot) is a small TypeScript bot that picks a random wolf noise from a predefined JSON list and posts it to Bluesky. It then waits a random interval (configurable between 1–3 hours by default) before posting again.

@@ -4,7 +4,7 @@ description: A personal PaperMC Minecraft server in Docker Compose with DuckDNS 
 date: 2026-02-24
 tags: [minecraft, docker, self-hosting]
 draft: false
-atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfkzicumfw25"
+atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfyqfj56ww25"
 ---
 
 [mc-server](https://github.com/ewanc26/mc-server) is a personal Minecraft server setup using Docker Compose with PaperMC, Spigot plugins, and an optional DuckDNS dynamic DNS companion script. Primarily intended for personal use or small groups.
