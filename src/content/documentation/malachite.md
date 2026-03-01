@@ -15,18 +15,21 @@ The name is a deliberate nod to the `teal` lexicon it publishes to: malachite is
 
 Malachite comes in two forms:
 
-**Web interface** — the easiest way to get started. Visit [malachite.ewancroft.uk](https://malachite.ewancroft.uk), sign in with your ATProto handle and an app password, upload your export files, and import. Everything runs locally in your browser — no data is sent to any server other than your own PDS.
+**Web interface** — the easiest way to get started. Visit [malachite.croft.click](https://malachite.croft.click), authenticate via ATProto OAuth (recommended) or an app password, upload your export files, and import. Everything runs locally in your browser — no data is sent to any server other than your own PDS.
 
 **CLI** — a Node.js command-line tool for local use. Useful if you want full control over batch settings, need to automate imports, or simply prefer the terminal. Requires cloning the repository and building from source.
 
 ## Web Interface
 
-No installation required. Open [malachite.ewancroft.uk](https://malachite.ewancroft.uk) and follow the steps:
+No installation required. Open [malachite.croft.click](https://malachite.croft.click) and follow the wizard:
 
 1. **Choose a mode** — Last.fm, Spotify, combined, sync, or deduplicate
-2. **Sign in** — your ATProto handle and an app password (never stored)
-3. **Upload your export** — CSV or JSON, parsed entirely in the browser
-4. **Import** — records are published directly to your PDS with automatic rate-limit handling
+2. **Sign in** — via ATProto OAuth (recommended; redirects to your PDS and back, your credentials are never shared with Malachite) or an app password
+3. **Upload your export** — CSV or JSON, parsed entirely in the browser (skipped in deduplicate mode)
+4. **Options** — optionally enable dry run, reverse chronological order, or skip the Teal duplicate check
+5. **Run** — records are published directly to your PDS with automatic rate-limit handling
+
+The web app is built with SvelteKit.
 
 ## CLI
 
@@ -176,7 +179,7 @@ Example Last.fm record:
   "trackName": "Paint My Masterpiece",
   "artists": [{ "artistName": "Cjbeards", "artistMbId": "c8d4f4bf-..." }],
   "releaseName": "Masquerade",
-  "playedTime": "2026-11-13T23:49:36Z",
+  "playedTime": "2025-11-13T23:49:36Z",
   "originUrl": "https://www.last.fm/music/Cjbeards/_/Paint+My+Masterpiece",
   "submissionClientAgent": "malachite/v0.9.3",
   "musicServiceBaseDomain": "last.fm"
