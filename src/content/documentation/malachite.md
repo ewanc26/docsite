@@ -1,7 +1,7 @@
 ---
 title: Malachite
 description: Import your Last.fm and Spotify listening history to the AT Protocol network using the fm.teal.alpha.feed.play lexicon.
-date: 2026-02-24
+date: 2026-03-02
 tags: [malachite, atproto, lastfm, spotify, tools]
 draft: false
 atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfyqfjxlo625"
@@ -132,7 +132,7 @@ Malachite has two layers of protection against duplicates:
 
 **Input deduplication** — before publishing anything, it removes entries within your source file that share the same track name, artist, and timestamp.
 
-**Teal comparison** — it fetches all your existing Teal records and skips anything already imported. This uses adaptive batch sizing (starting at 25, scaling up to 100 based on network performance) and shows real-time progress. This runs automatically; no special mode needed, but credentials are required even for dry runs.
+**Teal comparison via CAR export** — it downloads your entire repo as a single CARv1 file using `com.atproto.sync.getRepo` (the sync namespace, not the AppView), parses it locally, and skips anything already imported. This costs zero AppView write-quota points. It runs automatically for every mode; credentials are required even for dry runs.
 
 ## Rate Limiting
 
@@ -147,12 +147,6 @@ Malachite handles this automatically:
 - Pauses 24 hours between days for large imports
 - Scales immediately back to maximum speed after a quota reset
 
-You can also check your current rate limit status at any time (CLI only):
-
-```bash
-npm run check-limits
-```
-
 ## File Storage
 
 All CLI data is stored in `~/.malachite/`:
@@ -165,7 +159,7 @@ All CLI data is stored in `~/.malachite/`:
 └── credentials.json  # AES-256-GCM encrypted credentials (optional)
 ```
 
-Credentials are encrypted using a key derived from your hostname and username, making them machine-specific. You can clear them with `pnpm start --clear-credentials`.
+Credentials are saved automatically after every successful login — no separate prompt. They are encrypted using a key derived from your hostname and username, making them machine-specific. Clear them with `pnpm start --clear-credentials`.
 
 ## Record Format
 
@@ -181,7 +175,7 @@ Example Last.fm record:
   "releaseName": "Masquerade",
   "playedTime": "2025-11-13T23:49:36Z",
   "originUrl": "https://www.last.fm/music/Cjbeards/_/Paint+My+Masterpiece",
-  "submissionClientAgent": "malachite/v0.9.3",
+  "submissionClientAgent": "malachite/v0.10.0",
   "musicServiceBaseDomain": "last.fm"
 }
 ```
