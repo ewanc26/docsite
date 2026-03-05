@@ -57,3 +57,7 @@ pnpm check      # svelte-check type checking
 pnpm format     # prettier
 pnpm lint       # prettier --check
 ```
+
+## ☕ Support
+
+If you found this useful, consider [buying me a ko-fi](https://ko-fi.com/ewancroft)!
