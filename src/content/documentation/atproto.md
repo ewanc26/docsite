@@ -2,14 +2,14 @@
 title: "@ewanc26/atproto"
 description: AT Protocol service layer extracted from ewancroft.uk — profile fetching, Standard.site documents, Bluesky posts, music/mood status, Tangled repos, and a built-in in-memory cache.
 date: 2026-03-06
-tags: [library, atproto, typescript, monorepo]
+tags: [library, atproto, typescript, pkgs]
 draft: false
 atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mgghylqq2725"
 ---
 
-[@ewanc26/atproto](https://github.com/ewanc26/website/tree/main/packages/atproto) is the AT Protocol service layer extracted from [ewancroft.uk](https://ewancroft.uk). It handles all communication with the AT Protocol network: resolving identities, fetching profiles and lexicon records, reading Standard.site blog posts and documents, streaming Bluesky posts, and looking up music/mood status — all with a built-in in-memory cache.
+[@ewanc26/atproto](https://github.com/ewanc26/pkgs/tree/main/packages/atproto) is the AT Protocol service layer extracted from [ewancroft.uk](https://ewancroft.uk). It handles all communication with the AT Protocol network: resolving identities, fetching profiles and lexicon records, reading Standard.site blog posts and documents, streaming Bluesky posts, and looking up music/mood status — all with a built-in in-memory cache.
 
-Part of the [website monorepo](/projects/website).
+Part of the [`@ewanc26/pkgs`](/projects/pkgs) monorepo.
 
 ## Installation
 
@@ -154,4 +154,4 @@ TypeScript 5.9+. Peer dependency on `@atproto/api`. Compiled to ESM with `tsc`.
 
 ## Licence
 
-See the [website repository](https://github.com/ewanc26/website).
+AGPL-3.0-only — see the [pkgs monorepo](https://github.com/ewanc26/pkgs).
