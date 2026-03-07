@@ -9,9 +9,11 @@ atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfyqfgh246
 
 [website](https://github.com/ewanc26/website) is the source code for [ewancroft.uk](https://ewancroft.uk). It's a fully AT Protocol-integrated personal site built with SvelteKit 5, Tailwind CSS 4, and Svelte 5 Runes. While the repository includes Ewan-specific configuration, the codebase is designed to be adapted for anyone running their own AT Protocol-powered site.
 
+The repository is a pnpm monorepo. The app itself lives at the root; shared logic is split into three published packages: [@ewanc26/atproto](/documentation/ewanc26-atproto), [@ewanc26/ui](/documentation/ewanc26-ui), and [@ewanc26/utils](/documentation/ewanc26-utils).
+
 ## Features at a Glance
 
-**AT Protocol integration** — Bluesky profile (avatar, banner, bio, pronouns, follower counts), Standard.site blog posts, [teal.fm](https://teal.fm) music status, [kibun.social](https://kibun.social) mood status, [Tangled](https://tangled.org) repositories, and [Linkat](https://linkat.blue) link board — all fetched live with configurable in-memory caching.
+**AT Protocol integration** — Bluesky profile (avatar, banner, bio, pronouns, follower counts), Standard.site blog posts, [teal.fm](https://teal.fm) music status, [kibun.social](https://kibun.social) mood status, [Tangled](https://tangled.org) repositories, and [Linkat](https://linkat.blue) link board — all fetched live with configurable in-memory caching via [@ewanc26/atproto](/documentation/ewanc26-atproto).
 
 **Content system** — Multi-publication Standard.site support with friendly URL slugs, per-publication RSS 2.0 feeds, an `/archive` page, and redirects from `/{slug}/{rkey}` to the full document on Standard.site.
 
@@ -19,7 +21,7 @@ atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfyqfgh246
 
 **Music integration** — Album artwork via a cascading server-side proxy: MusicBrainz Cover Art Archive → iTunes → Deezer → Last.fm → AT Protocol blob fallback. All with smart caching and CORS-free via `/api/artwork`.
 
-**Theming** — 12 colour themes (Sage, Monochrome, Slate, Ruby, Coral, Sunset, Amber, Forest, Teal, Ocean, Lavender, Rose) using OKLCH colour space, system preference detection, and persistent selection.
+**Theming** — 12 colour themes (Sage, Monochrome, Slate, Ruby, Coral, Sunset, Amber, Forest, Teal, Ocean, Lavender, Rose) using OKLCH colour space, system preference detection, and persistent selection — configured in [@ewanc26/ui](/documentation/ewanc26-ui).
 
 **Fun bits** — Wolf mode (converts page text to wolf sounds while preserving numbers, abbreviations, and interactive elements), decimal clock, Happy Mac easter egg, scroll-to-top button.
 
@@ -28,7 +30,7 @@ atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfyqfgh246
 ```bash
 git clone git@github.com:ewanc26/website
 cd website
-npm install
+pnpm install
 cp .env .env.local
 ```
 
@@ -43,7 +45,7 @@ PUBLIC_SITE_URL=https://yoursite.com
 Configure publication slugs in `src/lib/config/slugs.ts`, then:
 
 ```bash
-npm run dev
+pnpm dev
 ```
 
 ## Environment Variables
@@ -58,6 +60,14 @@ npm run dev
 | `CACHE_TTL_MUSIC_STATUS` | No | Music status TTL (default: 120) |
 | `CACHE_TTL_KIBUN_STATUS` | No | Mood status TTL (default: 120) |
 
+## Monorepo Packages
+
+| Package | Description |
+|---------|-------------|
+| [@ewanc26/atproto](/documentation/ewanc26-atproto) | AT Protocol service layer — profile, posts, documents, status records, cache, agents |
+| [@ewanc26/ui](/documentation/ewanc26-ui) | Svelte component library — layout, cards, UI primitives, stores, theme config |
+| [@ewanc26/utils](/documentation/ewanc26-utils) | Utility functions — date/number formatting, URL helpers, validators, RSS generation |
+
 ## Publication System
 
 Map friendly slugs to Standard.site publication rkeys in `src/lib/config/slugs.ts`:
@@ -69,19 +79,6 @@ export const slugMappings: SlugMapping[] = [
 ```
 
 This creates routes at `/blog`, `/blog/{rkey}`, and `/blog/rss`.
-
-## AT Protocol Services
-
-All AT Protocol data fetching lives in `src/lib/services/atproto/`:
-
-- `fetch.ts` — Profile, links, music and mood status
-- `posts.ts` — Bluesky posts and Standard.site documents
-- `documents.ts` — Standard.site document management
-- `engagement.ts` — Like and repost counts via Constellation API
-- `media.ts` — Blob URL construction and image handling
-- `musicbrainz.ts` — Album artwork with cascading fallbacks
-- `cache.ts` — In-memory caching with configurable TTL
-- `agents.ts` — PDS resolution with Bluesky public API fallback
 
 ## Custom Lexicons Used
 
