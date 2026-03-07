@@ -2,12 +2,14 @@
 title: "@ewanc26/tid"
 description: Zero-dependency, spec-compliant AT Protocol TID generation for Node.js and browsers.
 date: 2026-03-04
-tags: [atproto, typescript, library, malachite, tools]
+tags: [atproto, typescript, library, malachite, tools, pkgs]
 draft: false
 atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mgayldp4nc25"
 ---
 
-[@ewanc26/tid](https://github.com/ewanc26/malachite/tree/main/packages/tid) is a tiny TypeScript library for generating, validating, decoding, and comparing AT Protocol TIDs (Timestamp Identifiers). It has no runtime dependencies, ships with type definitions, and works in Node.js 20+, Deno, Bun, and modern browsers via the Web Crypto API.
+[@ewanc26/tid](https://github.com/ewanc26/pkgs/tree/main/packages/tid) is a tiny TypeScript library for generating, validating, decoding, and comparing AT Protocol TIDs (Timestamp Identifiers). It has no runtime dependencies, ships with type definitions, and works in Node.js 20+, Deno, Bun, and modern browsers via the Web Crypto API.
+
+Part of the [`@ewanc26/pkgs`](/projects/pkgs) monorepo.
 
 TIDs are 13-character, lexicographically sortable record keys used across the AT Protocol and Bluesky. They encode a microsecond-precision Unix timestamp and a 5-bit clock ID. Within a JS context, the library guarantees monotonicity — if records arrive out of order, the clock is bumped forward so every generated TID is strictly increasing.
 
@@ -104,4 +106,4 @@ interface DecodedTid {
 
 ## Licence
 
-AGPL-3.0-only — same as [Malachite](https://github.com/ewanc26/malachite).
+AGPL-3.0-only — see the [pkgs monorepo](https://github.com/ewanc26/pkgs).

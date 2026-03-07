@@ -2,14 +2,14 @@
 title: "@ewanc26/ui"
 description: Svelte UI component library extracted from ewancroft.uk — pluggable layout, card, SEO, and UI primitive components alongside Svelte stores and a multi-theme config system.
 date: 2026-03-06
-tags: [library, svelte, ui, monorepo]
+tags: [library, svelte, ui, pkgs]
 draft: false
 atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mgghylndnh25"
 ---
 
-[@ewanc26/ui](https://github.com/ewanc26/website/tree/main/packages/ui) is the Svelte component library extracted from [ewancroft.uk](https://ewancroft.uk). It provides layout components, a rich set of card types, UI primitives, SEO tags, Svelte stores, badge helpers, and a central multi-theme configuration — all built for SvelteKit 2 + Svelte 5 + Tailwind CSS 4.
+[@ewanc26/ui](https://github.com/ewanc26/pkgs/tree/main/packages/ui) is the Svelte component library extracted from [ewancroft.uk](https://ewancroft.uk). It provides layout components, a rich set of card types, UI primitives, SEO tags, Svelte stores, badge helpers, and a central multi-theme configuration — all built for SvelteKit 2 + Svelte 5 + Tailwind CSS 4.
 
-Part of the [website monorepo](/projects/website).
+Part of the [`@ewanc26/pkgs`](/projects/pkgs) monorepo.
 
 ## Installation
 
@@ -181,4 +181,4 @@ Svelte 5, SvelteKit 2, Tailwind CSS 4, TypeScript 5.9+, `@lucide/svelte`. Built 
 
 ## Licence
 
-See the [website repository](https://github.com/ewanc26/website).
+AGPL-3.0-only — see the [pkgs monorepo](https://github.com/ewanc26/pkgs).

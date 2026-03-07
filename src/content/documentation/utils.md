@@ -2,14 +2,14 @@
 title: "@ewanc26/utils"
 description: Shared utility functions extracted from ewancroft.uk — date formatting, number formatting, URL helpers, validators, RSS generation, and locale detection.
 date: 2026-03-06
-tags: [library, utilities, typescript, monorepo]
+tags: [library, utilities, typescript, pkgs]
 draft: false
 atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mgghyljhmp25"
 ---
 
-[@ewanc26/utils](https://github.com/ewanc26/website/tree/main/packages/utils) is a zero-dependency TypeScript utility library extracted from [ewancroft.uk](https://ewancroft.uk). It provides helpers for date and number formatting, URL manipulation, input validation, locale detection, and RSS feed generation.
+[@ewanc26/utils](https://github.com/ewanc26/pkgs/tree/main/packages/utils) is a zero-dependency TypeScript utility library extracted from [ewancroft.uk](https://ewancroft.uk). It provides helpers for date and number formatting, URL manipulation, input validation, locale detection, and RSS feed generation.
 
-Part of the [website monorepo](/projects/website).
+Part of the [`@ewanc26/pkgs`](/projects/pkgs) monorepo.
 
 ## Installation
 
@@ -136,4 +136,4 @@ TypeScript 5.9+. No runtime dependencies. Compiled to ESM with `tsc`.
 
 ## Licence
 
-See the [website repository](https://github.com/ewanc26/website).
+AGPL-3.0-only — see the [pkgs monorepo](https://github.com/ewanc26/pkgs).
