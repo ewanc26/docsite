@@ -9,11 +9,11 @@ atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfyqfgh246
 
 [website](https://github.com/ewanc26/website) is the source code for [ewancroft.uk](https://ewancroft.uk). It's a fully AT Protocol-integrated personal site built with SvelteKit 5, Tailwind CSS 4, and Svelte 5 Runes. While the repository includes Ewan-specific configuration, the codebase is designed to be adapted for anyone running their own AT Protocol-powered site.
 
-The repository is a pnpm monorepo. The app itself lives at the root; shared logic is split into three published packages: [@ewanc26/atproto](/documentation/ewanc26-atproto), [@ewanc26/ui](/documentation/ewanc26-ui), and [@ewanc26/utils](/documentation/ewanc26-utils).
+The repository is a pnpm monorepo. The app itself lives at the root; shared logic is split into three published packages: [@ewanc26/atproto](/documentation/atproto), [@ewanc26/ui](/documentation/ui), and [@ewanc26/utils](/documentation/utils).
 
 ## Features at a Glance
 
-**AT Protocol integration** — Bluesky profile (avatar, banner, bio, pronouns, follower counts), Standard.site blog posts, [teal.fm](https://teal.fm) music status, [kibun.social](https://kibun.social) mood status, [Tangled](https://tangled.org) repositories, and [Linkat](https://linkat.blue) link board — all fetched live with configurable in-memory caching via [@ewanc26/atproto](/documentation/ewanc26-atproto).
+**AT Protocol integration** — Bluesky profile (avatar, banner, bio, pronouns, follower counts), Standard.site blog posts, [teal.fm](https://teal.fm) music status, [kibun.social](https://kibun.social) mood status, [Tangled](https://tangled.org) repositories, and [Linkat](https://linkat.blue) link board — all fetched live with configurable in-memory caching via [@ewanc26/atproto](/documentation/atproto).
 
 **Content system** — Multi-publication Standard.site support with friendly URL slugs, per-publication RSS 2.0 feeds, an `/archive` page, and redirects from `/{slug}/{rkey}` to the full document on Standard.site.
 
@@ -21,7 +21,7 @@ The repository is a pnpm monorepo. The app itself lives at the root; shared logi
 
 **Music integration** — Album artwork via a cascading server-side proxy: MusicBrainz Cover Art Archive → iTunes → Deezer → Last.fm → AT Protocol blob fallback. All with smart caching and CORS-free via `/api/artwork`.
 
-**Theming** — 12 colour themes (Sage, Monochrome, Slate, Ruby, Coral, Sunset, Amber, Forest, Teal, Ocean, Lavender, Rose) using OKLCH colour space, system preference detection, and persistent selection — configured in [@ewanc26/ui](/documentation/ewanc26-ui).
+**Theming** — 12 colour themes (Sage, Monochrome, Slate, Ruby, Coral, Sunset, Amber, Forest, Teal, Ocean, Lavender, Rose) using OKLCH colour space, system preference detection, and persistent selection — configured in [@ewanc26/ui](/documentation/ui).
 
 **Fun bits** — Wolf mode (converts page text to wolf sounds while preserving numbers, abbreviations, and interactive elements), decimal clock, Happy Mac easter egg, scroll-to-top button.
 
@@ -64,9 +64,9 @@ pnpm dev
 
 | Package | Description |
 |---------|-------------|
-| [@ewanc26/atproto](/documentation/ewanc26-atproto) | AT Protocol service layer — profile, posts, documents, status records, cache, agents |
-| [@ewanc26/ui](/documentation/ewanc26-ui) | Svelte component library — layout, cards, UI primitives, stores, theme config |
-| [@ewanc26/utils](/documentation/ewanc26-utils) | Utility functions — date/number formatting, URL helpers, validators, RSS generation |
+| [@ewanc26/atproto](/documentation/atproto) | AT Protocol service layer — profile, posts, documents, status records, cache, agents |
+| [@ewanc26/ui](/documentation/ui) | Svelte component library — layout, cards, UI primitives, stores, theme config |
+| [@ewanc26/utils](/documentation/utils) | Utility functions — date/number formatting, URL helpers, validators, RSS generation |
 
 ## Publication System
 
