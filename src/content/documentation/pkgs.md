@@ -23,6 +23,7 @@ The monorepo has since expanded to include Rust CLI tools and Python utilities, 
 | [`@ewanc26/utils`](/projects/utils) | 0.x | Shared utilities (dates, numbers, URLs, validators, RSS) |
 | [`@ewanc26/svelte-standard-site`](/projects/svelte-standard-site) | 0.x | SvelteKit library for `site.standard.*` AT Protocol records |
 | [`@ewanc26/tangled-sync`](/projects/tangled-sync) | 1.x | CLI tool for syncing GitHub repos to Tangled with ATProto records |
+| [`@ewanc26/pds-landing`](/projects/pds-landing) | 1.x | Static landing page for the personal ATProto PDS at pds.ewancroft.uk |
 
 ### Rust
 
@@ -113,6 +114,18 @@ Each package was extracted from its source repository using one of two approache
 **Consolidated packages** (`nix-config-tools`, `tangled-sync`, `llm-analyser`) — these were copied from their original locations and integrated into the monorepo structure.
 
 The source repos retain their original files for reference, but the canonical source of truth for all packages is this monorepo.
+
+## Publishing
+
+TypeScript packages are published to npm automatically via GitHub Actions. Pushing a tag in the format `<package-name>/v<semver>` triggers the workflow, which resolves the package from the tag, builds it, and publishes to npm with provenance via OIDC.
+
+```bash
+# Publish a specific package
+git tag pds-landing/v1.0.0
+git push origin pds-landing/v1.0.0
+```
+
+The `NPM_TOKEN` secret must be set in the repository's GitHub Actions secrets. Rust and Python packages are not published automatically.
 
 ## Licence
 

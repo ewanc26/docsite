@@ -11,24 +11,23 @@ atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfyqfhi6no
 
 This tool is now part of the [@ewanc26/pkgs monorepo](/projects/pkgs).
 
-## Setup
+## Installation
 
 ```bash
-# Clone the monorepo
-git clone git@github.com:ewanc26/pkgs
-cd pkgs
-
-# Install dependencies
-pnpm install
-
-# Navigate to the tangled-sync package
-cd packages/tangled-sync
-
-# Copy environment template
-cp src/.env.example src/.env
+npm install -g @ewanc26/tangled-sync
+# or
+pnpm add -g @ewanc26/tangled-sync
 ```
 
-Edit `src/.env`:
+Or run directly without installing:
+
+```bash
+npx @ewanc26/tangled-sync
+```
+
+## Setup
+
+Create a `.env` file in your working directory:
 
 ```env
 BASE_DIR=/path/to/local/clone/directory
@@ -46,7 +45,7 @@ Ensure your Tangled SSH key is configured before running — the script will att
 Before the full sync, verify your AT Protocol setup:
 
 ```bash
-pnpm --filter @ewanc26/tangled-sync run test-atproto
+tangled-sync-test-atproto
 ```
 
 This checks credentials, confirms your DID, and lists existing `sh.tangled.repo` records.
@@ -54,7 +53,14 @@ This checks credentials, confirms your DID, and lists existing `sh.tangled.repo`
 ## Running the Sync
 
 ```bash
-pnpm --filter @ewanc26/tangled-sync run sync
+tangled-sync          # sync new repos only
+tangled-sync --force  # force sync all repos
+```
+
+Or run the health check first:
+
+```bash
+tangled-sync-check
 ```
 
 What happens:
