@@ -23,7 +23,9 @@ The monorepo has since expanded to include Rust CLI tools and Python utilities, 
 | [`@ewanc26/utils`](/projects/utils) | 0.x | Shared utilities (dates, numbers, URLs, validators, RSS) |
 | [`@ewanc26/svelte-standard-site`](/projects/svelte-standard-site) | 0.x | SvelteKit library for `site.standard.*` AT Protocol records |
 | [`@ewanc26/tangled-sync`](/projects/tangled-sync) | 1.x | CLI tool for syncing GitHub repos to Tangled with ATProto records |
-| [`@ewanc26/pds-landing`](/projects/pds-landing) | 1.x | Static landing page for the personal ATProto PDS at pds.ewancroft.uk |
+| [`@ewanc26/pds-landing`](/projects/pds-landing) | 2.x | Composable Svelte components for an ATProto PDS landing page — terminal-aesthetic UI with live status fetching |
+| [`@ewanc26/noise-avatar`](/projects/noise-avatar) | 0.x | Deterministic value-noise avatar generation from a string seed — zero dependencies, works in browsers and Node.js |
+| [`@ewanc26/supporters`](/projects/supporters) | 0.x | SvelteKit component library for displaying Ko-fi supporters, backed by an ATProto PDS |
 
 ### Rust
 
@@ -57,6 +59,8 @@ pnpm add @ewanc26/ui
 pnpm add @ewanc26/utils
 pnpm add @ewanc26/svelte-standard-site
 pnpm add @ewanc26/tangled-sync
+pnpm add @ewanc26/noise-avatar
+pnpm add @ewanc26/supporters
 ```
 
 ### Rust tools
