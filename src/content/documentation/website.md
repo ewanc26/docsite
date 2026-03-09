@@ -9,11 +9,15 @@ atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfyqfgh246
 
 [website](https://github.com/ewanc26/website) is the source code for [ewancroft.uk](https://ewancroft.uk). It's a fully AT Protocol-integrated personal site built with SvelteKit 5, Tailwind CSS 4, and Svelte 5 Runes. While the repository includes Ewan-specific configuration, the codebase is designed to be adapted for anyone running their own AT Protocol-powered site.
 
-The repository is a pnpm monorepo. The app itself lives at the root; shared logic is split into three published packages: [@ewanc26/atproto](/projects/atproto), [@ewanc26/ui](/projects/ui), and [@ewanc26/utils](/projects/utils).
+The app is a single SvelteKit project. All shared packages (@ewanc26/atproto, @ewanc26/ui, @ewanc26/utils, etc.) live in the separate [@ewanc26/pkgs](/documentation/pkgs) monorepo and are consumed as published npm dependencies.
 
 ## Features at a Glance
 
 **AT Protocol integration** — Bluesky profile (avatar, banner, bio, pronouns, follower counts), Standard.site blog posts, [teal.fm](https://teal.fm) music status, [kibun.social](https://kibun.social) mood status, [Tangled](https://tangled.org) repositories, and [Linkat](https://linkat.blue) link board — all fetched live with configurable in-memory caching via [@ewanc26/atproto](/projects/atproto).
+
+**Ko-fi supporters** — Ko-fi webhook integration via [@ewanc26/supporters](/projects/supporters). Payment events are stored as `uk.ewancroft.kofi.supporter` records on the ATProto PDS and displayed with the `<KofiSupporters>` and `<LunarContributors>` components.
+
+**Noise avatars** — Deterministic value-noise profile pictures generated client-side from a string seed via [@ewanc26/noise-avatar](/projects/noise-avatar).
 
 **Content system** — Multi-publication Standard.site support with friendly URL slugs, per-publication RSS 2.0 feeds, an `/archive` page, and redirects from `/{slug}/{rkey}` to the full document on Standard.site.
 
@@ -40,9 +44,12 @@ Edit `.env.local`:
 PUBLIC_ATPROTO_DID=did:plc:your-did-here
 PUBLIC_SITE_TITLE=Your Site Title
 PUBLIC_SITE_URL=https://yoursite.com
+# Optional: Ko-fi webhook integration
+# KOFI_VERIFICATION_TOKEN=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+# ATPROTO_APP_PASSWORD=xxxx-xxxx-xxxx-xxxx
 ```
 
-Configure publication slugs in `src/lib/config/slugs.ts`, then:
+Configure publication slugs in `src/lib/data/slug-mappings.ts`, then:
 
 ```bash
 pnpm dev
@@ -54,27 +61,46 @@ pnpm dev
 |----------|----------|-------------|
 | `PUBLIC_ATPROTO_DID` | Yes | Your AT Protocol DID |
 | `PUBLIC_SITE_TITLE` | No | Site title for SEO |
+| `PUBLIC_SITE_DESCRIPTION` | No | Site description for SEO |
+| `PUBLIC_SITE_KEYWORDS` | No | Comma-separated keywords for SEO |
 | `PUBLIC_SITE_URL` | No | Canonical site URL |
+| `PUBLIC_BLOG_FALLBACK_URL` | No | Redirect here if a document isn't found (omit to 404) |
+| `PUBLIC_LOCAL_SLINGSHOT_URL` | No | Local Slingshot instance URL (default: `http://localhost:3000`) |
+| `PUBLIC_SLINGSHOT_URL` | No | Public Slingshot fallback URL (default: `https://slingshot.microcosm.blue`) |
 | `PUBLIC_CORS_ALLOWED_ORIGINS` | No | Comma-separated CORS origins for `/api/` |
+| `KOFI_VERIFICATION_TOKEN` | No | Ko-fi webhook verification token |
+| `ATPROTO_APP_PASSWORD` | No | ATProto app password for writing Ko-fi supporter records |
 | `CACHE_TTL_PROFILE` | No | Profile cache TTL in seconds (default: 60) |
-| `CACHE_TTL_MUSIC_STATUS` | No | Music status TTL (default: 120) |
-| `CACHE_TTL_KIBUN_STATUS` | No | Mood status TTL (default: 120) |
+| `CACHE_TTL_SITE_INFO` | No | Site info TTL (default: 120) |
+| `CACHE_TTL_LINKS` | No | Links TTL (default: 60) |
+| `CACHE_TTL_MUSIC_STATUS` | No | Music status TTL (default: 10) |
+| `CACHE_TTL_KIBUN_STATUS` | No | Mood status TTL (default: 15) |
+| `CACHE_TTL_TANGLED_REPOS` | No | Tangled repos TTL (default: 60) |
+| `CACHE_TTL_BLOG_POSTS` | No | Blog posts TTL (default: 30) |
+| `CACHE_TTL_PUBLICATIONS` | No | Publications TTL (default: 60) |
+| `CACHE_TTL_INDIVIDUAL_POST` | No | Individual post TTL (default: 60) |
+| `CACHE_TTL_IDENTITY` | No | Identity resolution TTL in seconds (default: 1440) |
 
-## Monorepo Packages
+## Dependencies
+
+The site consumes these packages from the [@ewanc26/pkgs](/documentation/pkgs) monorepo:
 
 | Package | Description |
 |---------|-------------|
 | [@ewanc26/atproto](/projects/atproto) | AT Protocol service layer — profile, posts, documents, status records, cache, agents |
 | [@ewanc26/ui](/projects/ui) | Svelte component library — layout, cards, UI primitives, stores, theme config |
 | [@ewanc26/utils](/projects/utils) | Utility functions — date/number formatting, URL helpers, validators, RSS generation |
+| [@ewanc26/noise-avatar](/projects/noise-avatar) | Deterministic value-noise avatar generation |
+| [@ewanc26/supporters](/projects/supporters) | Ko-fi supporter display components backed by ATProto PDS |
+| [@ewanc26/tid](/projects/tid) | Zero-dependency AT Protocol TID generation |
 
 ## Publication System
 
-Map friendly slugs to Standard.site publication rkeys in `src/lib/config/slugs.ts`:
+Map friendly slugs to Standard.site publication rkeys in `src/lib/data/slug-mappings.ts`:
 
 ```typescript
 export const slugMappings: SlugMapping[] = [
-  { slug: 'blog', publicationRkey: '3m3x4bgbsh22k' }
+  { slug: 'blog', publicationRkey: '3m3x4bgbsh22k', platform: 'standard.site' }
 ];
 ```
 
@@ -91,7 +117,7 @@ This creates routes at `/blog`, `/blog/{rkey}`, and `/blog/rss`.
 
 ## Tech Stack
 
-SvelteKit 2.50+ with Svelte 5, Tailwind CSS 4, `@atproto/api` v0.18.1, HLS.js, Lucide icons, Vite 7, TypeScript 5.9+. Deployed on Vercel via `@sveltejs/adapter-vercel`.
+SvelteKit 2.53+ with Svelte 5, Tailwind CSS 4, `@atproto/api` v0.18.21+, HLS.js, `@lucide/svelte`, Vite 7, TypeScript 5.9+. Deployed on Vercel via `@sveltejs/adapter-vercel`.
 
 ## Licence
 
