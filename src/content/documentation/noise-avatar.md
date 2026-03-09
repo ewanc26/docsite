@@ -4,6 +4,7 @@ description: Deterministic value-noise avatar generation from a string seed — 
 date: 2026-03-09
 tags: [typescript, canvas, svelte, library, pkgs]
 draft: false
+atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mgo2rpzy7n2t"
 ---
 
 [@ewanc26/noise-avatar](https://github.com/ewanc26/pkgs/tree/main/packages/noise-avatar) generates unique, colourful avatar images from an arbitrary string seed. The same seed always produces the same image. It has zero runtime dependencies and works in any environment with a Canvas API — browsers, jsdom, and server-side environments with a canvas polyfill.
