@@ -4,6 +4,7 @@ description: Generic deterministic value-noise generation. Arbitrary dimensions,
 date: 2026-03-13
 tags: [typescript, canvas, svelte, library, pkgs]
 draft: false
+atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mgxbu7atec2r"
 ---
 
 [@ewanc26/noise](https://github.com/ewanc26/pkgs/tree/main/packages/noise) is the underlying noise engine extracted from [@ewanc26/noise-avatar](/documentation/noise-avatar). It generates deterministic value-noise pixel data from an arbitrary string seed — same seed always produces the same output. It supports arbitrary canvas dimensions, multi-octave fractal Brownian motion (FBM), and several colour modes. Zero runtime dependencies; works anywhere with a `Uint8ClampedArray` — browsers, Node.js, and workers.
