@@ -9,7 +9,7 @@ atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfyqfgh246
 
 [website](https://github.com/ewanc26/website) is the source code for [ewancroft.uk](https://ewancroft.uk). It's a fully AT Protocol-integrated personal site built with SvelteKit 5, Tailwind CSS 4, and Svelte 5 Runes. While the repository includes Ewan-specific configuration, the codebase is designed to be adapted for anyone running their own AT Protocol-powered site.
 
-The app is a single SvelteKit project. All shared packages (@ewanc26/atproto, @ewanc26/ui, @ewanc26/utils, etc.) live in the separate [@ewanc26/pkgs](/documentation/pkgs) monorepo and are consumed as published npm dependencies.
+The app is a single SvelteKit project. All shared packages (@ewanc26/atproto, @ewanc26/ui, @ewanc26/utils, etc.) live in the separate [@ewanc26/pkgs](/projects/pkgs) monorepo and are consumed as published npm dependencies.
 
 ## Features at a Glance
 
@@ -83,7 +83,7 @@ pnpm dev
 
 ## Dependencies
 
-The site consumes these packages from the [@ewanc26/pkgs](/documentation/pkgs) monorepo:
+The site consumes these packages from the [@ewanc26/pkgs](/projects/pkgs) monorepo:
 
 | Package | Description |
 |---------|-------------|
