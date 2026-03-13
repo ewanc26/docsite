@@ -7,7 +7,9 @@ draft: false
 atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfyqfjxlo625"
 ---
 
-[Malachite](https://github.com/ewanc26/malachite) is a tool for importing your Last.fm and Spotify listening history to the AT Protocol network as `fm.teal.alpha.feed.play` records. It's designed to be safe, resumable, and smart about rate limits — so you don't accidentally hammer your PDS.
+> **Note:** The standalone [malachite](https://github.com/ewanc26/malachite) repository has been archived. Development continues in the [`@ewanc26/pkgs`](https://github.com/ewanc26/pkgs) monorepo — CLI at [`packages/malachite/`](https://github.com/ewanc26/pkgs/tree/main/packages/malachite), web frontend at [`packages/malachite-web/`](https://github.com/ewanc26/pkgs/tree/main/packages/malachite-web).
+
+Malachite is a tool for importing your Last.fm and Spotify listening history to the AT Protocol network as `fm.teal.alpha.feed.play` records. It's designed to be safe, resumable, and smart about rate limits — so you don't accidentally hammer your PDS.
 
 The name is a deliberate nod to the `teal` lexicon it publishes to: malachite is a greenish-blue copper mineral associated with preservation and transformation, sitting squarely in that teal/green colour range.
 
@@ -41,49 +43,51 @@ The web app is built with SvelteKit.
 ### Install and Build
 
 ```bash
-# Clone the repository
-git clone https://github.com/ewanc26/malachite.git
-cd malachite
+# Clone the monorepo
+git clone https://github.com/ewanc26/pkgs.git
+cd pkgs
 
-# Install dependencies
+# Install all workspace dependencies
 pnpm install
 
-# Build
-pnpm build
+# Build the malachite CLI
+pnpm --filter @ewanc26/malachite build
 ```
 
 ### Quick Start
 
 ```bash
 # Run in interactive mode (recommended for first-time use)
-pnpm start
+pnpm --filter @ewanc26/malachite start
 
 # Or with command line arguments
-pnpm start -i lastfm.csv -h alice.bsky.social -p xxxx-xxxx-xxxx-xxxx -y
+pnpm --filter @ewanc26/malachite start -- -i lastfm.csv -h alice.bsky.social -p xxxx-xxxx-xxxx-xxxx -y
 ```
 
 Interactive mode walks you through everything: choosing a mode, entering credentials, picking files, and setting optional flags.
 
 ### Common Invocations
 
+All commands run from the `pkgs` root:
+
 ```bash
 # Import from Last.fm CSV
-pnpm start -i lastfm.csv -h alice.bsky.social -p xxxx-xxxx-xxxx-xxxx -y
+pnpm --filter @ewanc26/malachite start -- -i lastfm.csv -h alice.bsky.social -p xxxx-xxxx-xxxx-xxxx -y
 
 # Import from Spotify JSON export
-pnpm start -i spotify-export/ -m spotify -h alice.bsky.social -p xxxx-xxxx-xxxx-xxxx -y
+pnpm --filter @ewanc26/malachite start -- -i spotify-export/ -m spotify -h alice.bsky.social -p xxxx-xxxx-xxxx-xxxx -y
 
 # Merge both sources
-pnpm start -i lastfm.csv --spotify-input spotify-export/ -m combined -h alice.bsky.social -p xxxx-xxxx-xxxx-xxxx -y
+pnpm --filter @ewanc26/malachite start -- -i lastfm.csv --spotify-input spotify-export/ -m combined -h alice.bsky.social -p xxxx-xxxx-xxxx-xxxx -y
 
 # Sync (skip already-imported records)
-pnpm start -i lastfm.csv -m sync -h alice.bsky.social -p xxxx-xxxx-xxxx-xxxx -y
+pnpm --filter @ewanc26/malachite start -- -i lastfm.csv -m sync -h alice.bsky.social -p xxxx-xxxx-xxxx-xxxx -y
 
 # Remove duplicates from your Teal feed
-pnpm start -m deduplicate -h alice.bsky.social -p xxxx-xxxx-xxxx-xxxx
+pnpm --filter @ewanc26/malachite start -- -m deduplicate -h alice.bsky.social -p xxxx-xxxx-xxxx-xxxx
 
 # Preview without publishing
-pnpm start -i lastfm.csv --dry-run
+pnpm --filter @ewanc26/malachite start -- -i lastfm.csv --dry-run
 ```
 
 ## Import Modes
@@ -182,12 +186,18 @@ Example Last.fm record:
 
 ## Development
 
+All commands run from the `pkgs` root:
+
 ```bash
-pnpm run type-check   # Type checking
-pnpm run build        # Build
-pnpm run dev          # Rebuild and run
-pnpm run test         # Run tests
-pnpm run clean        # Clean build artifacts
+pnpm --filter @ewanc26/malachite run type-check   # Type checking
+pnpm --filter @ewanc26/malachite run build        # Build
+pnpm --filter @ewanc26/malachite run dev          # Rebuild and run
+pnpm --filter @ewanc26/malachite run test         # Run tests
+pnpm --filter @ewanc26/malachite run clean        # Clean build artifacts
+
+# Web frontend
+pnpm --filter @ewanc26/malachite-web dev          # Dev server at http://127.0.0.1:5173
+pnpm --filter @ewanc26/malachite-web build        # Build for deployment
 ```
 
 ## Lexicon
