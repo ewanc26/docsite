@@ -1,13 +1,13 @@
 ---
 title: "@ewanc26/noise-avatar"
-description: Deterministic value-noise avatar generation from a string seed — zero dependencies, works in browsers and Node.js.
+description: Deterministic value-noise avatar generation from a string seed — thin wrapper around @ewanc26/noise, works in browsers and Node.js.
 date: 2026-03-09
 tags: [typescript, canvas, svelte, library, pkgs]
 draft: false
 atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mgo2rpzy7n2t"
 ---
 
-[@ewanc26/noise-avatar](https://github.com/ewanc26/pkgs/tree/main/packages/noise-avatar) generates unique, colourful avatar images from an arbitrary string seed. The same seed always produces the same image. It has zero runtime dependencies and works in any environment with a Canvas API — browsers, jsdom, and server-side environments with a canvas polyfill.
+[@ewanc26/noise-avatar](https://github.com/ewanc26/pkgs/tree/main/packages/noise-avatar) generates unique, colourful avatar images from an arbitrary string seed. The same seed always produces the same image. It is a thin opinionated wrapper around [@ewanc26/noise](/documentation/noise), fixing the colour mode to HSL and defaulting to a square 64×64 canvas so you don't have to think about noise options for the common avatar use-case.
 
 Part of the [`@ewanc26/pkgs`](/projects/pkgs) monorepo.
 
@@ -22,6 +22,8 @@ Ships as both ESM and CJS with full TypeScript type definitions.
 ## How it works
 
 Each pixel's colour is computed via bilinear interpolation over a small value-noise grid, using smoothstep blending for a smooth, organic look. The palette is derived from the seed: a djb2 hash determines the base hue, and a seeded LCG PRNG drives the noise grid and colour variance. Because everything is deterministic, the output is stable across environments — the same seed always maps to the same avatar.
+
+The rendering is delegated entirely to `@ewanc26/noise`. For full control over dimensions, FBM octaves, and colour modes, use that package directly.
 
 ## Usage
 
@@ -52,7 +54,7 @@ The action re-renders automatically when `seed` changes via Svelte's `update` li
 
 ### `renderNoiseAvatar(canvas, seed, options?)`
 
-Renders a deterministic value-noise texture onto `canvas`. Resizes the canvas element to `options.displaySize` before drawing.
+Renders a deterministic HSL value-noise texture onto `canvas` at `displaySize × displaySize` pixels.
 
 | Parameter | Type | Description |
 |---|---|---|
@@ -62,19 +64,11 @@ Renders a deterministic value-noise texture onto `canvas`. Resizes the canvas el
 
 ### `noiseAvatarAction(canvas, seed, options?)`
 
-Svelte action wrapper around `renderNoiseAvatar`. Re-renders whenever `seed` changes.
+Svelte action wrapper. Re-renders whenever `seed` changes.
 
-### `hash32(str)`
+### Re-exported primitives
 
-djb2 hash — returns an unsigned 32-bit integer. Exported for custom seed construction or debugging.
-
-### `makePrng(seed)`
-
-Seeded LCG PRNG — returns a `() => number` function producing floats in `[0, 1)`.
-
-### `hslToRgb(h, s, l)`
-
-Converts HSL (each component in `[0, 1]`) to an RGB triple (`[0, 255]` each).
+`hash32`, `makePrng`, `hslToRgb`, `makeValueNoiseSampler`, and `generateNoisePixels` are all re-exported from `@ewanc26/noise` for convenience.
 
 ## Options
 
@@ -82,7 +76,7 @@ All options are passed as the third argument to `renderNoiseAvatar` or `noiseAva
 
 | Option | Type | Default | Description |
 |---|---|---|---|
-| `gridSize` | `number` | `5` | Side length of the internal noise grid — higher values add more detail |
+| `gridSize` | `number` | `5` | Side length of the noise grid |
 | `displaySize` | `number` | `64` | Width and height of the rendered canvas in pixels |
 | `hueRange` | `number` | `60` | Hue spread in degrees around the seed-derived base hue |
 | `saturationRange` | `[number, number]` | `[45, 70]` | Saturation min/max as percentages |
