@@ -7,7 +7,7 @@ draft: false
 atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mghs3tnb6x25"
 ---
 
-[`@ewanc26/pkgs`](https://github.com/ewanc26/pkgs) is a language-agnostic monorepo containing all of Ewan's publishable packages across multiple programming languages. It was created by extracting the `packages/` subdirectories from their original host repositories ([malachite](https://github.com/ewanc26/malachite) and [website](https://github.com/ewanc26/website)) and migrating the entire [svelte-standard-site](https://github.com/ewanc26/svelte-standard-site) repository — all with full git history preserved via `git subtree`.
+[`@ewanc26/pkgs`](https://github.com/ewanc26/pkgs) is a language-agnostic monorepo containing all of Ewan's publishable packages across multiple programming languages. It was created by extracting the `packages/` subdirectories from their original host repositories ([malachite](https://github.com/ewanc26/malachite) and [website](https://github.com/ewanc26/website)) and migrating the entire [svelte-standard-site](https://github.com/ewanc26/svelte-standard-site) repository — all with full git history preserved via `git subtree`. The standalone malachite repository has since been fully consolidated here too, with the CLI and web frontend split into separate packages.
 
 The monorepo has since expanded to include Rust CLI tools and Python utilities, making it a unified workspace for all reusable code.
 
@@ -26,6 +26,8 @@ The monorepo has since expanded to include Rust CLI tools and Python utilities, 
 | [`@ewanc26/pds-landing`](/projects/pds-landing) | 2.x | Composable Svelte components for an ATProto PDS landing page — terminal-aesthetic UI with live status fetching |
 | [`@ewanc26/noise-avatar`](/projects/noise-avatar) | 0.x | Deterministic value-noise avatar generation from a string seed — zero dependencies, works in browsers and Node.js |
 | [`@ewanc26/supporters`](/projects/supporters) | 0.x | SvelteKit component library for displaying Ko-fi supporters, backed by an ATProto PDS |
+| [`@ewanc26/malachite`](/projects/malachite) | 0.x | CLI tool for importing Last.fm & Spotify history to AT Protocol as `fm.teal.alpha.feed.play` records |
+| [`@ewanc26/malachite-web`](/projects/malachite) | 0.x | SvelteKit web frontend for Malachite — browser-based import with ATProto OAuth |
 
 ### Rust
 
@@ -116,6 +118,8 @@ Each package was extracted from its source repository using one of two approache
 **Whole-repo package** (`svelte-standard-site`) — the repo root was already the package, so no split step was needed. The full history was merged directly into `packages/svelte-standard-site` via `git subtree add`.
 
 **Consolidated packages** (`nix-config-tools`, `tangled-sync`, `llm-analyser`) — these were copied from their original locations and integrated into the monorepo structure.
+
+**Archived repo consolidation** (`malachite`, `malachite-web`) — the standalone [malachite](https://github.com/ewanc26/malachite) repository was fully migrated using `git filter-repo`, rewriting its commit history under `packages/malachite/` (CLI) and `packages/malachite-web/` (web frontend) separately. The original repo is now archived.
 
 The source repos retain their original files for reference, but the canonical source of truth for all packages is this monorepo.
 
