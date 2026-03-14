@@ -7,7 +7,7 @@ draft: false
 atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mgxbu7atec2r"
 ---
 
-[@ewanc26/noise](https://github.com/ewanc26/pkgs/tree/main/packages/noise) is the underlying noise engine extracted from [@ewanc26/noise-avatar](/documentation/noise-avatar). It generates deterministic value-noise pixel data from an arbitrary string seed — same seed always produces the same output. It supports arbitrary canvas dimensions, multi-octave fractal Brownian motion (FBM), and several colour modes. Zero runtime dependencies; works anywhere with a `Uint8ClampedArray` — browsers, Node.js, and workers.
+[@ewanc26/noise](https://github.com/ewanc26/pkgs/tree/main/packages/noise) is the underlying noise engine extracted from [@ewanc26/noise-avatar](/projects/noise-avatar). It generates deterministic value-noise pixel data from an arbitrary string seed — same seed always produces the same output. It supports arbitrary canvas dimensions, multi-octave fractal Brownian motion (FBM), and several colour modes. Zero runtime dependencies; works anywhere with a `Uint8ClampedArray` — browsers, Node.js, and workers.
 
 Part of the [`@ewanc26/pkgs`](/projects/pkgs) monorepo.
 
@@ -146,7 +146,7 @@ const heightmap = generateNoisePixels(512, 512, 'terrain-seed', {
 
 ## Relation to noise-avatar
 
-[@ewanc26/noise-avatar](/documentation/noise-avatar) is a thin opinionated wrapper around this package. It fixes the colour mode to HSL and defaults to a square 64×64 canvas, so you don't have to think about noise options for the common avatar use-case. Use `@ewanc26/noise` directly when you need non-square dimensions, FBM octaves, or grayscale/palette colour modes.
+[@ewanc26/noise-avatar](/projects/noise-avatar) is a thin opinionated wrapper around this package. It fixes the colour mode to HSL and defaults to a square 64×64 canvas, so you don't have to think about noise options for the common avatar use-case. Use `@ewanc26/noise` directly when you need non-square dimensions, FBM octaves, or grayscale/palette colour modes.
 
 ## Licence
 
