@@ -7,7 +7,7 @@ draft: false
 atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mgo2rpzy7n2t"
 ---
 
-[@ewanc26/noise-avatar](https://github.com/ewanc26/pkgs/tree/main/packages/noise-avatar) generates unique, colourful avatar images from an arbitrary string seed. The same seed always produces the same image. It is a thin opinionated wrapper around [@ewanc26/noise](/documentation/noise), fixing the colour mode to HSL and defaulting to a square 64×64 canvas so you don't have to think about noise options for the common avatar use-case.
+[@ewanc26/noise-avatar](https://github.com/ewanc26/pkgs/tree/main/packages/noise-avatar) generates unique, colourful avatar images from an arbitrary string seed. The same seed always produces the same image. It is a thin opinionated wrapper around [@ewanc26/noise](/projects/noise), fixing the colour mode to HSL and defaulting to a square 64×64 canvas so you don't have to think about noise options for the common avatar use-case.
 
 Part of the [`@ewanc26/pkgs`](/projects/pkgs) monorepo.
 
