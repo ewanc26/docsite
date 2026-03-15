@@ -1,7 +1,7 @@
 ---
 title: Malachite
 description: Import your Last.fm and Spotify listening history to the AT Protocol network using the fm.teal.alpha.feed.play lexicon.
-date: 2026-03-02
+date: 2026-03-15
 tags: [malachite, atproto, lastfm, spotify, tools]
 draft: false
 atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfyqfjxlo625"
@@ -31,7 +31,7 @@ No installation required. Open [malachite.croft.click](https://malachite.croft.c
 4. **Options** — optionally enable dry run, reverse chronological order, or skip the Teal duplicate check
 5. **Run** — records are published directly to your PDS with automatic rate-limit handling
 
-The web app is built with SvelteKit.
+The web app is built with SvelteKit and uses [`@ewanc26/malachite`](https://github.com/ewanc26/pkgs/tree/main/packages/malachite) as an npm dependency for all shared logic.
 
 ## CLI
 
@@ -54,40 +54,75 @@ pnpm install
 pnpm --filter @ewanc26/malachite build
 ```
 
+### Authentication
+
+The CLI supports two authentication methods. OAuth is recommended.
+
+**OAuth (recommended)**
+
+Signs in via your browser — your password is never shared with Malachite. The session is persisted at `~/.malachite/oauth.json` and refreshes automatically.
+
+```bash
+# From the pkgs root
+pnpm --filter @ewanc26/malachite start -- --oauth-login
+```
+
+This opens your browser at your PDS's OAuth authorisation screen. After approving, you're redirected back and the session is saved. Subsequent imports will use the stored session automatically — no flags required.
+
+**App password**
+
+If you prefer not to use OAuth, pass your handle and an [app password](https://bsky.app/settings/app-passwords) directly. The credentials are encrypted and saved for future runs.
+
+```bash
+pnpm --filter @ewanc26/malachite start -- -h alice.bsky.social -p xxxx-xxxx-xxxx-xxxx -i lastfm.csv -y
+```
+
 ### Quick Start
 
 ```bash
-# Run in interactive mode (recommended for first-time use)
+# Sign in with OAuth first (one-time)
+pnpm --filter @ewanc26/malachite start -- --oauth-login
+
+# Then run in interactive mode (recommended for first-time use)
 pnpm --filter @ewanc26/malachite start
 
-# Or with command line arguments
-pnpm --filter @ewanc26/malachite start -- -i lastfm.csv -h alice.bsky.social -p xxxx-xxxx-xxxx-xxxx -y
+# Or pass arguments directly — stored OAuth session is used automatically
+pnpm --filter @ewanc26/malachite start -- -i lastfm.csv -y
 ```
 
-Interactive mode walks you through everything: choosing a mode, entering credentials, picking files, and setting optional flags.
+Interactive mode walks you through everything: choosing a mode, checking for stored sessions, picking files, and setting optional flags.
 
 ### Common Invocations
 
-All commands run from the `pkgs` root:
+All commands run from the `pkgs` root. These assume a stored OAuth session; pass `-h` and `-p` instead if using app-password auth.
 
 ```bash
 # Import from Last.fm CSV
-pnpm --filter @ewanc26/malachite start -- -i lastfm.csv -h alice.bsky.social -p xxxx-xxxx-xxxx-xxxx -y
+pnpm --filter @ewanc26/malachite start -- -i lastfm.csv -y
 
 # Import from Spotify JSON export
-pnpm --filter @ewanc26/malachite start -- -i spotify-export/ -m spotify -h alice.bsky.social -p xxxx-xxxx-xxxx-xxxx -y
+pnpm --filter @ewanc26/malachite start -- -i spotify-export/ -m spotify -y
 
 # Merge both sources
-pnpm --filter @ewanc26/malachite start -- -i lastfm.csv --spotify-input spotify-export/ -m combined -h alice.bsky.social -p xxxx-xxxx-xxxx-xxxx -y
+pnpm --filter @ewanc26/malachite start -- -i lastfm.csv --spotify-input spotify-export/ -m combined -y
 
 # Sync (skip already-imported records)
-pnpm --filter @ewanc26/malachite start -- -i lastfm.csv -m sync -h alice.bsky.social -p xxxx-xxxx-xxxx-xxxx -y
+pnpm --filter @ewanc26/malachite start -- -i lastfm.csv -m sync -y
 
 # Remove duplicates from your Teal feed
-pnpm --filter @ewanc26/malachite start -- -m deduplicate -h alice.bsky.social -p xxxx-xxxx-xxxx-xxxx
+pnpm --filter @ewanc26/malachite start -- -m deduplicate
 
 # Preview without publishing
 pnpm --filter @ewanc26/malachite start -- -i lastfm.csv --dry-run
+
+# List stored OAuth sessions
+pnpm --filter @ewanc26/malachite start -- --list-sessions
+
+# Sign out
+pnpm --filter @ewanc26/malachite start -- --logout
+
+# Sign out a specific session by DID
+pnpm --filter @ewanc26/malachite start -- --logout -h did:plc:xxxx
 ```
 
 ## Import Modes
@@ -102,27 +137,52 @@ pnpm --filter @ewanc26/malachite start -- -i lastfm.csv --dry-run
 
 ## Command Line Options
 
-### Required
+### Authentication
+
+| Option | Description |
+|--------|-------------|
+| `--oauth-login` | Sign in via OAuth — opens browser, saves session (recommended) |
+| `--logout` | Remove stored OAuth session (`--handle <did>` to target a specific one) |
+| `--list-sessions` | List all stored OAuth sessions |
+| `--handle <handle>` / `-h` | ATProto handle or DID (for app-password auth, or to target a specific OAuth session) |
+| `--password <pass>` / `-p` | ATProto app password |
+| `--pds <url>` | Skip identity resolution and connect to a known PDS URL directly |
+
+`did:web` identifiers are supported in addition to handles and `did:plc` DIDs.
+
+### Input
 
 | Option | Short | Description |
 |--------|-------|-------------|
 | `--input <path>` | `-i` | Path to Last.fm CSV or Spotify JSON file/directory |
-| `--handle <handle>` | `-h` | Your ATProto handle or DID |
-| `--password <pass>` | `-p` | Your ATProto app password (not your main password) |
+| `--spotify-input <path>` | | Spotify export path (combined mode) |
 
-### Common Options
+### Import
 
 | Option | Short | Description |
 |--------|-------|-------------|
 | `--mode <mode>` | `-m` | Import mode (see table above) |
-| `--spotify-input <path>` | | Spotify export path (for combined mode) |
 | `--reverse` | `-r` | Process newest tracks first |
 | `--yes` | `-y` | Skip confirmation prompts |
 | `--dry-run` | | Preview records without publishing |
+| `--aggressive` | | Use 85% of the daily limit (8,500/day) instead of 75% |
+| `--fresh` | | Ignore previous import state and cached records |
+
+### Output
+
+| Option | Short | Description |
+|--------|-------|-------------|
 | `--verbose` | `-v` | Debug-level logging |
 | `--quiet` | `-q` | Warnings and errors only |
 | `--dev` | | Verbose + file logging + smaller batches |
-| `--pds <url>` | | Skip identity resolution and use a known PDS URL directly |
+
+### Maintenance
+
+| Option | Description |
+|--------|-------------|
+| `--clear-cache` | Clear cached Teal records for the current account |
+| `--clear-all-caches` | Clear all cached records |
+| `--clear-credentials` | Clear saved app-password credentials |
 
 ## Getting Your Data
 
@@ -136,7 +196,7 @@ Malachite has two layers of protection against duplicates:
 
 **Input deduplication** — before publishing anything, it removes entries within your source file that share the same track name, artist, and timestamp.
 
-**Teal comparison via CAR export** — it downloads your entire repo as a single CARv1 file using `com.atproto.sync.getRepo` (the sync namespace, not the AppView), parses it locally, and skips anything already imported. This costs zero AppView write-quota points. It runs automatically for every mode; credentials are required even for dry runs.
+**Teal comparison via CAR export** — it downloads your entire repo as a single CARv1 file using `com.atproto.sync.getRepo` (the sync namespace, not the AppView), parses it locally, and skips anything already imported. This costs zero AppView write-quota points. It runs automatically for every mode.
 
 ## Rate Limiting
 
@@ -160,10 +220,13 @@ All CLI data is stored in `~/.malachite/`:
 ├── cache/            # Cached Teal records (24-hour TTL)
 ├── state/            # Import state for resume support
 ├── logs/             # Logs when --dev is active
-└── credentials.json  # AES-256-GCM encrypted credentials (optional)
+├── credentials.json  # AES-256-GCM encrypted app-password credentials (optional)
+└── oauth.json        # OAuth session state (chmod 600)
 ```
 
-Credentials are saved automatically after every successful login — no separate prompt. They are encrypted using a key derived from your hostname and username, making them machine-specific. Clear them with `pnpm start --clear-credentials`.
+App-password credentials are saved automatically after every successful login and encrypted using a key derived from your hostname and username, making them machine-specific. Clear them with `--clear-credentials`.
+
+OAuth sessions are saved automatically after `--oauth-login` and refresh automatically when the access token expires. Clear them with `--logout`.
 
 ## Record Format
 
@@ -179,7 +242,7 @@ Example Last.fm record:
   "releaseName": "Masquerade",
   "playedTime": "2025-11-13T23:49:36Z",
   "originUrl": "https://www.last.fm/music/Cjbeards/_/Paint+My+Masterpiece",
-  "submissionClientAgent": "malachite/v0.10.0",
+  "submissionClientAgent": "malachite/v0.12.0",
   "musicServiceBaseDomain": "last.fm"
 }
 ```
