@@ -45,7 +45,7 @@ Requires `svelte >= 5`, `@sveltejs/kit >= 2`, and `tailwindcss >= 4` as peer dep
 
 ### Cards
 
-The card components accept typed props from `@ewanc26/atproto`:
+The AT Protocol card components accept typed props from `@ewanc26/atproto`:
 
 ```svelte
 <script>
@@ -63,6 +63,66 @@ The card components accept typed props from `@ewanc26/atproto`:
 <TangledRepoCard {repo} />
 ```
 
+#### FeedCard
+
+`FeedCard` is a generic, protocol-agnostic feed list card. Pass any array of `FeedItem` objects and it renders a titled list with avatar/icon slots, optional descriptions, relative timestamps, optional badges, and clickable rows — all using the same hover-state pattern as the rest of the card family.
+
+```svelte
+<script>
+  import { FeedCard } from '@ewanc26/ui';
+  import type { FeedItem } from '@ewanc26/ui';
+
+  const items: FeedItem[] = [
+    {
+      id: '1',
+      title: 'New release: v2.0.0',
+      description: 'Major update with breaking changes and new APIs.',
+      href: 'https://github.com/example/repo/releases/tag/v2.0.0',
+      iconFallback: '🚀',
+      timestamp: '2026-03-15T10:00:00Z',
+      badge: 'release'
+    },
+    {
+      id: '2',
+      title: 'RFC: new config format',
+      description: 'Proposal to simplify the configuration surface.',
+      avatarUrl: 'https://example.com/avatar.jpg',
+      timestamp: '2026-03-14T08:30:00Z'
+    }
+  ];
+</script>
+
+<!-- Pass null to show the loading skeleton -->
+<FeedCard items={null} />
+
+<!-- Populated -->
+<FeedCard {items} title="Latest Activity" />
+
+<!-- Empty state -->
+<FeedCard items={[]} emptyMessage="No activity yet." />
+```
+
+The `FeedItem` interface:
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `id` | `string` | No | Unique key for Svelte's keyed `{#each}`. Falls back to `title + index`. |
+| `title` | `string` | **Yes** | Primary row label. |
+| `description` | `string` | No | Secondary copy, clamped to two lines. |
+| `href` | `string` | No | When present, the row renders as an `<a>`. |
+| `avatarUrl` | `string` | No | Image URL shown in the leading avatar slot. |
+| `iconFallback` | `string` | No | Emoji or initials shown when `avatarUrl` is absent. |
+| `timestamp` | `string` | No | ISO-8601 string rendered as a relative time label. |
+| `badge` | `string` | No | Short label shown as a trailing badge. |
+
+Props on `FeedCard`:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `items` | `FeedItem[] \| null` | `null` | `null` triggers the loading skeleton. |
+| `title` | `string` | `'Feed'` | Section heading inside the card. |
+| `emptyMessage` | `string` | `'Nothing here yet.'` | Copy shown when `items` is an empty array. |
+
 ### UI Primitives
 
 ```svelte
@@ -76,7 +136,7 @@ The card components accept typed props from `@ewanc26/atproto`:
 ```
 
 - **`Card`** — base card wrapper
-- **`InternalCard`** — card variant for internal links
+- **`InternalCard`** — card variant for internal links and interactive rows
 - **`DocumentCard`** — Standard.site document preview
 - **`BlogPostCard`** — blog post listing item with badges
 - **`Dropdown`** — accessible dropdown menu
@@ -172,7 +232,7 @@ const tags     = getAllTags(posts);
 ## Types
 
 ```typescript
-import type { SiteMetadata, NavItem, ColorTheme, ThemeDefinition } from '@ewanc26/ui';
+import type { SiteMetadata, NavItem, ColorTheme, ThemeDefinition, FeedItem } from '@ewanc26/ui';
 ```
 
 ## Tech Stack
