@@ -6,10 +6,12 @@
 	import {
 		PUBLIC_SITE_TITLE,
 		PUBLIC_SITE_DESCRIPTION,
-		PUBLIC_SITE_URL,
+		PUBLIC_SITE_URL
+	} from '$env/static/public';
+	import {
 		PUBLIC_AP_INSTANCE_URL,
 		PUBLIC_AP_USERNAME
-	} from '$env/static/public';
+	} from '$env/dynamic/public';
 
 	let { children, data }: { children: any; data: LayoutData } = $props();
 	let menuOpen = $state(false);
