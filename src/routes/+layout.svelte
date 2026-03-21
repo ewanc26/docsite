@@ -3,6 +3,13 @@
 	import { page } from '$app/stores';
 	import { Menu, X, Coffee, Globe } from '@lucide/svelte';
 	import type { LayoutData } from './$types';
+	import {
+		PUBLIC_SITE_TITLE,
+		PUBLIC_SITE_DESCRIPTION,
+		PUBLIC_SITE_URL,
+		PUBLIC_AP_INSTANCE_URL,
+		PUBLIC_AP_USERNAME
+	} from '$env/static/public';
 
 	let { children, data }: { children: any; data: LayoutData } = $props();
 	let menuOpen = $state(false);
@@ -11,20 +18,30 @@
 		$page.url.pathname;
 		menuOpen = false;
 	});
+
+	const instanceDomain = PUBLIC_AP_INSTANCE_URL
+		? new URL(PUBLIC_AP_INSTANCE_URL).hostname
+		: null;
+	const fediverseCreator =
+		PUBLIC_AP_USERNAME && instanceDomain ? `${PUBLIC_AP_USERNAME}@${instanceDomain}` : null;
 </script>
 
 <svelte:head>
-	<title>ewan's docs</title>
+	<title>{PUBLIC_SITE_TITLE}</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<meta name="description" content="Central documentation hub for ewan's projects." />
-	<meta name="author" content="Ewan" />
-	<meta property="og:site_name" content="ewan's docs" />
+	<meta name="description" content={PUBLIC_SITE_DESCRIPTION} />
+	<meta property="og:site_name" content={PUBLIC_SITE_TITLE} />
 	<meta property="og:type" content="website" />
-	<meta property="og:title" content="ewan's docs" />
-	<meta property="og:description" content="Central documentation hub for ewan's projects." />
+	<meta property="og:url" content={PUBLIC_SITE_URL} />
+	<meta property="og:title" content={PUBLIC_SITE_TITLE} />
+	<meta property="og:description" content={PUBLIC_SITE_DESCRIPTION} />
 	<meta name="twitter:card" content="summary" />
-	<meta name="twitter:title" content="ewan's docs" />
-	<meta name="twitter:description" content="Central documentation hub for ewan's projects." />
+	<meta name="twitter:url" content={PUBLIC_SITE_URL} />
+	<meta name="twitter:title" content={PUBLIC_SITE_TITLE} />
+	<meta name="twitter:description" content={PUBLIC_SITE_DESCRIPTION} />
+	{#if fediverseCreator}
+		<meta name="fediverse:creator" content={fediverseCreator} />
+	{/if}
 	<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="" />
 	<link
 		href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&display=swap"
