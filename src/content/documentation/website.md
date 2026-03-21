@@ -44,6 +44,9 @@ Edit `.env.local`:
 PUBLIC_ATPROTO_DID=did:plc:your-did-here
 PUBLIC_SITE_TITLE=Your Site Title
 PUBLIC_SITE_URL=https://yoursite.com
+# Optional: ActivityPub / Fediverse
+# PUBLIC_AP_INSTANCE_URL=https://ap.example.com
+# PUBLIC_AP_USERNAME=yourname
 # Optional: Ko-fi webhook integration
 # KOFI_VERIFICATION_TOKEN=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 # ATPROTO_APP_PASSWORD=xxxx-xxxx-xxxx-xxxx
@@ -67,6 +70,8 @@ pnpm dev
 | `PUBLIC_BLOG_FALLBACK_URL` | No | Redirect here if a document isn't found (omit to 404) |
 | `PUBLIC_LOCAL_SLINGSHOT_URL` | No | Local Slingshot instance URL (default: `http://localhost:3000`) |
 | `PUBLIC_SLINGSHOT_URL` | No | Public Slingshot fallback URL (default: `https://slingshot.microcosm.blue`) |
+| `PUBLIC_AP_INSTANCE_URL` | No | Full URL of your ActivityPub instance (e.g. `https://ap.example.com`) |
+| `PUBLIC_AP_USERNAME` | No | Your username on the AP instance |
 | `PUBLIC_CORS_ALLOWED_ORIGINS` | No | Comma-separated CORS origins for `/api/` |
 | `KOFI_VERIFICATION_TOKEN` | No | Ko-fi webhook verification token |
 | `ATPROTO_APP_PASSWORD` | No | ATProto app password for writing Ko-fi supporter records |
@@ -105,6 +110,16 @@ export const slugMappings: SlugMapping[] = [
 ```
 
 This creates routes at `/blog`, `/blog/{rkey}`, and `/blog/rss`.
+
+## Well-Known Routes
+
+All `/.well-known/` endpoints are dynamic server routes driven by env vars — there are no static files for identity resolution.
+
+**`/.well-known/atproto-did`** — Returns `PUBLIC_ATPROTO_DID` as plain text. This is how AT Protocol resolves your DID from your domain handle.
+
+**`/.well-known/webfinger`** — Accepts a `resource` query parameter and returns a JRD JSON response. Valid resources are `acct:{username}@{ap-instance}`, `acct:{username}@{site-domain}`, and `https://{ap-instance}/@{username}`. The response is proxied live from the AP instance with the site-domain alias (`acct:{username}@{site-domain}`) injected before returning. Returns `400` if `resource` is missing, `404` if the resource is not recognised, and `502` if the upstream AP instance is unreachable. Requires `PUBLIC_AP_INSTANCE_URL`, `PUBLIC_AP_USERNAME`, and `PUBLIC_SITE_URL`.
+
+**`fediverse:creator` metatag** — When `PUBLIC_AP_INSTANCE_URL` and `PUBLIC_AP_USERNAME` are set, a `fediverse:creator` metatag is injected into every page via the `MetaTags` component.
 
 ## Custom Lexicons Used
 
