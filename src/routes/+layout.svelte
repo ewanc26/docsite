@@ -8,10 +8,6 @@
 		PUBLIC_SITE_DESCRIPTION,
 		PUBLIC_SITE_URL
 	} from '$env/static/public';
-	import {
-		PUBLIC_AP_INSTANCE_URL,
-		PUBLIC_AP_USERNAME
-	} from '$env/dynamic/public';
 
 	let { children, data }: { children: any; data: LayoutData } = $props();
 	let menuOpen = $state(false);
@@ -21,11 +17,11 @@
 		menuOpen = false;
 	});
 
-	const instanceDomain = PUBLIC_AP_INSTANCE_URL
-		? new URL(PUBLIC_AP_INSTANCE_URL).hostname
+	const instanceDomain = data.apInstanceUrl
+		? new URL(data.apInstanceUrl).hostname
 		: null;
 	const fediverseCreator =
-		PUBLIC_AP_USERNAME && instanceDomain ? `${PUBLIC_AP_USERNAME}@${instanceDomain}` : null;
+		data.apUsername && instanceDomain ? `${data.apUsername}@${instanceDomain}` : null;
 </script>
 
 <svelte:head>
