@@ -1,7 +1,7 @@
 ---
 title: "@ewanc26/pkgs"
 description: Ewan's personal package monorepo — language-agnostic workspace with TypeScript, Rust, and Python packages.
-date: 2026-03-07
+date: 2026-03-24
 tags: [monorepo, pnpm, typescript, rust, python, atproto, library, tools]
 draft: false
 atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mghs3tnb6x25"
@@ -21,13 +21,16 @@ The monorepo has since expanded to include Rust CLI tools and Python utilities, 
 | [`@ewanc26/atproto`](/projects/atproto) | 0.x | AT Protocol service layer (profiles, posts, Standard.site, music status) |
 | [`@ewanc26/ui`](/projects/ui) | 0.x | Svelte 5 UI component library (cards, layout, stores, themes) |
 | [`@ewanc26/utils`](/projects/utils) | 0.x | Shared utilities (dates, numbers, URLs, validators, RSS) |
-| [`@ewanc26/svelte-standard-site`](/projects/svelte-standard-site) | 0.x | SvelteKit library for `site.standard.*` AT Protocol records |
-| [`@ewanc26/tangled-sync`](/projects/tangled-sync) | 1.x | CLI tool for syncing GitHub repos to Tangled with ATProto records |
+| [`@ewanc26/noise`](/projects/noise) | 0.x | Generic deterministic value-noise generation — arbitrary dimensions, multi-octave FBM, multiple colour modes |
+| [`@ewanc26/noise-avatar`](/projects/noise-avatar) | 0.x | Deterministic value-noise avatar generation from a string seed — thin wrapper around `@ewanc26/noise` |
+| [`@ewanc26/bismuth`](/projects/bismuth) | 0.x | Convert `pub.leaflet` RTF-block documents (`site.standard.document` records) to Markdown — CLI and library |
+| [`@ewanc26/svelte-standard-site`](/projects/svelte-standard-site) | 0.x | SvelteKit library for `site.standard.*` AT Protocol records — design system, federated comments, publishing tools, and content verification |
 | [`@ewanc26/pds-landing`](/projects/pds-landing) | 2.x | Composable Svelte components for an ATProto PDS landing page — terminal-aesthetic UI with live status fetching |
-| [`@ewanc26/noise-avatar`](/projects/noise-avatar) | 0.x | Deterministic value-noise avatar generation from a string seed — zero dependencies, works in browsers and Node.js |
 | [`@ewanc26/supporters`](/projects/supporters) | 0.x | SvelteKit component library for displaying Ko-fi supporters, backed by an ATProto PDS |
+| [`@ewanc26/wafrn-theme`](/projects/wafrn-theme) | 1.x | WAFRN CSS theme using the pds-landing Catppuccin terminal aesthetic — dark forest-green palette, JetBrains Mono |
+| [`@ewanc26/tangled-sync`](/projects/tangled-sync) | 1.x | CLI tool for syncing GitHub repos to Tangled with ATProto records |
 | [`@ewanc26/malachite`](/projects/malachite) | 0.x | CLI tool for importing Last.fm & Spotify history to AT Protocol as `fm.teal.alpha.feed.play` records |
-| [`@ewanc26/malachite-web`](/projects/malachite) | 0.x | SvelteKit web frontend for Malachite — browser-based import with ATProto OAuth |
+| [`malachite-web`](/projects/malachite) | 0.x | SvelteKit web frontend for Malachite — browser-based import with ATProto OAuth (private, not published to npm) |
 
 ### Rust
 
@@ -43,7 +46,7 @@ The monorepo has since expanded to include Rust CLI tools and Python utilities, 
 
 ## Why a monorepo?
 
-The packages share overlapping concerns — `@ewanc26/ui` depends on `@ewanc26/atproto` for its card components, and both consume types from `@ewanc26/utils`. `@ewanc26/svelte-standard-site` is a self-contained SvelteKit library. Having them colocated means:
+The packages share overlapping concerns — `@ewanc26/ui` depends on `@ewanc26/noise-avatar` and optionally `@ewanc26/atproto` for its card components, and both consume types from `@ewanc26/utils`. `@ewanc26/svelte-standard-site` pulls in `@ewanc26/atproto`, `@ewanc26/tid`, and `@ewanc26/utils`. `@ewanc26/bismuth` converts the same `site.standard.document` records that `@ewanc26/svelte-standard-site` renders. Having them colocated means:
 
 - Cross-package changes can land in a single PR
 - `workspace:*` references keep internal deps in sync without publishing intermediary versions
@@ -59,10 +62,14 @@ pnpm add @ewanc26/tid
 pnpm add @ewanc26/atproto
 pnpm add @ewanc26/ui
 pnpm add @ewanc26/utils
-pnpm add @ewanc26/svelte-standard-site
-pnpm add @ewanc26/tangled-sync
+pnpm add @ewanc26/noise
 pnpm add @ewanc26/noise-avatar
+pnpm add @ewanc26/bismuth
+pnpm add @ewanc26/svelte-standard-site
+pnpm add @ewanc26/pds-landing
 pnpm add @ewanc26/supporters
+pnpm add @ewanc26/wafrn-theme
+pnpm add @ewanc26/tangled-sync
 ```
 
 ### Rust tools
@@ -75,10 +82,10 @@ nix run https://github.com/ewanc26/pkgs#health-check
 
 ```bash
 # Install dependencies
-pip install ollama python-docx
+pip install -r packages/llm-analyser/requirements.txt
 
 # Run the tool
-python3 main.py
+python3 packages/llm-analyser/main.py
 ```
 
 ## Development
@@ -100,11 +107,9 @@ pnpm test
 # Build all Rust packages
 cargo build --release
 
-# Check Python syntax
-pnpm py:check
-
 # Work on a single package
 pnpm --filter @ewanc26/tid build
+pnpm --filter @ewanc26/bismuth dev
 pnpm --filter @ewanc26/svelte-standard-site dev
 cargo build -p nix-config-tools --bin health-check
 ```
@@ -129,11 +134,11 @@ TypeScript packages are published to npm automatically via GitHub Actions. Pushi
 
 ```bash
 # Publish a specific package
-git tag pds-landing/v1.0.0
-git push origin pds-landing/v1.0.0
+git tag bismuth/v0.1.0
+git push origin bismuth/v0.1.0
 ```
 
-The `NPM_TOKEN` secret must be set in the repository's GitHub Actions secrets. Rust and Python packages are not published automatically.
+The `NPM_TOKEN` secret must be set in the repository's GitHub Actions secrets. `malachite-web` is private and not published. Rust and Python packages are not published automatically.
 
 ## Licence
 
