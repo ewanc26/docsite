@@ -4,6 +4,7 @@ description: Convert pub.leaflet RTF-block documents (site.standard.document ATP
 date: 2026-03-24
 tags: [typescript, atproto, cli, library, pkgs]
 draft: false
+atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mhrd6j4ag22f"
 ---
 
 [@ewanc26/bismuth](https://github.com/ewanc26/pkgs/tree/main/packages/bismuth) converts [`pub.leaflet`](https://github.com/hyperlink-academy/leaflet) RTF-block documents — as stored in [`site.standard.document`](https://standard.site) ATProto records — to Markdown. It ships as both a CLI tool and a TypeScript library.
