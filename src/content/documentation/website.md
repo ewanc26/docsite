@@ -15,7 +15,7 @@ The app is a single SvelteKit project. All shared packages (@ewanc26/atproto, @e
 
 **AT Protocol integration** — Bluesky profile (avatar, banner, bio, pronouns, follower counts), Standard.site blog posts, [teal.fm](https://teal.fm) music status, [kibun.social](https://kibun.social) mood status, [Tangled](https://tangled.org) repositories, and [Linkat](https://linkat.blue) link board — all fetched live with configurable in-memory caching via [@ewanc26/atproto](/projects/atproto).
 
-**Ko-fi supporters** — Ko-fi webhook integration via [@ewanc26/supporters](/projects/supporters). Payment events are stored as `uk.ewancroft.kofi.supporter` records on the ATProto PDS and displayed with the `<KofiSupporters>` and `<LunarContributors>` components.
+**Supporters** — Ko-fi and GitHub Sponsors webhook integration via [@ewanc26/supporters](/projects/supporters). Events from both platforms are stored as records on the ATProto PDS and surfaced in a unified chronological timeline. Ko-fi events use the `<KofiSupporters>` and `<LunarContributors>` components; GitHub sponsorship events use `<GitHubSponsors>`.
 
 **Noise avatars** — Deterministic value-noise profile pictures generated client-side from a string seed via [@ewanc26/noise-avatar](/projects/noise-avatar).
 
@@ -48,8 +48,12 @@ PUBLIC_SITE_URL=https://yoursite.com
 # PUBLIC_AP_INSTANCE_URL=https://ap.example.com
 # PUBLIC_AP_USERNAME=yourname
 # Optional: Ko-fi webhook integration
+# KOFI_PAGE_ID=your-kofi-page-id
 # KOFI_VERIFICATION_TOKEN=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 # ATPROTO_APP_PASSWORD=xxxx-xxxx-xxxx-xxxx
+# Optional: GitHub Sponsors webhook
+# GITHUB_USERNAME=your-github-username
+# GITHUB_WEBHOOK_SECRET=your-webhook-secret
 ```
 
 Configure publication slugs in `src/lib/data/slug-mappings.ts`, then:
@@ -73,8 +77,11 @@ pnpm dev
 | `PUBLIC_AP_INSTANCE_URL` | No | Full URL of your ActivityPub instance (e.g. `https://ap.example.com`) |
 | `PUBLIC_AP_USERNAME` | No | Your username on the AP instance |
 | `PUBLIC_CORS_ALLOWED_ORIGINS` | No | Comma-separated CORS origins for `/api/` |
+| `KOFI_PAGE_ID` | No | Your Ko-fi page ID (e.g. `ewancroft`) |
 | `KOFI_VERIFICATION_TOKEN` | No | Ko-fi webhook verification token |
-| `ATPROTO_APP_PASSWORD` | No | ATProto app password for writing Ko-fi supporter records |
+| `GITHUB_USERNAME` | No | Your GitHub username for the Sponsors profile link |
+| `GITHUB_WEBHOOK_SECRET` | No | HMAC secret for verifying GitHub Sponsors webhook payloads |
+| `ATPROTO_APP_PASSWORD` | No | ATProto app password for writing supporter records |
 | `CACHE_TTL_PROFILE` | No | Profile cache TTL in seconds (default: 60) |
 | `CACHE_TTL_SITE_INFO` | No | Site info TTL (default: 120) |
 | `CACHE_TTL_LINKS` | No | Links TTL (default: 60) |
@@ -96,7 +103,7 @@ The site consumes these packages from the [@ewanc26/pkgs](/projects/pkgs) monore
 | [@ewanc26/ui](/projects/ui) | Svelte component library — layout, cards, UI primitives, stores, theme config |
 | [@ewanc26/utils](/projects/utils) | Utility functions — date/number formatting, URL helpers, validators, RSS generation |
 | [@ewanc26/noise-avatar](/projects/noise-avatar) | Deterministic value-noise avatar generation |
-| [@ewanc26/supporters](/projects/supporters) | Ko-fi supporter display components backed by ATProto PDS |
+| [@ewanc26/supporters](/projects/supporters) | Ko-fi and GitHub Sponsors display components backed by ATProto PDS, with a unified event timeline |
 | [@ewanc26/tid](/projects/tid) | Zero-dependency AT Protocol TID generation |
 
 ## Publication System
