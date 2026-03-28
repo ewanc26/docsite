@@ -17,7 +17,7 @@ Part of the [`@ewanc26/pkgs`](/projects/pkgs) monorepo.
 
 1. Ko-fi POSTs a webhook event to `/webhook` on each transaction
 2. The handler verifies the `verification_token`, respects `is_public`, and calls `appendEvent`
-3. `appendEvent` writes a record to your PDS under `uk.ewancroft.kofi.supporter`
+3. `appendEvent` writes a record to your PDS under `uk.ewancroft.support.kofi`
 4. `readStore` fetches all records and aggregates them into `KofiSupporter` objects
 5. Pass the result to `<KofiSupporters>` or `<LunarContributors>`
 
@@ -25,7 +25,7 @@ Part of the [`@ewanc26/pkgs`](/projects/pkgs) monorepo.
 
 1. GitHub POSTs a `sponsorship` webhook event to `/webhook/github` on each sponsorship change
 2. The handler verifies the HMAC-SHA256 signature, respects `privacy_level`, and skips `pending_*` actions
-3. `appendSponsorEvent` writes a record to your PDS under `uk.ewancroft.github.sponsor`
+3. `appendSponsorEvent` writes a record to your PDS under `uk.ewancroft.support.github`
 4. `readSponsors` fetches all records and replays them chronologically to derive the current state (active/inactive, current tier) per sponsor
 5. Pass the result to `<GitHubSponsors>`
 
@@ -128,7 +128,7 @@ Displays GitHub Sponsors with their tier name. Each card links to the sponsor's 
 
 #### `readStore(): Promise<KofiSupporter[]>`
 
-Fetches all `uk.ewancroft.kofi.supporter` records from the PDS (no auth required) and aggregates them by name into `KofiSupporter` objects. Reads are paginated automatically.
+Fetches all `uk.ewancroft.support.kofi` records from the PDS (no auth required) and aggregates them by name into `KofiSupporter` objects. Reads are paginated automatically.
 
 #### `appendEvent(name, type, tier, timestamp, opts?): Promise<void>`
 
@@ -142,11 +142,11 @@ Validates and parses an incoming Ko-fi `application/x-www-form-urlencoded` webho
 
 #### `fetchSponsorEvents(did): Promise<GitHubSponsorEvent[]>`
 
-Fetches all `uk.ewancroft.github.sponsor` records from the PDS (no auth required) and returns them as a flat chronological timeline — one entry per event, sorted most-recent-first. Used by the website's unified supporters feed.
+Fetches all `uk.ewancroft.support.github` records from the PDS (no auth required) and returns them as a flat chronological timeline — one entry per event, sorted most-recent-first. Used by the website's unified supporters feed.
 
 #### `readSponsors(): Promise<GitHubSponsor[]>`
 
-Fetches all `uk.ewancroft.github.sponsor` records from the PDS (no auth required) and replays them chronologically to produce the current state per sponsor. A sponsor is considered active if their most recent event is `created` or `tier_changed`, and inactive after `cancelled`.
+Fetches all `uk.ewancroft.support.github` records from the PDS (no auth required) and replays them chronologically to produce the current state per sponsor. A sponsor is considered active if their most recent event is `created` or `tier_changed`, and inactive after `cancelled`.
 
 #### `appendSponsorEvent(login, name, action, tierName, monthlyUsd, timestamp): Promise<void>`
 
@@ -195,7 +195,7 @@ Remove `--dry-run` to write records. The script is idempotent — re-running mer
 
 ## Lexicons
 
-### `uk.ewancroft.kofi.supporter`
+### `uk.ewancroft.support.kofi`
 
 ```ts
 {
@@ -205,7 +205,7 @@ Remove `--dry-run` to write records. The script is idempotent — re-running mer
 }
 ```
 
-### `uk.ewancroft.github.sponsor`
+### `uk.ewancroft.support.github`
 
 ```ts
 {
