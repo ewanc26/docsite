@@ -77,9 +77,9 @@ pnpm dev
 | `PUBLIC_AP_INSTANCE_URL` | No | Full URL of your ActivityPub instance (e.g. `https://ap.example.com`) |
 | `PUBLIC_AP_USERNAME` | No | Your username on the AP instance |
 | `PUBLIC_CORS_ALLOWED_ORIGINS` | No | Comma-separated CORS origins for `/api/` |
-| `KOFI_PAGE_ID` | No | Your Ko-fi page ID (e.g. `ewancroft`) |
+| `PUBLIC_KOFI_PAGE_ID` | No | Your Ko-fi page ID (e.g. `ewancroft`) |
 | `KOFI_VERIFICATION_TOKEN` | No | Ko-fi webhook verification token |
-| `GITHUB_USERNAME` | No | Your GitHub username for the Sponsors profile link |
+| `PUBLIC_GITHUB_USERNAME` | No | Your GitHub username for the Sponsors profile link |
 | `GITHUB_WEBHOOK_SECRET` | No | HMAC secret for verifying GitHub Sponsors webhook payloads |
 | `ATPROTO_APP_PASSWORD` | No | ATProto app password for writing supporter records |
 | `CACHE_TTL_PROFILE` | No | Profile cache TTL in seconds (default: 60) |
