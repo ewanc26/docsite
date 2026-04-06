@@ -220,4 +220,4 @@ examples/       – sample .num programs
 
 ## Licence
 
-MIT.
+AGPL 3.0
