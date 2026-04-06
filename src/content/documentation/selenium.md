@@ -4,6 +4,7 @@ description: "A small esoteric language with lunar/poetic syntax that compiles t
 date: 2026-04-06
 tags: [python, compiler, esoteric, c]
 draft: false
+atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mitwy7mvez2r"
 ---
 
 [Selenium](https://github.com/ewanc26/selenium) is a small esoteric language with a lunar / poetic surface and a strict, C-like core.
