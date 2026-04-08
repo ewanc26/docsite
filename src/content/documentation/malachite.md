@@ -263,6 +263,37 @@ pnpm --filter @ewanc26/malachite-web dev          # Dev server at http://127.0.0
 pnpm --filter @ewanc26/malachite-web build        # Build for deployment
 ```
 
+## Using as a Library
+
+Malachite can be used as a library in other projects. The `/core` export provides environment-agnostic logic:
+
+```typescript
+import {
+  // Spotify parsing
+  parseSpotifyJsonContent,
+  convertSpotifyToPlayRecord,
+
+  // CSV parsing
+  parseLastfmCsv,
+  parseLastfmCsvString,
+
+  // AT Protocol publishing
+  PlayRecordPublisher,
+  RateLimiter,
+
+  // TID generation
+  generateTID,
+
+  // Types
+  type SpotifyRecord,
+  type PlayRecord,
+} from '@ewanc26/malachite/core';
+```
+
+The core module has **zero Node.js dependencies** — it works in browsers, Deno, and Node.js 20+. All I/O and UI concerns are handled by the consumer.
+
+See `CONTRIBUTING.md` in the package for the `src/core/` contract if you want to extend it.
+
 ## Lexicon
 
 Malachite publishes to the `fm.teal.alpha` lexicon. The schema definitions live in `/lexicons/fm.teal.alpha/` in the repository.
