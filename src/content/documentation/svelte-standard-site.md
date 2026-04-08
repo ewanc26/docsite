@@ -100,6 +100,51 @@ ATPROTO_HANDLE=you.bsky.social
 
 Svelte 5, SvelteKit 2, Tailwind CSS 4, `@atproto/api`, Zod, Vitest.
 
+## Customizing Components
+
+All components support style overrides via the `class` prop. For deeper customization, use render snippets.
+
+### DocumentCard with Custom Layout
+
+```svelte
+<script>
+  import { DocumentCard } from '@ewanc26/svelte-standard-site';
+</script>
+
+<DocumentCard {document} {publication}>
+  {#snippet layout({ document, publication, href })}
+    <article class="my-custom-card">
+      <h2><a href={href}>{document.value.title}</a></h2>
+      <p>{document.value.description}</p>
+    </article>
+  {/snippet layout}
+</DocumentCard>
+```
+
+### Override Individual Sections
+
+```svelte
+<DocumentCard {document} {publication}>
+  {#snippet title({ title, href })}
+    <h2 class="text-3xl font-display">
+      <a href={href}>{title}</a>
+    </h2>
+  {/snippet title}
+</DocumentCard>
+```
+
+Available snippets: `layout`, `cover`, `title`, `description`, `metadata`, `tags`.
+
+### Headless Mode
+
+Use `headless` on `ThemedCard` to render only the themed wrapper without default styles:
+
+```svelte
+<ThemedCard {theme} headless class="p-4 rounded-xl bg-accent-100">
+  <p>Fully custom content</p>
+</ThemedCard>
+```
+
 ## Licence
 
 AGPL-3.0-only — see the [pkgs monorepo](https://github.com/ewanc26/pkgs).
