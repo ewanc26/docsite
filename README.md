@@ -2,7 +2,7 @@
 
 Central documentation hub for all of ewan's projects. Posts are written in Markdown and published to the AT Protocol automatically via [Sequoia](https://sequoia.pub).
 
-Built with SvelteKit, Tailwind CSS (typography plugin), and `marked`. Deployed on Vercel.
+Built with SvelteKit, Tailwind CSS (typography plugin), and unified/remark/rehype for markdown processing. Deployed on Vercel.
 
 ## Adding a post
 
