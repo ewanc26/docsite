@@ -4,6 +4,7 @@ description: "A pure symbolic stack language — all syntax is punctuation, no a
 date: 2026-04-10
 tags: [sigi, compiler, python, c, esolang]
 draft: false
+atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mj6alrmuoi2p"
 ---
 
 [Sigi](https://github.com/ewanc26/sigi) is an esoteric stack language where all syntax consists of symbols and punctuation. No alphanumeric keywords anywhere.
