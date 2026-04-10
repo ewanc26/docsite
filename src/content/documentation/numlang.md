@@ -7,11 +7,11 @@ draft: false
 atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3miu27fktx52p"
 ---
 
-[Numlang](https://github.com/ewanc26/numlang) is an esoteric stack-based language that compiles to C through a Python compiler. The entire character set is `0-9 ^ & * + - / . | ; % # ~ "` — no letters, no keywords, just numbers and punctuation.
+[Numlang](https://github.com/ewanc26/numlang) is an esoteric stack-based language that compiles to C through a Python compiler. The character set is `0-9 ^ & * + - / . | ; % # ~ " !` — no letters, no keywords.
 
 ## Data model
 
-All values are 64-bit IEEE 754 doubles. The runtime has a stack (depth 1000) and ten named variables `vars[0]`–`vars[9]`, all initialised to `0`.
+All values are 64-bit IEEE 754 doubles. The runtime has a stack (depth 1000) and **100 named variables** `vars[0]`–`vars[99]`, all initialised to `0`.
 
 ## Installation
 
@@ -27,7 +27,7 @@ This installs the `numlangc` command.
 # Compile to a C file
 numlangc hello.num -o hello.c
 
-# Compile and run immediately (requires gcc)
+# Compile, run with gcc, and execute immediately
 numlangc hello.num --run
 
 # Use a different C compiler
@@ -44,10 +44,19 @@ numlangc hello.num --run --cc clang
 
 | Syntax | Effect |
 |--------|--------|
-| `N` | Push the integer literal N |
-| `\|n` | Push the value of variable n (0–9) |
+| `N` (integer literal) | Push integer N, **unless** N is a special opcode (see tables below) |
+| `N.M` (float literal) | Push float N.M — **never** treated as an opcode |
+| `|n` or `|nn` | Push value of variable n (0–99) |
 
-The numbers 10–15 and 16–18, 20, and 30 are reserved as opcode aliases (comparison, stack, and control flow) — see below. To push the literal value 10 on the stack, compute it: `9 1 +`. String literals (see below) sidestep this entirely for character output.
+> **Tip:** Use float syntax (`10.0` instead of `10`) to push numbers that match opcode aliases.
+
+### Stack manipulation
+
+| Code | Name | Effect |
+|------|------|--------|
+| `16` | DUP  | Duplicate top of stack |
+| `17` | SWAP | Swap top two elements |
+| `18` | DROP | Discard top of stack |
 
 ### Arithmetic
 
@@ -56,12 +65,10 @@ The numbers 10–15 and 16–18, 20, and 30 are reserved as opcode aliases (comp
 | `+` | pop b, pop a → push a + b |
 | `-` | pop b, pop a → push a − b |
 | `*` | pop b, pop a → push a × b |
-| `/` | pop b, pop a → push a ÷ b (division-by-zero exits) |
-| `%` | pop b, pop a → push a mod b (via `fmod`) |
+| `/` | pop b, pop a → push a ÷ b |
+| `%` | pop b, pop a → push fmod(a, b) |
 
-### Comparison
-
-Comparisons push `1.0` for true, `0.0` for false.
+### Comparison *(push 1.0 = true, 0.0 = false)*
 
 | Code | Meaning |
 |------|---------|
@@ -72,73 +79,44 @@ Comparisons push `1.0` for true, `0.0` for false.
 | `14` | a <= b |
 | `15` | a >= b |
 
-### Stack manipulation
-
-| Code | Name | Effect |
-|------|------|--------|
-| `16` | DUP  | Duplicate top of stack |
-| `17` | SWAP | Swap top two elements |
-| `18` | DROP | Discard top of stack |
-
 ### Control flow
 
 | Syntax | Effect |
 |--------|--------|
-| `20` | **IF** — pops condition; if non-zero, executes the **next single** operation |
-| `30 … ;` | **WHILE** — pops condition each iteration; body must leave next condition on stack |
+| `20` | **IF** — pops condition; executes body if non-zero |
+| `28` | **ELSE** — separates if/else bodies |
+| `30 … ;` | **WHILE** — pops condition each iteration |
+| `50 … ;` | **REPEAT** — executes body N times (pushes 0-based index each iteration) |
 
 ### Variables
 
 ```
-<value> <index> &
-```
-
-Pops the index (0–9), then the value, and stores `vars[index] = value`.
-
-```
-42 3 &    # vars[3] = 42
+<value> <index> &    # store value in vars[index]
+|n                    # push vars[n]
 ```
 
 ### I/O
 
 | Symbol | Effect |
 |--------|--------|
-| `\|` | Pop and print top of stack as a number (with newline) |
-| `~` | Pop and print top of stack as an ASCII character (no newline) |
-| `^` | Read a double from stdin and push it |
-| `"..."` | Print a string literal — see below |
-
-### String literals
-
-`"..."` prints each character immediately — the multi-character sibling of `~`. It desugars to a `putchar()` call per character and leaves the stack unchanged.
-
-Escape sequences follow the full C syntax set:
-
-| Escape | Value | Meaning |
-|--------|-------|---------|
-| `\n` | 10 | newline |
-| `\t` | 9 | horizontal tab |
-| `\r` | 13 | carriage return |
-| `\\` | 92 | backslash |
-| `\"` | 34 | double quote |
-| `\'` | 39 | single quote |
-| `\a` | 7 | alert / bell |
-| `\b` | 8 | backspace |
-| `\f` | 12 | form feed |
-| `\v` | 11 | vertical tab |
-| `\xHH` | 0–255 | hex escape (1–2 hex digits) |
-| `\NNN` | 0–255 | octal escape (1–3 octal digits, first digit 0–7) |
-
-Escapes are resolved in the lexer before the opcode table is consulted, so `"\n"` always produces a newline character even though the integer `10` is the `LT` opcode.
+| `|` | Pop and print as number (with newline) |
+| `~` | Pop and print as ASCII character |
+| `^` | Read double from stdin and push |
+| `"..."` | Print string literal |
 
 ### Functions
 
 ```
-/N  <body>  ;   # define function N
-.N              # call function N
+/N  <body>  ;    # define function N
+.N               # call function N
 ```
 
-Function numbers are plain integers. Functions may be defined in any order — forward calls are supported.
+Functions may be defined in any order. Forward calls and recursion are supported.
+
+## Gotchas
+
+1. **Opcode collisions**: Integer literals matching opcode numbers are interpreted as opcodes. Use float syntax (e.g., `42.0`).
+2. **Division vs functions**: `/` followed by an integer defines a function. Use float divisors to avoid this.
 
 ## Examples
 
@@ -148,61 +126,33 @@ Function numbers are plain integers. Functions may be defined in any order — f
 "Hello, World!\n"
 ```
 
-### Print a number
-
-```
-42 |
-```
-
-### Read and double a number from stdin
-
-```
-^ 16 + |    # read x, DUP, add → 2x, print
-```
-
 ### Variables
 
 ```
-99 0 &      # vars[0] = 99
-|0 |        # push vars[0], print
+99 0 &     # vars[0] = 99
+|0 |       # print 99
 ```
 
-### Countdown with WHILE
+### WHILE countdown
 
 ```
-5 0 &           # vars[0] = 5
-|0 0 11         # initial condition: vars[0] > 0
+5 0 &          # vars[0] = 5
+|0 0 11        # condition: vars[0] > 0
 30
-    |0 |        # print vars[0]
-    |0 1 - 0 &  # vars[0] -= 1
-    |0 0 11     # next condition
+    |0 |       # print vars[0]
+    |0 1 - 0 & # vars[0] -= 1
+    |0 0 11    # next condition
 ;
-```
-
-### Conditional (IF)
-
-```
-3 5 10          # push (3 < 5) = 1.0
-20 99 |         # IF true: print 99
 ```
 
 ### Functions
 
 ```
 /0
-    5 0 &
-    |0 |
+    "Hi\n"
 ;
 
 .0
-```
-
-### String escapes
-
-```
-"Tab:\there\n"
-"\x48\x65\x6c\x6c\x6f\n"   # "Hello\n" via hex
-"\110\145\154\154\157\n"    # "Hello\n" via octal
 ```
 
 ## Project layout
@@ -211,10 +161,7 @@ Function numbers are plain integers. Functions may be defined in any order — f
 numlang/
   lexer.py      – tokeniser
   parser.py     – recursive-descent parser → AST
-  ast.py        – AST node types
-  sema.py       – semantic analysis
   codegen_c.py  – C code generator
-  main.py       – CLI entry point
 examples/       – sample .num programs
 ```
 
