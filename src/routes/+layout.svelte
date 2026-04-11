@@ -3,11 +3,8 @@
 	import { page } from '$app/stores';
 	import { Menu, X, Coffee, Globe } from '@lucide/svelte';
 	import type { LayoutData } from './$types';
-	import {
-		PUBLIC_SITE_TITLE,
-		PUBLIC_SITE_DESCRIPTION,
-		PUBLIC_SITE_URL
-	} from '$env/static/public';
+	import { MetaTags } from '$lib/components/seo';
+	import { defaultSiteMeta, createSiteMeta } from '$lib/helper/metaTags';
 
 	let { children, data }: { children: any; data: LayoutData } = $props();
 	let menuOpen = $state(false);
@@ -17,35 +14,28 @@
 		menuOpen = false;
 	});
 
-	const instanceDomain = data.apInstanceUrl
-		? new URL(data.apInstanceUrl).hostname
-		: null;
-	const fediverseCreator =
-		data.apUsername && instanceDomain ? `${data.apUsername}@${instanceDomain}` : null;
+	// Compute fediverse:creator from AP instance and username
+	const fediverseCreator = $derived(() => {
+		if (!data.apInstanceUrl || !data.apUsername) return null;
+		try {
+			return `${data.apUsername}@${new URL(data.apInstanceUrl).hostname}`;
+		} catch {
+			return null;
+		}
+	})();
+
+	const siteMeta = defaultSiteMeta;
 </script>
 
 <svelte:head>
-	<title>{PUBLIC_SITE_TITLE}</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<meta name="description" content={PUBLIC_SITE_DESCRIPTION} />
-	<meta property="og:site_name" content={PUBLIC_SITE_TITLE} />
-	<meta property="og:type" content="website" />
-	<meta property="og:url" content={PUBLIC_SITE_URL} />
-	<meta property="og:title" content={PUBLIC_SITE_TITLE} />
-	<meta property="og:description" content={PUBLIC_SITE_DESCRIPTION} />
-	<meta name="twitter:card" content="summary" />
-	<meta name="twitter:url" content={PUBLIC_SITE_URL} />
-	<meta name="twitter:title" content={PUBLIC_SITE_TITLE} />
-	<meta name="twitter:description" content={PUBLIC_SITE_DESCRIPTION} />
-	{#if fediverseCreator}
-		<meta name="fediverse:creator" content={fediverseCreator} />
-	{/if}
 	<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="" />
 	<link
 		href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&display=swap"
 		rel="stylesheet"
 	/>
 </svelte:head>
+
+<MetaTags meta={siteMeta} {siteMeta} {fediverseCreator} />
 
 <div class="shell">
 	<!-- Titlebar -->
@@ -118,5 +108,7 @@
 		·
 		published via
 		<a href="https://sequoia.pub" target="_blank" rel="noopener" class="underline hover:text-[var(--color-green)]">sequoia</a>
+		·
+		<span title="GDPR-compliant, cookie-free analytics">privacy-first analytics</span>
 	</footer>
 </div>
