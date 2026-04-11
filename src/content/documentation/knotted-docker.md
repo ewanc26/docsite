@@ -1,7 +1,7 @@
 ---
 title: knotted-docker
 description: A Dockerised Tangled knot server with optional Cloudflare Tunnel routing.
-date: 2026-02-24
+date: 2026-04-11
 tags: [tangled, atproto, docker, self-hosting]
 draft: false
 atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfyqfllmpg25"

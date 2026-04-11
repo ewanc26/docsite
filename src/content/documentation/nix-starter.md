@@ -1,0 +1,54 @@
+---
+title: Nix Starter
+description: Beginner-friendly, self-contained NixOS configurations with no personal infrastructure or shared abstractions.
+date: 2026-04-11
+tags: [nix, nixos, configuration, beginner]
+draft: false
+atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mj7zf7z4k62q"
+---
+
+[nix-starter](https://github.com/ewanc26/nix-starter) provides beginner-friendly, self-contained NixOS configurations. No personal infrastructure, no shared abstractions — just plain NixOS.
+
+## Hosts
+
+| Host | Description |
+|------|-------------|
+| [`as-the-gods-intended`](https://github.com/ewanc26/nix-starter/tree/main/hosts/as-the-gods-intended) | Minimal TUI laptop, optional KDE Plasma desktop |
+| [`server`](https://github.com/ewanc26/nix-starter/tree/main/hosts/server) | Hardened server — AT Protocol PDS + Mastodon via Cloudflare Tunnel |
+
+## Structure
+
+```
+flake.nix                        — top-level flake, wires up all hosts
+hosts/
+├── as-the-gods-intended/
+│   ├── default.nix              — system config (boot, networking, packages)
+│   ├── home.nix                 — user config (shell, editor, tools)
+│   ├── hardware-configuration.nix  — generated per-machine, replace before install
+│   └── README.md               — full setup guide for that host
+└── server/
+    ├── default.nix              — host skeleton (boot, networking, SSH, nginx, nix)
+    ├── hardware-configuration.nix  — generated per-machine, replace before install
+    ├── README.md               — full setup, secrets, and tunnel guide
+    └── modules/
+        ├── cloudflare-tunnel.nix   — outbound tunnel, ingress rules for both services
+        ├── pds.nix                 — bluesky-pds + nginx vhost
+        └── mastodon.nix            — Mastodon + nginx vhost overrides
+```
+
+## Adding a new host
+
+1. Copy an existing host directory as a starting point:
+   ```bash
+   cp -r hosts/as-the-gods-intended hosts/my-new-host
+   ```
+2. Update `networking.hostName`, the username, and the hardware config.
+3. Add an entry to `flake.nix` under `nixosConfigurations`.
+4. Follow the setup guide in the new host's `README.md`.
+
+## Resources
+
+- NixOS manual: https://nixos.org/manual/nixos/stable
+- Package search: https://search.nixos.org/packages
+- Home Manager options: https://nix-community.github.io/home-manager/options.xhtml
+- NixOS Discourse: https://discourse.nixos.org

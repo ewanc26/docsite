@@ -1,7 +1,7 @@
 ---
 title: college-practice-lycanquiz
 description: A VB.NET Windows Forms quiz about werewolf mythology, made as a college practice project.
-date: 2026-02-24
+date: 2026-04-11
 tags: [vbnet, windows-forms, college, historical]
 draft: false
 atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfyqfmrudo25"

@@ -1,7 +1,7 @@
 ---
 title: atproto-shortlink
 description: A server-side AT Protocol link shortener powered by your Linkat board. No database required.
-date: 2026-02-24
+date: 2026-04-11
 tags: [atproto, sveltekit, linkat, tools]
 draft: false
 atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfyqfqkvf625"
