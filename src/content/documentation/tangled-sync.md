@@ -1,7 +1,7 @@
 ---
 title: "@ewanc26/tangled-sync"
 description: CLI tool for syncing GitHub repositories to Tangled with ATProto record publishing — now part of the @ewanc26/pkgs monorepo.
-date: 2026-02-24
+date: 2026-04-11
 tags: [atproto, tangled, github, automation, typescript, monorepo]
 draft: false
 atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfyqfhi6no25"

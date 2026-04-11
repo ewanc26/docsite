@@ -1,7 +1,7 @@
 ---
 title: text-to-pixel-image
 description: A Python script that converts a string of text into a pixel art image with per-character colours. Unmaintained.
-date: 2026-02-24
+date: 2026-04-11
 tags: [python, image-generation, historical, unmaintained]
 draft: false
 atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfyqfgxodg25"
