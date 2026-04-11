@@ -1,7 +1,7 @@
 ---
 title: bluesky-avatar-updater
 description: Automatically update your Bluesky avatar (and banner) every hour based on the time of day.
-date: 2026-02-24
+date: 2026-04-11
 tags: [bluesky, atproto, python, automation]
 draft: false
 atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfyqfpgwyo25"

@@ -1,7 +1,7 @@
 ---
 title: bluesky-moon-tracker
 description: A Bluesky bot that posts daily moon phase updates with a lycanthropic twist. Unmaintained.
-date: 2026-02-24
+date: 2026-04-11
 tags: [bluesky, bot, typescript, unmaintained]
 draft: false
 atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfyqfntcno25"

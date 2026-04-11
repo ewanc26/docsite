@@ -1,7 +1,7 @@
 ---
 title: bean-dumper
 description: An early Python experiment — unmaintained and kept for historical interest.
-date: 2026-02-24
+date: 2026-04-11
 tags: [python, historical, unmaintained]
 draft: false
 atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfyqfpra3w25"
