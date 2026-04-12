@@ -4,6 +4,7 @@ description: A VB.NET Windows Forms application demonstrating variable types, ma
 date: 2026-04-12
 tags: [vbnet, windows-forms, college, historical]
 draft: false
+atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mjdejiun4j2r"
 ---
 
 [college-practice-variables](https://github.com/ewanc26/college-practice-variables) is a Windows Forms application built in VB.NET as a college practice exercise. It demonstrates five variable types: Integer, String, Double (currency), Boolean, and Array, with formatted output display.

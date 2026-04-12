@@ -4,6 +4,7 @@ description: A VB.NET Windows Forms application that changes colours based on us
 date: 2026-04-12
 tags: [vbnet, windows-forms, college, historical]
 draft: false
+atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mjdejja23p2p"
 ---
 
 [college-practice-colourthebox](https://github.com/ewanc26/college-practice-colourthebox) is a Windows Forms application built in VB.NET as a college practice exercise. It changes a PictureBox background colour based on text input for three supported colours: Red, Green, and Blue.

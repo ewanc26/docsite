@@ -4,6 +4,7 @@ description: A VB.NET Windows Forms application showing personalized greetings a
 date: 2026-04-12
 tags: [vbnet, windows-forms, college, historical]
 draft: false
+atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mjdejjefyr2r"
 ---
 
 [college-practice-aboutmetoo](https://github.com/ewanc26/college-practice-aboutmetoo) is a Windows Forms application built in VB.NET as a college practice exercise. It displays personalized greetings based on user name input and shows mood-based images for three states: Happy, OK, and Unhappy.

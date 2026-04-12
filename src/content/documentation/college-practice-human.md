@@ -4,6 +4,7 @@ description: A VB.NET Windows Forms profile generator with age categorization an
 date: 2026-04-12
 tags: [vbnet, windows-forms, college, historical]
 draft: false
+atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mjdejj3huj2r"
 ---
 
 [college-practice-human](https://github.com/ewanc26/college-practice-human) is a Windows Forms application built in VB.NET as a college practice exercise. It generates a human profile with age cohort categorization (Infant, Child, Teenager, Adult, Senior), birth month name conversion, and UK driving eligibility checking.
