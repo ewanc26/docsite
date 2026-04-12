@@ -4,6 +4,7 @@ description: A VB.NET Windows Forms multiplication table generator using five di
 date: 2026-04-12
 tags: [vbnet, windows-forms, college, historical]
 draft: false
+atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mjdejizbvo2a"
 ---
 
 [college-practice-loops](https://github.com/ewanc26/college-practice-loops) is a Windows Forms application built in VB.NET as a college practice exercise. It generates multiplication tables using five different loop implementations: For-Next, While, Do Until, Do While, and Do-Loop with exit condition.

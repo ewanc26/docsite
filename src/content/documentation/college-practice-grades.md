@@ -4,6 +4,7 @@ description: A VB.NET Windows Forms grades calculator for averaging three subjec
 date: 2026-04-12
 tags: [vbnet, windows-forms, college, historical]
 draft: false
+atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mjdejj5ruw2y"
 ---
 
 [college-practice-grades](https://github.com/ewanc26/college-practice-grades) is a Windows Forms application built in VB.NET as a college practice exercise. It calculates the average of three subject grades (Science, English, Maths) with type conversion and real-time display.
