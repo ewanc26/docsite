@@ -4,6 +4,7 @@ description: A VB.NET Windows Forms counter application with increment functiona
 date: 2026-04-12
 tags: [vbnet, windows-forms, college, historical]
 draft: false
+atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mjdejjc7or2r"
 ---
 
 [college-practice-challenge](https://github.com/ewanc26/college-practice-challenge) is a Windows Forms application built in VB.NET as a college practice exercise. It demonstrates a simple counter that increments when a button is clicked, displaying the current value in real-time.

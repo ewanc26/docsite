@@ -4,6 +4,7 @@ description: A VB.NET Windows Forms shape shop with custom pricing options, made
 date: 2026-04-12
 tags: [vbnet, windows-forms, college, historical]
 draft: false
+atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mjdejiwvq62a"
 ---
 
 [college-practice-shapes](https://github.com/ewanc26/college-practice-shapes) is a Windows Forms application built in VB.NET as a college practice exercise. It allows users to select and price custom shapes (Square, Circle, Triangle) with colour and pattern options, calculating dynamic prices.
