@@ -4,7 +4,7 @@ description: Import your Last.fm and Spotify listening history to the AT Protoco
 date: 2026-03-15
 tags: [malachite, atproto, lastfm, spotify, tools]
 draft: false
-atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfyqfjxlo625"
+atUri: 'at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfyqfjxlo625'
 ---
 
 > **Note:** The standalone [malachite](https://github.com/ewanc26/malachite) repository has been archived. Development continues in the [`@ewanc26/pkgs`](https://github.com/ewanc26/pkgs) monorepo — CLI at [`packages/malachite/`](https://github.com/ewanc26/pkgs/tree/main/packages/malachite), web frontend at [`packages/malachite-web/`](https://github.com/ewanc26/pkgs/tree/main/packages/malachite-web).
@@ -12,6 +12,17 @@ atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfyqfjxlo6
 Malachite is a tool for importing your Last.fm and Spotify listening history to the AT Protocol network as `fm.teal.alpha.feed.play` records. It's designed to be safe, resumable, and smart about rate limits — so you don't accidentally hammer your PDS.
 
 The name is a deliberate nod to the `teal` lexicon it publishes to: malachite is a greenish-blue copper mineral associated with preservation and transformation, sitting squarely in that teal/green colour range.
+
+## The Sigil
+
+Malachite's logo is a sigil designed with pagan symbolism:
+
+- **Concentric rings** — Sacred circles of protection; cycles of listening, returning, remembering
+- **Pentagram** — The five-pointed star binds the elements (earth, air, fire, water, spirit); each point a moment in time, connected through listening
+- **Centre point** — The listener as witness, the still point around which music revolves
+- **The name** — Malachite itself: a stone of transformation, protection, and safe passage between states
+
+The sigil represents what the tool does: gathering scattered plays into a protected, meaningful pattern — your listening history as a kind of sorcery, records bound into a coherent whole.
 
 ## Usage Options
 
@@ -127,62 +138,62 @@ pnpm --filter @ewanc26/malachite start -- --logout -h did:plc:xxxx
 
 ## Import Modes
 
-| Mode | Flag | Description |
-|------|------|-------------|
-| Last.fm | `-m lastfm` (default) | Import a Last.fm CSV export |
-| Spotify | `-m spotify` | Import Spotify Extended Streaming History JSON |
-| Combined | `-m combined` | Merge both sources with deduplication |
-| Sync | `-m sync` | Skip records that already exist on Teal |
-| Deduplicate | `-m deduplicate` | Remove duplicate records already on Teal |
+| Mode        | Flag                  | Description                                    |
+| ----------- | --------------------- | ---------------------------------------------- |
+| Last.fm     | `-m lastfm` (default) | Import a Last.fm CSV export                    |
+| Spotify     | `-m spotify`          | Import Spotify Extended Streaming History JSON |
+| Combined    | `-m combined`         | Merge both sources with deduplication          |
+| Sync        | `-m sync`             | Skip records that already exist on Teal        |
+| Deduplicate | `-m deduplicate`      | Remove duplicate records already on Teal       |
 
 ## Command Line Options
 
 ### Authentication
 
-| Option | Description |
-|--------|-------------|
-| `--oauth-login` | Sign in via OAuth — opens browser, saves session (recommended) |
-| `--logout` | Remove stored OAuth session (`--handle <did>` to target a specific one) |
-| `--list-sessions` | List all stored OAuth sessions |
+| Option                     | Description                                                                          |
+| -------------------------- | ------------------------------------------------------------------------------------ |
+| `--oauth-login`            | Sign in via OAuth — opens browser, saves session (recommended)                       |
+| `--logout`                 | Remove stored OAuth session (`--handle <did>` to target a specific one)              |
+| `--list-sessions`          | List all stored OAuth sessions                                                       |
 | `--handle <handle>` / `-h` | ATProto handle or DID (for app-password auth, or to target a specific OAuth session) |
-| `--password <pass>` / `-p` | ATProto app password |
-| `--pds <url>` | Skip identity resolution and connect to a known PDS URL directly |
+| `--password <pass>` / `-p` | ATProto app password                                                                 |
+| `--pds <url>`              | Skip identity resolution and connect to a known PDS URL directly                     |
 
 `did:web` identifiers are supported in addition to handles and `did:plc` DIDs.
 
 ### Input
 
-| Option | Short | Description |
-|--------|-------|-------------|
-| `--input <path>` | `-i` | Path to Last.fm CSV or Spotify JSON file/directory |
-| `--spotify-input <path>` | | Spotify export path (combined mode) |
+| Option                   | Short | Description                                        |
+| ------------------------ | ----- | -------------------------------------------------- |
+| `--input <path>`         | `-i`  | Path to Last.fm CSV or Spotify JSON file/directory |
+| `--spotify-input <path>` |       | Spotify export path (combined mode)                |
 
 ### Import
 
-| Option | Short | Description |
-|--------|-------|-------------|
-| `--mode <mode>` | `-m` | Import mode (see table above) |
-| `--reverse` | `-r` | Process newest tracks first |
-| `--yes` | `-y` | Skip confirmation prompts |
-| `--dry-run` | | Preview records without publishing |
-| `--aggressive` | | Use 85% of the daily limit (8,500/day) instead of 75% |
-| `--fresh` | | Ignore previous import state and cached records |
+| Option          | Short | Description                                           |
+| --------------- | ----- | ----------------------------------------------------- |
+| `--mode <mode>` | `-m`  | Import mode (see table above)                         |
+| `--reverse`     | `-r`  | Process newest tracks first                           |
+| `--yes`         | `-y`  | Skip confirmation prompts                             |
+| `--dry-run`     |       | Preview records without publishing                    |
+| `--aggressive`  |       | Use 85% of the daily limit (8,500/day) instead of 75% |
+| `--fresh`       |       | Ignore previous import state and cached records       |
 
 ### Output
 
-| Option | Short | Description |
-|--------|-------|-------------|
-| `--verbose` | `-v` | Debug-level logging |
-| `--quiet` | `-q` | Warnings and errors only |
-| `--dev` | | Verbose + file logging + smaller batches |
+| Option      | Short | Description                              |
+| ----------- | ----- | ---------------------------------------- |
+| `--verbose` | `-v`  | Debug-level logging                      |
+| `--quiet`   | `-q`  | Warnings and errors only                 |
+| `--dev`     |       | Verbose + file logging + smaller batches |
 
 ### Maintenance
 
-| Option | Description |
-|--------|-------------|
-| `--clear-cache` | Clear cached Teal records for the current account |
-| `--clear-all-caches` | Clear all cached records |
-| `--clear-credentials` | Clear saved app-password credentials |
+| Option                | Description                                       |
+| --------------------- | ------------------------------------------------- |
+| `--clear-cache`       | Clear cached Teal records for the current account |
+| `--clear-all-caches`  | Clear all cached records                          |
+| `--clear-credentials` | Clear saved app-password credentials              |
 
 ## Getting Your Data
 
@@ -236,14 +247,14 @@ Example Last.fm record:
 
 ```json
 {
-  "$type": "fm.teal.alpha.feed.play",
-  "trackName": "Paint My Masterpiece",
-  "artists": [{ "artistName": "Cjbeards", "artistMbId": "c8d4f4bf-..." }],
-  "releaseName": "Masquerade",
-  "playedTime": "2025-11-13T23:49:36Z",
-  "originUrl": "https://www.last.fm/music/Cjbeards/_/Paint+My+Masterpiece",
-  "submissionClientAgent": "malachite/v0.12.0",
-  "musicServiceBaseDomain": "last.fm"
+	"$type": "fm.teal.alpha.feed.play",
+	"trackName": "Paint My Masterpiece",
+	"artists": [{ "artistName": "Cjbeards", "artistMbId": "c8d4f4bf-..." }],
+	"releaseName": "Masquerade",
+	"playedTime": "2025-11-13T23:49:36Z",
+	"originUrl": "https://www.last.fm/music/Cjbeards/_/Paint+My+Masterpiece",
+	"submissionClientAgent": "malachite/v0.12.0",
+	"musicServiceBaseDomain": "last.fm"
 }
 ```
 
@@ -269,24 +280,24 @@ Malachite can be used as a library in other projects. The `/core` export provide
 
 ```typescript
 import {
-  // Spotify parsing
-  parseSpotifyJsonContent,
-  convertSpotifyToPlayRecord,
+	// Spotify parsing
+	parseSpotifyJsonContent,
+	convertSpotifyToPlayRecord,
 
-  // CSV parsing
-  parseLastfmCsv,
-  parseLastfmCsvString,
+	// CSV parsing
+	parseLastfmCsv,
+	parseLastfmCsvString,
 
-  // AT Protocol publishing
-  PlayRecordPublisher,
-  RateLimiter,
+	// AT Protocol publishing
+	PlayRecordPublisher,
+	RateLimiter,
 
-  // TID generation
-  generateTID,
+	// TID generation
+	generateTID,
 
-  // Types
-  type SpotifyRecord,
-  type PlayRecord,
+	// Types
+	type SpotifyRecord,
+	type PlayRecord
 } from '@ewanc26/malachite/core';
 ```
 
