@@ -1,7 +1,7 @@
 ---
 title: Jasper
 description: Convert Instagram data exports into posts on Grain.social while preserving original timestamps.
-date: 2026-04-15
+date: 2026-04-16
 tags: [jasper, atproto, instagram, grain, tools]
 draft: false
 atUri: 'at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mjizjbv6qk2t'
@@ -15,6 +15,7 @@ The name follows ATProto import tools using mineral names — a nod to the patte
 
 - **Preserves timestamps** — Photos appear with their original Instagram dates
 - **Handles all export formats** — Works with 2022, 2023, 2024, and 2025 Instagram exports
+- **Gallery-based** — Photos are organised into Grain galleries you choose or create
 - **Skips duplicates** — Already-imported photos are detected and skipped
 - **Dry run mode** — Preview what would be imported before committing
 - **OAuth authentication** — Secure login via your existing AT Protocol identity
@@ -38,6 +39,8 @@ Run without arguments for guided prompts:
 ```bash
 jasper
 ```
+
+Jasper will prompt you to select or create a gallery before importing.
 
 ### Command Line
 
@@ -94,6 +97,16 @@ Generate an app password at [bsky.app/settings/app-passwords](https://bsky.app/s
 
 Jasper will locate `posts_1.json` automatically, handling all export format variations.
 
+## Grain Data Model
+
+Jasper creates three types of records:
+
+1. **`social.grain.photo`** — The image blob with aspect ratio and timestamp
+2. **`social.grain.gallery`** — A container you create or select for organizing photos
+3. **`social.grain.gallery.item`** — Links each photo to your chosen gallery with position
+
+This matches Grain's expected structure — photos must be linked to a gallery to display properly on grain.social.
+
 ## What Gets Imported
 
 Imported:
@@ -140,11 +153,13 @@ No data is sent to any server except your chosen Grain account.
 Jasper requests minimal permissions:
 
 ```
-atproto blob:*/* repo:social.grain.photo
+atproto blob:*/* repo:social.grain.photo repo:social.grain.gallery repo:social.grain.gallery.item
 ```
 
 - `blob:*/*` — Upload images as blobs
-- `repo:social.grain.photo` — Write to Grain's photo collection
+- `repo:social.grain.photo` — Write photo records
+- `repo:social.grain.gallery` — Create galleries
+- `repo:social.grain.gallery.item` — Link photos to galleries
 
 This follows ATProto's granular permission model — no broad `transition:generic` scope.
 
