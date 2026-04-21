@@ -89,11 +89,18 @@ Generate an app password at [bsky.app/settings/app-passwords](https://bsky.app/s
 
 ## Getting Your Instagram Export
 
-1. Go to [Instagram's download page](https://accountscenter.instagram.com/info_and_permissions/dgp/)
-2. Request a download of your information
-3. Select "Some of your information" → "Posts" and "Archived posts"
-4. Choose JSON format
-5. Download the ZIP file when ready
+1. Open Instagram (app or web browser)
+2. Go to your profile
+3. Tap the menu (☰) → Settings → Accounts Center
+4. Select "Your information and permissions"
+5. Choose "Export your information"
+6. Select "Export to device"
+7. Choose what to include (or select "All information")
+8. Select **JSON format**
+9. Choose media quality (High recommended)
+10. Enter your password to confirm
+11. Wait for the email notification (can take hours to days)
+12. Download the ZIP file when ready
 
 Jasper will locate `posts_1.json` automatically, handling all export format variations.
 
