@@ -144,14 +144,42 @@ Imported:
 | `--logout [DID]`     | Sign out (removes stored session)                  |
 | `--list-sessions`    | List stored OAuth sessions                         |
 
+## Daily Limits for Large Exports
+
+Large Instagram exports (hundreds of photos) should be split across multiple days to avoid hitting PDS blob upload quotas. Jasper supports resumable imports with daily limits:
+
+```bash
+# Import with daily limit (default: 100 posts/day)
+jasper -i large-export.zip --daily-limit 50
+
+# Resume previous import session
+jasper --resume
+
+# List pending import sessions
+jasper --list-imports
+
+# Clear all saved import state
+jasper --clear-imports
+```
+
+| Option              | Description                                    |
+| ------------------- | ---------------------------------------------- |
+| `--daily-limit <N>` | Maximum posts to import per day (default: 100) |
+| `--resume`          | Resume previous import session                 |
+| `--list-imports`    | List pending import sessions                   |
+| `--clear-imports`   | Clear all saved import state                   |
+
+When the daily limit is reached, Jasper saves your progress and prompts you to continue the next day. Run `jasper --resume` to continue importing.
+
 ## Data Storage
 
 All data stays on your machine:
 
-| Location               | Content              |
-| ---------------------- | -------------------- |
-| `~/.jasper/oauth.json` | OAuth session tokens |
-| `~/.jasper/logs/`      | Debug log files      |
+| Location               | Content                             |
+| ---------------------- | ----------------------------------- |
+| `~/.jasper/oauth.json` | OAuth session tokens                |
+| `~/.jasper/imports/`   | Import state for resumable sessions |
+| `~/.jasper/logs/`      | Debug log files                     |
 
 No data is sent to any server except your chosen Grain account.
 
