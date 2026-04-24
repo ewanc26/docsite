@@ -4,6 +4,8 @@ Central documentation hub for all of ewan's projects. Posts are written in Markd
 
 Built with SvelteKit, Tailwind CSS (typography plugin), and unified/remark/rehype for markdown processing. Deployed on Vercel.
 
+> 🧶 Also available on [Tangled](https://tangled.org/ewancroft.uk/docsite)
+
 ## Adding a post
 
 Create a Markdown file in `src/content/documentation/`:
