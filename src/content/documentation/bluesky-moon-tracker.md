@@ -2,12 +2,14 @@
 title: bluesky-moon-tracker
 description: A Bluesky bot that posts daily moon phase updates with a lycanthropic twist. Optional Ollama LLM generation.
 date: 2026-04-11
-tags: [bluesky, bot, typescript, ollama]
+tags: [bluesky, bot, rust, ollama]
 draft: false
 atUri: 'at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfyqfntcno25'
 ---
 
-[bluesky-moon-tracker](https://github.com/ewanc26/bluesky-moon-tracker) is a TypeScript bot that posts daily moon phase updates to Bluesky at 00:00 UTC. Messages are tailored to the lunar phase and current month, with a lycanthropic flavour, British references, and occasional Pride references in June.
+[bluesky-moon-tracker](https://github.com/ewanc26/bluesky-moon-tracker) is a Rust bot that posts daily moon phase updates to Bluesky at 00:00 UTC. Messages are tailored to the lunar phase and current month, with a lycanthropic flavour, British references, and occasional Pride references in June.
+
+Built with [atrium-rs](https://github.com/atrium-rs/atrium) for AT Protocol, compiled to a ~3 MB static binary with rustls-tls (no OpenSSL).
 
 ## Moon Phase Data
 
@@ -21,7 +23,7 @@ If all APIs are down, the local calculation ensures the bot can still post. Accu
 
 ## Ollama LLM Generation
 
-Set `OLLAMA_MODEL` to generate unique posts via a local Ollama LLM instead of the built-in template system. The bot auto-starts Ollama if it isn't already running.
+Set `OLLAMA_MODEL` to generate unique posts via a local Ollama LLM instead of the built-in template system.
 
 The LLM is prompted with the moon phase, illumination, month, and the bot's personality (lycanthropic, British, pagan). If Ollama fails or times out, the bot falls back to templates.
 
@@ -30,10 +32,10 @@ The LLM is prompted with the moon phase, illumination, month, and the bot's pers
 ```bash
 git clone git@github.com:ewanc26/bluesky-moon-tracker
 cd bluesky-moon-tracker
-pnpm install
+cargo build --release
 ```
 
-Create `src/config.env`:
+Create `.env` (or copy `.env.example`):
 
 ```ini
 BLUESKY_USERNAME="your_username"
@@ -50,7 +52,7 @@ OLLAMA_TIMEOUT="30000"
 Run:
 
 ```bash
-pnpm run dev:start
+cargo run --release
 ```
 
 If the current time is past 00:00 UTC, the bot posts immediately and then schedules the next post for the following day.
@@ -59,14 +61,14 @@ Setting `DEBUG_MODE=true` with credentials causes an immediate test post; withou
 
 ## Structure
 
-- `src/index.ts` — Scheduling and orchestration
-- `src/services/blueskyService.ts` — Authentication and posting
-- `src/services/moonPhaseService.ts` — Multi-source moon phase fetching (Skytime → Farmsense → Local)
-- `src/services/ollamaService.ts` — Ollama API client with auto-start
-- `src/core/localMoonCalc.ts` — Local moon phase calculation (Meeus algorithm)
-- `src/core/moonPhaseMessages.ts` — Message generation (Ollama → template fallback)
-- `src/core/moonPhaseConstants.ts` — Phase emojis, hashtags, phrases
-- `src/core/timeUtils.ts` — Scheduling utilities
+- `src/main.rs` — Entry point, env loading, debug/production mode
+- `src/config.rs` — Environment variable parsing
+- `src/bluesky.rs` — Authentication and posting via atrium-api
+- `src/scheduler.rs` — UTC midnight sleep loop with graceful shutdown
+- `src/moon/constants.rs` — Phase enum, emojis, hashtags, phrase banks
+- `src/moon/calc.rs` — Local moon phase calculation (Meeus algorithm)
+- `src/moon/api.rs` — Multi-source moon phase fetching (Skytime → Farmsense → Local)
+- `src/moon/messages.rs` — Message generation (Ollama → template fallback)
 
 ## Licence
 
