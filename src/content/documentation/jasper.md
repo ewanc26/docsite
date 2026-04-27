@@ -1,24 +1,28 @@
 ---
 title: Jasper
-description: Convert Instagram data exports into posts on Grain.social while preserving original timestamps.
+description: Convert Instagram data exports into posts, stories, and videos on Grain or Spark while preserving original timestamps.
 date: 2026-04-16
-tags: [jasper, atproto, instagram, grain, tools]
+tags: [jasper, atproto, instagram, grain, spark, tools]
 draft: false
 atUri: 'at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mjizjbv6qk2t'
 ---
 
-Jasper imports your Instagram photos to [Grain.social](https://grain.social) while preserving original timestamps. Your memories appear with their original dates, not the import date.
+Jasper imports your Instagram photos to [Grain](https://grain.social) or [Spark](https://sprk.so) while preserving original timestamps. Your memories appear with their original dates, not the import date.
 
 The name follows ATProto import tools using mineral names — a nod to the pattern established by Malachite. Jasper is a red-orange quartz, fitting for something that preserves photographic memories.
 
 ## What it does
 
 - **Preserves timestamps** — Photos appear with their original Instagram dates
+- **Multiple targets** — Import to Grain or Spark
+- **Stories and videos** — Instagram stories and videos import to Spark (Grain doesn't support them)
 - **Handles all export formats** — Works with 2022, 2023, 2024, and 2025 Instagram exports
-- **Gallery-based** — Photos are organised into Grain galleries you choose or create
-- **Skips duplicates** — Already-imported photos are detected and skipped
+- **Gallery-based (Grain)** — Photos are organised into Grain galleries you choose or create
+- **Multi-image posts (Spark)** — Carousel posts import as a single Spark post with up to 12 images
+- **Skips duplicates** — Already-imported posts are detected and skipped
 - **Dry run mode** — Preview what would be imported before committing
 - **OAuth authentication** — Secure login via your existing AT Protocol identity
+- **Web interface** — Import from your browser at [jasper.croft.click](https://jasper.croft.click)
 
 ## Installation
 
@@ -40,13 +44,16 @@ Run without arguments for guided prompts:
 jasper
 ```
 
-Jasper will prompt you to select or create a gallery before importing.
+Jasper will prompt you to select a target platform (Grain or Spark) and, for Grain, select or create a gallery before importing.
 
 ### Command Line
 
 ```bash
-# Import from ZIP
+# Import from ZIP to Grain (default)
 jasper -i instagram-export.zip
+
+# Import from ZIP to Spark
+jasper -i instagram-export.zip --target spark
 
 # Import from extracted directory
 jasper -i instagram-export/
@@ -56,6 +63,9 @@ jasper -i instagram-export.zip --dry-run
 
 # Limit to first 50 posts
 jasper -i instagram-export.zip --limit 50
+
+# Override alt text for all photos
+jasper -i instagram-export.zip --alt "Instagram photo"
 
 # Skip confirmation prompts
 jasper -i instagram-export.zip -y
@@ -91,7 +101,7 @@ Generate an app password at [bsky.app/settings/app-passwords](https://bsky.app/s
 
 1. Open Instagram (app or web browser)
 2. Go to your profile
-3. Tap the menu (☰) → Settings → Accounts Center
+3. Tap the menu (☰) → Settings → Accounts Centre
 4. Select "Your information and permissions"
 5. Choose "Export your information"
 6. Select "Export to device"
@@ -102,47 +112,85 @@ Generate an app password at [bsky.app/settings/app-passwords](https://bsky.app/s
 11. Wait for the email notification (can take hours to days)
 12. Download the ZIP file when ready
 
-Jasper will locate `posts_1.json` automatically, handling all export format variations.
+Jasper will locate `posts_1.json` and `stories_1.json` automatically, handling all export format variations.
 
-## Grain Data Model
+## Target Platforms
+
+Jasper supports two AT Protocol platforms for importing. Each has different capabilities:
+
+| Feature           | Grain                     | Spark                |
+| ----------------- | ------------------------- | -------------------- |
+| Photos            | ✅                        | ✅                   |
+| Videos            | ❌                        | ✅                   |
+| Stories           | ❌                        | ✅                   |
+| Galleries         | ✅                        | ❌                   |
+| Multi-image posts | ❌ (one photo per record) | ✅ (up to 12 images) |
+| Alt text          | Optional                  | Required             |
+| Max image size    | 1 MB                      | 5 MB                 |
+
+Choose the target that fits your content. Use `--target grain` or `--target spark` (default: grain).
+
+## Data Model
+
+### Grain
 
 Jasper creates three types of records:
 
 1. **`social.grain.photo`** — The image blob with aspect ratio and timestamp
-2. **`social.grain.gallery`** — A container you create or select for organizing photos
+2. **`social.grain.gallery`** — A container you create or select for organising photos
 3. **`social.grain.gallery.item`** — Links each photo to your chosen gallery with position
 
-This matches Grain's expected structure — photos must be linked to a gallery to display properly on grain.social.
+Photos must be linked to a gallery to display properly on grain.social. Each record holds one photo.
+
+### Spark
+
+Jasper creates two types of records:
+
+1. **`so.sprk.feed.post`** — A post with a media union of images or video
+2. **`so.sprk.story.post`** — A story with a media union of images or video
+
+Spark uses a media union — each post has either `so.sprk.media.images` (up to 12 images) or `so.sprk.media.video`. Carousel Instagram posts become a single Spark post with multiple images. Videos are uploaded as blobs and attached with `so.sprk.media.video`.
 
 ## What Gets Imported
 
-Imported:
+Imported to **Grain**:
 
 - ✅ Photos (JPEG, PNG, WebP, GIF)
 - ✅ Original timestamps
 - ✅ Captions (as alt text)
-- ✅ Carousel posts (multiple photos)
+- ✅ Carousel posts (each photo as a separate record)
+
+Imported to **Spark**:
+
+- ✅ Photos (JPEG, PNG, WebP, GIF)
+- ✅ Videos (MP4, MOV)
+- ✅ Original timestamps
+- ✅ Captions (as alt text)
+- ✅ Carousel posts (up to 12 images per post)
+- ✅ Stories (image and video)
 
 **Not** imported:
 
-- ❌ Videos (Grain doesn't support video posts yet)
-- ❌ Stories
 - ❌ Reels
+- ❌ Stories to Grain (not supported)
+- ❌ Videos to Grain (not supported)
 
 ## Options
 
-| Option               | Description                                        |
-| -------------------- | -------------------------------------------------- |
-| `-i, --input <path>` | Path to Instagram export ZIP or directory          |
-| `--dry-run`          | Preview posts without importing                    |
-| `--limit <N>`        | Import at most N posts                             |
-| `--reverse`          | Process newest posts first (default: oldest first) |
-| `-v, --verbose`      | Enable debug logging                               |
-| `-q, --quiet`        | Suppress non-essential output                      |
-| `-y, --yes`          | Skip confirmation prompts                          |
-| `--oauth-login`      | Sign in via OAuth                                  |
-| `--logout [DID]`     | Sign out (removes stored session)                  |
-| `--list-sessions`    | List stored OAuth sessions                         |
+| Option                | Description                                          |
+| --------------------- | ---------------------------------------------------- |
+| `-i, --input <path>`  | Path to Instagram export ZIP or directory            |
+| `--target <platform>` | Target platform: `grain` or `spark` (default: grain) |
+| `--dry-run`           | Preview posts without importing                      |
+| `--limit <N>`         | Import at most N posts                               |
+| `--reverse`           | Process newest posts first (default: oldest first)   |
+| `--alt <text>`        | Override alt text for all photos (default: captions) |
+| `-v, --verbose`       | Enable debug logging                                 |
+| `-q, --quiet`         | Suppress non-essential output                        |
+| `-y, --yes`           | Skip confirmation prompts                            |
+| `--oauth-login`       | Sign in via OAuth                                    |
+| `--logout [DID]`      | Sign out (removes stored session)                    |
+| `--list-sessions`     | List stored OAuth sessions                           |
 
 ## Daily Limits for Large Exports
 
@@ -171,6 +219,14 @@ jasper --clear-imports
 
 When the daily limit is reached, Jasper saves your progress and prompts you to continue the next day. Run `jasper --resume` to continue importing.
 
+## Web Interface
+
+Jasper has a browser-based interface at [jasper.croft.click](https://jasper.croft.click) — no installation required. The web app runs entirely in your browser: your Instagram export is parsed locally, and photos are uploaded directly to your PDS.
+
+The web app uses `@atproto/oauth-client-browser` for authentication. No data passes through any intermediate server.
+
+Source: [`packages/jasper-web`](https://github.com/ewanc26/pkgs/tree/main/packages/jasper-web) in the monorepo.
+
 ## Data Storage
 
 All data stays on your machine:
@@ -181,20 +237,23 @@ All data stays on your machine:
 | `~/.jasper/imports/`   | Import state for resumable sessions |
 | `~/.jasper/logs/`      | Debug log files                     |
 
-No data is sent to any server except your chosen Grain account.
+No data is sent to any server except your chosen Grain or Spark account.
 
 ## OAuth Scope
 
-Jasper requests minimal permissions:
+Jasper requests minimal permissions based on target platform:
+
+**Grain:**
 
 ```
 atproto blob:*/* repo:social.grain.photo repo:social.grain.gallery repo:social.grain.gallery.item
 ```
 
-- `blob:*/*` — Upload images as blobs
-- `repo:social.grain.photo` — Write photo records
-- `repo:social.grain.gallery` — Create galleries
-- `repo:social.grain.gallery.item` — Link photos to galleries
+**Spark:**
+
+```
+atproto blob:*/* repo:so.sprk.feed.post repo:so.sprk.story.post
+```
 
 This follows ATProto's granular permission model — no broad `transition:generic` scope.
 
@@ -216,10 +275,16 @@ Run in dev mode:
 pnpm --filter @ewanc26/jasper dev
 ```
 
+Build the web app:
+
+```bash
+pnpm --filter @ewanc26/jasper-web build
+```
+
 ## Requirements
 
 - Node.js 18+
-- A [Grain.social](https://grain.social) account (use your existing AT Protocol identity)
+- A [Grain](https://grain.social) or [Spark](https://sprk.so) account (use your existing AT Protocol identity)
 
 ## License
 
