@@ -4,6 +4,7 @@ description: Convert microblog posts from Twitter, Mastodon, Threads, and Nostr 
 date: 2026-05-01
 tags: [opal, atproto, bluesky, twitter, mastodon, threads, nostr, tools]
 draft: false
+atUri: 'at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mkt5rvjuzj2s'
 ---
 
 Opal is a tool for converting microblog exports from Twitter, Mastodon, Threads, and Nostr into AT Protocol Bluesky posts. It handles facets (links, mentions, hashtags), automatically threads long posts, and publishes to your PDS via OAuth.
