@@ -39,15 +39,19 @@
 
 <div class="shell">
 	<!-- Titlebar -->
-	<header class="area-titlebar flex items-center gap-2 px-5 py-2 text-[0.8em] bg-[var(--color-surface-0)] border-b border-[color-mix(in_srgb,var(--color-green)_15%,transparent)] text-[var(--color-green)]">
+	<header
+		class="area-titlebar flex items-center gap-2 border-b border-[color-mix(in_srgb,var(--color-green)_15%,transparent)] bg-[var(--color-surface-0)] px-5 py-2 text-[0.8em] text-[var(--color-green)]"
+	>
 		<div class="flex gap-1.5">
-			{#each [0,1,2] as _}
-				<span class="w-2.5 h-2.5 rounded-full shrink-0 bg-[color-mix(in_srgb,var(--color-green)_25%,transparent)] border border-[color-mix(in_srgb,var(--color-green)_40%,transparent)]"></span>
+			{#each [0, 1, 2] as _}
+				<span
+					class="h-2.5 w-2.5 shrink-0 rounded-full border border-[color-mix(in_srgb,var(--color-green)_40%,transparent)] bg-[color-mix(in_srgb,var(--color-green)_25%,transparent)]"
+				></span>
 			{/each}
 		</div>
 		<span class="ml-1 flex-1">ewan's projects — docs</span>
 		<button
-			class="hidden max-sm:flex items-center justify-center ml-auto bg-transparent border border-[color-mix(in_srgb,var(--color-green)_50%,transparent)] text-[var(--color-green)] px-2 py-1 rounded cursor-pointer transition-colors hover:bg-[color-mix(in_srgb,var(--color-green)_12%,transparent)]"
+			class="ml-auto hidden cursor-pointer items-center justify-center rounded border border-[color-mix(in_srgb,var(--color-green)_50%,transparent)] bg-transparent px-2 py-1 text-[var(--color-green)] transition-colors hover:bg-[color-mix(in_srgb,var(--color-green)_12%,transparent)] max-sm:flex"
 			aria-label={menuOpen ? 'close menu' : 'open menu'}
 			aria-expanded={menuOpen}
 			onclick={() => (menuOpen = !menuOpen)}
@@ -58,56 +62,118 @@
 
 	<!-- Mobile overlay -->
 	{#if menuOpen}
-		<div class="fixed inset-0 z-[199] bg-black/50" role="presentation" onclick={() => (menuOpen = false)}></div>
+		<div
+			class="fixed inset-0 z-[199] bg-black/50"
+			role="presentation"
+			onclick={() => (menuOpen = false)}
+		></div>
 	{/if}
 
 	<!-- Sidebar -->
 	<nav
-		class="area-sidebar flex flex-col gap-6 p-5 bg-[var(--color-mantle)] border-r border-[color-mix(in_srgb,var(--color-green)_12%,transparent)]"
+		class="area-sidebar flex flex-col gap-6 border-r border-[color-mix(in_srgb,var(--color-green)_12%,transparent)] bg-[var(--color-mantle)] p-5"
 		class:open={menuOpen}
 	>
 		<div>
-			<p class="text-[0.7em] font-bold uppercase tracking-[0.12em] text-[var(--color-green)] mb-2">overview</p>
-			<ul class="flex flex-col gap-1 list-none">
-				<li class="before:content-['→_'] before:text-[var(--color-green)] before:opacity-50">
-					<a href="/" class="no-underline text-[0.88em] text-[var(--color-subtext-0)] transition-colors hover:text-[var(--color-green)] aria-[current=page]:text-[var(--color-green)]" aria-current={$page.url.pathname === '/' ? 'page' : undefined}>home</a>
+			<p class="mb-2 text-[0.7em] font-bold tracking-[0.12em] text-[var(--color-green)] uppercase">
+				overview
+			</p>
+			<ul class="flex list-none flex-col gap-1">
+				<li class="before:text-[var(--color-green)] before:opacity-50 before:content-['→_']">
+					<a
+						href="/"
+						class="text-[0.88em] text-[var(--color-subtext-0)] no-underline transition-colors hover:text-[var(--color-green)] aria-[current=page]:text-[var(--color-green)]"
+						aria-current={$page.url.pathname === '/' ? 'page' : undefined}>home</a
+					>
+				</li>
+				<li class="before:text-[var(--color-green)] before:opacity-50 before:content-['→_']">
+					<a
+						href="https://devlog.croft.click"
+						target="_blank"
+						rel="noopener"
+						class="text-[0.88em] text-[var(--color-subtext-0)] no-underline transition-colors hover:text-[var(--color-green)]"
+						>devlog</a
+					>
 				</li>
 			</ul>
 		</div>
 		<div>
-			<p class="text-[0.7em] font-bold uppercase tracking-[0.12em] text-[var(--color-green)] mb-2">projects</p>
-			<ul class="flex flex-col gap-1 list-none">
-				<li class="before:content-['→_'] before:text-[var(--color-green)] before:opacity-50">
-					<a href="/projects" class="no-underline text-[0.88em] text-[var(--color-subtext-0)] transition-colors hover:text-[var(--color-green)] aria-[current=page]:text-[var(--color-green)]" aria-current={$page.url.pathname === '/projects' ? 'page' : undefined}>all projects</a>
+			<p class="mb-2 text-[0.7em] font-bold tracking-[0.12em] text-[var(--color-green)] uppercase">
+				projects
+			</p>
+			<ul class="flex list-none flex-col gap-1">
+				<li class="before:text-[var(--color-green)] before:opacity-50 before:content-['→_']">
+					<a
+						href="/projects"
+						class="text-[0.88em] text-[var(--color-subtext-0)] no-underline transition-colors hover:text-[var(--color-green)] aria-[current=page]:text-[var(--color-green)]"
+						aria-current={$page.url.pathname === '/projects' ? 'page' : undefined}>all projects</a
+					>
 				</li>
 				{#each data.posts as post}
-					<li class="before:content-['→_'] before:text-[var(--color-green)] before:opacity-50">
-						<a href="/projects/{post.slug}" class="no-underline text-[0.88em] text-[var(--color-subtext-0)] transition-colors hover:text-[var(--color-green)] aria-[current=page]:text-[var(--color-green)]" aria-current={$page.url.pathname === `/projects/${post.slug}` ? 'page' : undefined}>{post.title}</a>
+					<li class="before:text-[var(--color-green)] before:opacity-50 before:content-['→_']">
+						<a
+							href="/projects/{post.slug}"
+							class="text-[0.88em] text-[var(--color-subtext-0)] no-underline transition-colors hover:text-[var(--color-green)] aria-[current=page]:text-[var(--color-green)]"
+							aria-current={$page.url.pathname === `/projects/${post.slug}` ? 'page' : undefined}
+							>{post.title}</a
+						>
 					</li>
 				{/each}
 			</ul>
 		</div>
-		<div class="mt-auto pt-4 border-t border-[color-mix(in_srgb,var(--color-green)_12%,transparent)] flex flex-col gap-1.5">
-			<a href="https://ewancroft.uk" target="_blank" rel="noopener" class="flex items-center gap-1.5 w-full px-3 py-1.5 text-[0.82em] no-underline text-[var(--color-green)] border border-[color-mix(in_srgb,var(--color-green)_30%,transparent)] rounded bg-[color-mix(in_srgb,var(--color-green)_8%,transparent)] transition-colors hover:bg-[color-mix(in_srgb,var(--color-green)_18%,transparent)] hover:text-[var(--color-text)]"><Globe size={14} />my website</a>
-			<a href="https://ko-fi.com/ewancroft" target="_blank" rel="noopener" class="flex items-center gap-1.5 w-full px-3 py-1.5 text-[0.82em] no-underline text-[var(--color-green)] border border-[color-mix(in_srgb,var(--color-green)_30%,transparent)] rounded bg-[color-mix(in_srgb,var(--color-green)_8%,transparent)] transition-colors hover:bg-[color-mix(in_srgb,var(--color-green)_18%,transparent)] hover:text-[var(--color-text)]"><Coffee size={14} />tip me on ko-fi</a>
+		<div
+			class="mt-auto flex flex-col gap-1.5 border-t border-[color-mix(in_srgb,var(--color-green)_12%,transparent)] pt-4"
+		>
+			<a
+				href="https://ewancroft.uk"
+				target="_blank"
+				rel="noopener"
+				class="flex w-full items-center gap-1.5 rounded border border-[color-mix(in_srgb,var(--color-green)_30%,transparent)] bg-[color-mix(in_srgb,var(--color-green)_8%,transparent)] px-3 py-1.5 text-[0.82em] text-[var(--color-green)] no-underline transition-colors hover:bg-[color-mix(in_srgb,var(--color-green)_18%,transparent)] hover:text-[var(--color-text)]"
+				><Globe size={14} />my website</a
+			>
+			<a
+				href="https://ko-fi.com/ewancroft"
+				target="_blank"
+				rel="noopener"
+				class="flex w-full items-center gap-1.5 rounded border border-[color-mix(in_srgb,var(--color-green)_30%,transparent)] bg-[color-mix(in_srgb,var(--color-green)_8%,transparent)] px-3 py-1.5 text-[0.82em] text-[var(--color-green)] no-underline transition-colors hover:bg-[color-mix(in_srgb,var(--color-green)_18%,transparent)] hover:text-[var(--color-text)]"
+				><Coffee size={14} />tip me on ko-fi</a
+			>
 		</div>
 	</nav>
 
 	<!-- Main -->
 	<main class="area-main flex justify-center overflow-x-hidden">
-		<div class="w-full min-w-0 max-w-[1200px] px-[clamp(1.2rem,4vw,3rem)] py-[clamp(1.5rem,4vw,3rem)]">
+		<div
+			class="w-full max-w-[1200px] min-w-0 px-[clamp(1.2rem,4vw,3rem)] py-[clamp(1.5rem,4vw,3rem)]"
+		>
 			{@render children()}
 		</div>
 	</main>
 
 	<!-- Footer -->
-	<footer class="area-footer text-center p-4 text-[0.75em] text-[color-mix(in_srgb,var(--color-green)_35%,transparent)] border-t border-[color-mix(in_srgb,var(--color-green)_10%,transparent)]">
-		<a href="https://ewancroft.uk" target="_blank" rel="noopener" class="underline hover:text-[var(--color-green)]">ewancroft.uk</a>
+	<footer
+		class="area-footer border-t border-[color-mix(in_srgb,var(--color-green)_10%,transparent)] p-4 text-center text-[0.75em] text-[color-mix(in_srgb,var(--color-green)_35%,transparent)]"
+	>
+		<a
+			href="https://ewancroft.uk"
+			target="_blank"
+			rel="noopener"
+			class="underline hover:text-[var(--color-green)]">ewancroft.uk</a
+		>
 		·
-		<a href="https://github.com/ewanc26" target="_blank" rel="noopener" class="underline hover:text-[var(--color-green)]">github</a>
-		·
-		published via
-		<a href="https://sequoia.pub" target="_blank" rel="noopener" class="underline hover:text-[var(--color-green)]">sequoia</a>
+		<a
+			href="https://github.com/ewanc26"
+			target="_blank"
+			rel="noopener"
+			class="underline hover:text-[var(--color-green)]">github</a
+		>
+		· published via
+		<a
+			href="https://sequoia.pub"
+			target="_blank"
+			rel="noopener"
+			class="underline hover:text-[var(--color-green)]">sequoia</a
+		>
 		·
 		<span title="GDPR-compliant, cookie-free analytics">privacy-first analytics</span>
 	</footer>
