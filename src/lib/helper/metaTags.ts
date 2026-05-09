@@ -1,12 +1,14 @@
-import {
-	PUBLIC_SITE_TITLE,
-	PUBLIC_SITE_DESCRIPTION,
-	PUBLIC_SITE_URL
-} from '$env/static/public';
-import type { SiteMetadata } from '@ewanc26/ui';
+import { PUBLIC_SITE_TITLE, PUBLIC_SITE_DESCRIPTION, PUBLIC_SITE_URL } from '$env/static/public';
 
-export { createSiteMeta, generateMetaTags } from '@ewanc26/ui';
-export type { SiteMetadata };
+export interface SiteMetadata {
+	title: string;
+	description: string;
+	keywords?: string;
+	url: string;
+	image: string;
+	imageWidth?: number;
+	imageHeight?: number;
+}
 
 /**
  * Default metadata for the docsite.
