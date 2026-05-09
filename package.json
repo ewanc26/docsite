@@ -14,7 +14,6 @@
 		"format": "prettier --write ."
 	},
 	"dependencies": {
-		"@ewanc26/ui": "^0.3.8",
 		"@lucide/svelte": "^0.575.0",
 		"gray-matter": "^4.0.3",
 		"hls.js": "^1.6.15",
