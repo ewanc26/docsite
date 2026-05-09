@@ -1,119 +1,138 @@
 @import 'tailwindcss';
 @plugin '@tailwindcss/typography';
 
+@import './css/fonts.css';
+
 /* ─── design tokens ──────────────────────────────────────────────────────── */
 :root {
-  --font-mono: 'JetBrains Mono', monospace;
+	--font-mono: 'JetBrains Mono', monospace;
 
-  --color-crust:     #0d1210;
-  --color-mantle:    #141c19;
-  --color-base:      #1a2420;
-  --color-surface-0: #243028;
-  --color-surface-1: #2e3d34;
-  --color-overlay-0: #4d6b58;
-  --color-text:      #cdd6f4;
-  --color-subtext-0: #93b09a;
-  --color-green:     #a6e3a1;
-  --color-red:       #f38ba8;
-  --color-yellow:    #f9e2af;
+	--color-crust: #0d1210;
+	--color-mantle: #141c19;
+	--color-base: #1a2420;
+	--color-surface-0: #243028;
+	--color-surface-1: #2e3d34;
+	--color-overlay-0: #4d6b58;
+	--color-text: #cdd6f4;
+	--color-subtext-0: #93b09a;
+	--color-green: #a6e3a1;
+	--color-red: #f38ba8;
+	--color-yellow: #f9e2af;
 }
 
 @layer base {
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+	*,
+	*::before,
+	*::after {
+		box-sizing: border-box;
+		margin: 0;
+		padding: 0;
+	}
 
-  html {
-    overflow-x: hidden;
-    font-family: var(--font-mono);
-    font-size: clamp(13px, 3.5vw, 15px);
-    line-height: 1.6;
-    background-color: var(--color-crust);
-    color: var(--color-text);
-  }
+	html {
+		overflow-x: hidden;
+		font-family: var(--font-mono);
+		font-size: clamp(13px, 3.5vw, 15px);
+		line-height: 1.6;
+		background-color: var(--color-crust);
+		color: var(--color-text);
+	}
 
-  body {
-    overflow-x: hidden;
-    min-height: 100dvh;
-  }
+	body {
+		overflow-x: hidden;
+		min-height: 100dvh;
+	}
 }
 
 /* ─── shell grid (grid-template-areas can't be done with Tailwind utilities) */
 .shell {
-  display: grid;
-  grid-template-columns: 220px minmax(0, 1fr);
-  grid-template-rows: auto 1fr auto;
-  grid-template-areas:
-    "titlebar titlebar"
-    "sidebar  main"
-    "footer   footer";
-  min-height: 100dvh;
+	display: grid;
+	grid-template-columns: 220px minmax(0, 1fr);
+	grid-template-rows: auto 1fr auto;
+	grid-template-areas:
+		'titlebar titlebar'
+		'sidebar  main'
+		'footer   footer';
+	min-height: 100dvh;
 }
 
 @media (max-width: 640px) {
-  .shell {
-    grid-template-columns: minmax(0, 1fr);
-    grid-template-areas:
-      "titlebar"
-      "main"
-      "footer";
-  }
+	.shell {
+		grid-template-columns: minmax(0, 1fr);
+		grid-template-areas:
+			'titlebar'
+			'main'
+			'footer';
+	}
 }
 
 /* ─── grid area assignments ───────────────────────────────────────────────── */
-.area-titlebar { grid-area: titlebar; }
-.area-sidebar  { grid-area: sidebar; }
-.area-main     { grid-area: main; min-width: 0; }
-.area-footer   { grid-area: footer; }
+.area-titlebar {
+	grid-area: titlebar;
+}
+.area-sidebar {
+	grid-area: sidebar;
+}
+.area-main {
+	grid-area: main;
+	min-width: 0;
+}
+.area-footer {
+	grid-area: footer;
+}
 
 /* ─── sidebar mobile slide drawer (requires JS class toggle) ─────────────── */
 @media (max-width: 640px) {
-  .area-sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 80vw;
-    max-width: 300px;
-    height: 100dvh;
-    z-index: 200;
-    transform: translateX(-100%);
-    transition: transform 0.25s ease;
-    overflow-y: auto;
-    padding-top: 3.5rem;
-  }
+	.area-sidebar {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 80vw;
+		max-width: 300px;
+		height: 100dvh;
+		z-index: 200;
+		transform: translateX(-100%);
+		transition: transform 0.25s ease;
+		overflow-y: auto;
+		padding-top: 3.5rem;
+	}
 
-  .area-sidebar.open {
-    transform: translateX(0);
-  }
+	.area-sidebar.open {
+		transform: translateX(0);
+	}
 }
 
 /* ─── prose theming (CSS custom properties only — can't be utilities) ────── */
 .prose {
-  --tw-prose-body:       var(--color-text);
-  --tw-prose-lead:       var(--color-subtext-0);
-  --tw-prose-headings:   var(--color-green);
-  --tw-prose-links:      var(--color-green);
-  --tw-prose-code:       var(--color-green);
-  --tw-prose-pre-bg:     var(--color-surface-0);
-  --tw-prose-hr:         color-mix(in srgb, var(--color-green) 15%, transparent);
-  --tw-prose-quotes:     var(--color-subtext-0);
-  --tw-prose-bold:       var(--color-text);
-  --tw-prose-counters:   var(--color-overlay-0);
-  --tw-prose-bullets:    var(--color-overlay-0);
-  --tw-prose-th-borders: color-mix(in srgb, var(--color-green) 20%, transparent);
-  --tw-prose-td-borders: color-mix(in srgb, var(--color-green) 10%, transparent);
-  font-family: var(--font-mono);
-  max-width: none !important;
-  overflow-wrap: break-word;
+	--tw-prose-body: var(--color-text);
+	--tw-prose-lead: var(--color-subtext-0);
+	--tw-prose-headings: var(--color-green);
+	--tw-prose-links: var(--color-green);
+	--tw-prose-code: var(--color-green);
+	--tw-prose-pre-bg: var(--color-surface-0);
+	--tw-prose-hr: color-mix(in srgb, var(--color-green) 15%, transparent);
+	--tw-prose-quotes: var(--color-subtext-0);
+	--tw-prose-bold: var(--color-text);
+	--tw-prose-counters: var(--color-overlay-0);
+	--tw-prose-bullets: var(--color-overlay-0);
+	--tw-prose-th-borders: color-mix(in srgb, var(--color-green) 20%, transparent);
+	--tw-prose-td-borders: color-mix(in srgb, var(--color-green) 10%, transparent);
+	font-family: var(--font-mono);
+	max-width: none !important;
+	overflow-wrap: break-word;
 }
 
 .prose :where(table) {
-  display: block;
-  overflow-x: auto;
-  max-width: 100%;
+	display: block;
+	overflow-x: auto;
+	max-width: 100%;
 }
 
 .prose pre {
-  max-width: 100%;
-  overflow-x: auto;
+	max-width: 100%;
+	overflow-x: auto;
 }
 
-.prose ul li::marker { content: '›  '; }
+.prose ul li::marker {
+	content: '›  ';
+}

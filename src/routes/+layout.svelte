@@ -4,7 +4,7 @@
 	import { Menu, X, Coffee, Globe } from '@lucide/svelte';
 	import type { LayoutData } from './$types';
 	import { MetaTags } from '$lib/components/seo';
-	import { defaultSiteMeta, createSiteMeta } from '$lib/helper/metaTags';
+	import { defaultSiteMeta } from '$lib/helper/metaTags';
 
 	let { children, data }: { children: any; data: LayoutData } = $props();
 	let menuOpen = $state(false);
@@ -26,14 +26,6 @@
 
 	const siteMeta = defaultSiteMeta;
 </script>
-
-<svelte:head>
-	<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="" />
-	<link
-		href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&display=swap"
-		rel="stylesheet"
-	/>
-</svelte:head>
 
 <MetaTags meta={siteMeta} {siteMeta} {fediverseCreator} />
 

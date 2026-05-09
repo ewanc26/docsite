@@ -8,9 +8,6 @@ importers:
 
   .:
     dependencies:
-      '@ewanc26/ui':
-        specifier: ^0.3.8
-        version: 0.3.8(@atproto/api@0.19.6)(@sveltejs/kit@2.57.0(@sveltejs/vite-plugin-svelte@6.2.4(svelte@5.55.2)(vite@7.3.2(jiti@2.6.1)(lightningcss@1.32.0)(tsx@4.21.0)))(svelte@5.55.2)(typescript@5.9.3)(vite@7.3.2(jiti@2.6.1)(lightningcss@1.32.0)(tsx@4.21.0)))(svelte@5.55.2)(tailwindcss@4.2.2)
       '@lucide/svelte':
         specifier: ^0.575.0
         version: 0.575.0(svelte@5.55.2)
@@ -19,7 +16,7 @@ importers:
         version: 4.0.3
       hls.js:
         specifier: ^1.6.15
-        version: 1.6.15
+        version: 1.6.16
       rehype-slug:
         specifier: ^6.0.0
         version: 6.0.0
@@ -121,9 +118,6 @@ packages:
 
   '@atproto/api@0.18.21':
     resolution: {integrity: sha512-s35MIJerGT/pKe2xJtKKswqlIr/ola2r2iURBKBL0Mk1OKe6jP4YvTMh1N2d2PEANFzNNTbKoDaLfJPo2Uvc/w==}
-
-  '@atproto/api@0.19.6':
-    resolution: {integrity: sha512-8L5dZvGaclB52b8msjtgDNx3uLWUY4PELA7KbFyAWBFVasCceE1txdrscCqDCLN+Fff9+Sm07OIjnjHYJXdETA==}
 
   '@atproto/common-web@0.4.19':
     resolution: {integrity: sha512-3BTi58p5WpT+9/zb6UZrdsXcfPo5P45UJm0E4iwHLILr+jc37CuBj9JReDSZ4U0i9RTrI3ZkfySyZ9bd+LnMsw==}
@@ -674,24 +668,6 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@ewanc26/atproto@0.2.8':
-    resolution: {integrity: sha512-x1E5Ol1pb0OXTTIQN0meV82nJpxofwbTsEDnc/2FiLIff2s6NGSzCq+hUIE7gnNY79tcb9dJiwNXVQZ7a8YkgA==}
-    peerDependencies:
-      '@atproto/api': '>=0.13.0'
-
-  '@ewanc26/noise-avatar@0.2.3':
-    resolution: {integrity: sha512-NmXm5llGw7cPrGf2HpdUrKS9pVzDV3I5gyBolYPkn2Xj7cfVv8WxW3PltYz9ohyD3g/ZFZImWVk6qdWqW1DMzA==}
-
-  '@ewanc26/noise@0.1.1':
-    resolution: {integrity: sha512-XeAc0vFrcDHQA7K8xoVVCTYhB2opeBnvGj4s+6SqDS/E3IAP6V32mGf+H2U0JcQHsH4hvpVehYEFt0i1Blnrfg==}
-
-  '@ewanc26/ui@0.3.8':
-    resolution: {integrity: sha512-ASlIEBJ2P6Ddd6E+wWVGAUDrxBLv8dzUG/5V2DPHg8h2iGDySKi8KHMyGM8Z4zecRz0W2ZFUyMWnTxQSl52ckQ==}
-    peerDependencies:
-      '@sveltejs/kit': '>=2.8.3'
-      svelte: '>=5.0.0'
-      tailwindcss: '>=4.0.0'
-
   '@fastify/busboy@2.1.1':
     resolution: {integrity: sha512-vBZP4NlzfOlerQTnba4aqZoMhE/a9HY7HRqoOPaETQcSQuWEIyZMHGfVu6w9wGtGK5fED5qRs2DteVCjOH60sA==}
     engines: {node: '>=14'}
@@ -726,11 +702,6 @@ packages:
 
   '@lucide/svelte@0.575.0':
     resolution: {integrity: sha512-FEFp/0McZwsjBqh1Dn8H+UBm1yHFQYk+utuVMFDw57155+wz2XMoc1pw027ylCPzs+bi14UEXYKbekFhuJKtnw==}
-    peerDependencies:
-      svelte: ^5
-
-  '@lucide/svelte@0.577.0':
-    resolution: {integrity: sha512-0P6mkySd2MapIEgq08tADPmcN4DHndC/02PWwaLkOerXlx5Sv9aT4BxyXLIY+eccr0g/nEyCYiJesqS61YdBZQ==}
     peerDependencies:
       svelte: ^5
 
@@ -1929,8 +1900,8 @@ packages:
   hast-util-whitespace@3.0.0:
     resolution: {integrity: sha512-88JUN06ipLwsnv+dVn+OIYOvAuvBMy/Qoi6O7mQHxdPXpjy+Cd6xRkWwux7DKO+4sYILtLBRIKgsdpS2gQc7qw==}
 
-  hls.js@1.6.15:
-    resolution: {integrity: sha512-E3a5VwgXimGHwpRGV+WxRTKeSp2DW5DI5MWv34ulL3t5UNmyJWCQ1KmLEHbYzcfThfXG8amBL+fCYPneGHC4VA==}
+  hls.js@1.6.16:
+    resolution: {integrity: sha512-VSIRpLfRwlAAdGL4wiTucx2ScRipo0ed1FBatWkyt832jC4CReKstga6yIhYVwGu9LOBjuX9wzmRMeQdBJtzEA==}
 
   html-void-elements@3.0.0:
     resolution: {integrity: sha512-bEqo66MRXsUGxWHV5IP0PUiAWwoEjba4VCzg0LjFJBpchPaTfyfCKTG6bc5F8ucKec3q5y6qOdGyYTSBEvhCrg==}
@@ -3132,18 +3103,6 @@ snapshots:
       tlds: 1.261.0
       zod: 3.25.76
 
-  '@atproto/api@0.19.6':
-    dependencies:
-      '@atproto/common-web': 0.4.19
-      '@atproto/lexicon': 0.6.2
-      '@atproto/syntax': 0.5.3
-      '@atproto/xrpc': 0.7.7
-      await-lock: 2.2.2
-      multiformats: 9.9.0
-      tlds: 1.261.0
-      zod: 3.25.76
-    optional: true
-
   '@atproto/common-web@0.4.19':
     dependencies:
       '@atproto/lex-data': 0.0.14
@@ -3514,29 +3473,6 @@ snapshots:
   '@esbuild/win32-x64@0.27.7':
     optional: true
 
-  '@ewanc26/atproto@0.2.8(@atproto/api@0.19.6)':
-    dependencies:
-      '@atproto/api': 0.19.6
-    optional: true
-
-  '@ewanc26/noise-avatar@0.2.3':
-    dependencies:
-      '@ewanc26/noise': 0.1.1
-
-  '@ewanc26/noise@0.1.1': {}
-
-  '@ewanc26/ui@0.3.8(@atproto/api@0.19.6)(@sveltejs/kit@2.57.0(@sveltejs/vite-plugin-svelte@6.2.4(svelte@5.55.2)(vite@7.3.2(jiti@2.6.1)(lightningcss@1.32.0)(tsx@4.21.0)))(svelte@5.55.2)(typescript@5.9.3)(vite@7.3.2(jiti@2.6.1)(lightningcss@1.32.0)(tsx@4.21.0)))(svelte@5.55.2)(tailwindcss@4.2.2)':
-    dependencies:
-      '@ewanc26/noise-avatar': 0.2.3
-      '@lucide/svelte': 0.577.0(svelte@5.55.2)
-      '@sveltejs/kit': 2.57.0(@sveltejs/vite-plugin-svelte@6.2.4(svelte@5.55.2)(vite@7.3.2(jiti@2.6.1)(lightningcss@1.32.0)(tsx@4.21.0)))(svelte@5.55.2)(typescript@5.9.3)(vite@7.3.2(jiti@2.6.1)(lightningcss@1.32.0)(tsx@4.21.0))
-      svelte: 5.55.2
-      tailwindcss: 4.2.2
-    optionalDependencies:
-      '@ewanc26/atproto': 0.2.8(@atproto/api@0.19.6)
-    transitivePeerDependencies:
-      - '@atproto/api'
-
   '@fastify/busboy@2.1.1': {}
 
   '@isaacs/balanced-match@4.0.1': {}
@@ -3569,10 +3505,6 @@ snapshots:
       '@jridgewell/sourcemap-codec': 1.5.5
 
   '@lucide/svelte@0.575.0(svelte@5.55.2)':
-    dependencies:
-      svelte: 5.55.2
-
-  '@lucide/svelte@0.577.0(svelte@5.55.2)':
     dependencies:
       svelte: 5.55.2
 
@@ -4857,7 +4789,7 @@ snapshots:
     dependencies:
       '@types/hast': 3.0.4
 
-  hls.js@1.6.15: {}
+  hls.js@1.6.16: {}
 
   html-void-elements@3.0.0: {}
 
