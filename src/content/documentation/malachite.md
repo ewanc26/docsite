@@ -2,14 +2,14 @@
 title: Malachite
 description: Import your Last.fm and Spotify listening history to the AT Protocol network using the fm.teal.alpha.feed.play lexicon.
 date: 2026-03-15
-tags: [malachite, atproto, lastfm, spotify, tools]
+tags: [malachite, atproto, lastfm, spotify, apple-music, youtube-music, tools]
 draft: false
 atUri: 'at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfyqfjxlo625'
 ---
 
 > **Note:** The standalone [malachite](https://github.com/ewanc26/malachite) repository has been archived. Development continues in the [`@ewanc26/pkgs`](https://github.com/ewanc26/pkgs) monorepo — CLI at [`packages/malachite/`](https://github.com/ewanc26/pkgs/tree/main/packages/malachite), web frontend at [`packages/malachite-web/`](https://github.com/ewanc26/pkgs/tree/main/packages/malachite-web).
 
-Malachite is a tool for importing your Last.fm and Spotify listening history to the AT Protocol network as `fm.teal.alpha.feed.play` records. It's designed to be safe, resumable, and smart about rate limits — so you don't accidentally hammer your PDS.
+Malachite is a tool for importing your Last.fm, Spotify, Apple Music, and YouTube Music listening history to the AT Protocol network as `fm.teal.alpha.feed.play` records. It's designed to be safe, resumable, and smart about rate limits — so you don't accidentally hammer your PDS.
 
 The name is a deliberate nod to the `teal` lexicon it publishes to: malachite is a greenish-blue copper mineral associated with preservation and transformation, sitting squarely in that teal/green colour range.
 
@@ -111,11 +111,17 @@ All commands run from the `pkgs` root. These assume a stored OAuth session; pass
 # Import from Last.fm CSV
 pnpm --filter @ewanc26/malachite start -- -i lastfm.csv -y
 
-# Import from Spotify JSON export
+# Import Spotify export
 pnpm --filter @ewanc26/malachite start -- -i spotify-export/ -m spotify -y
 
-# Merge both sources
-pnpm --filter @ewanc26/malachite start -- -i lastfm.csv --spotify-input spotify-export/ -m combined -y
+# Import Apple Music export
+pnpm --filter @ewanc26/malachite start -- -i Apple_Music_Play_Activity.csv -m apple -y
+
+# Import YouTube Music export
+pnpm --filter @ewanc26/malachite start -- -i watch-history.json -m youtube -y
+
+# Combined mode: Merge Last.fm, Spotify, Apple Music & YouTube Music
+pnpm --filter @ewanc26/malachite start -- -i lastfm.csv --spotify-input spotify-export/ --apple-input Apple_Music_Play_Activity.csv --youtube-input watch-history.json -m combined -y
 
 # Sync (skip already-imported records)
 pnpm --filter @ewanc26/malachite start -- -i lastfm.csv -m sync -y
@@ -142,7 +148,9 @@ pnpm --filter @ewanc26/malachite start -- --logout -h did:plc:xxxx
 | ----------- | --------------------- | ---------------------------------------------- |
 | Last.fm     | `-m lastfm` (default) | Import a Last.fm CSV export                    |
 | Spotify     | `-m spotify`          | Import Spotify Extended Streaming History JSON |
-| Combined    | `-m combined`         | Merge both sources with deduplication          |
+| Apple Music | `-m apple`            | Import Apple Music Play Activity CSV           |
+| YouTube     | `-m youtube`          | Import YouTube Music history JSON              |
+| Combined    | `-m combined`         | Merge all sources with deduplication           |
 | Sync        | `-m sync`             | Skip records that already exist on Teal        |
 | Deduplicate | `-m deduplicate`      | Remove duplicate records already on Teal       |
 
@@ -163,10 +171,12 @@ pnpm --filter @ewanc26/malachite start -- --logout -h did:plc:xxxx
 
 ### Input
 
-| Option                   | Short | Description                                        |
-| ------------------------ | ----- | -------------------------------------------------- |
-| `--input <path>`         | `-i`  | Path to Last.fm CSV or Spotify JSON file/directory |
-| `--spotify-input <path>` |       | Spotify export path (combined mode)                |
+| Option                   | Short | Description                               |
+| ------------------------ | ----- | ----------------------------------------- |
+| `--input <path>`         | `-i`  | Path to primary input file/directory      |
+| `--spotify-input <path>` |       | Spotify export path (combined mode)       |
+| `--apple-input <path>`   |       | Apple Music export path (combined mode)   |
+| `--youtube-input <path>` |       | YouTube Music export path (combined mode) |
 
 ### Import
 
@@ -197,9 +207,13 @@ pnpm --filter @ewanc26/malachite start -- --logout -h did:plc:xxxx
 
 ## Getting Your Data
 
-**Last.fm:** Export your scrobbles from [lastfm.ghan.nl/export](https://lastfm.ghan.nl/export/) as a CSV.
+**Last.fm:** Use [Last.fm Data Export](https://lastfm.ghan.nl/export/) or similar tools to get your full history as a `.csv`. The importer expects the standard column format (`artist,album,track,date`).
 
 **Spotify:** Go to [Spotify Privacy Settings](https://www.spotify.com/account/privacy/), request your "Extended streaming history" (takes up to 30 days), then use either a single `Streaming_History_Audio_*.json` file or the whole extracted directory. Malachite automatically filters out podcasts and non-music content.
+
+**Apple Music:** Go to [Apple Data & Privacy](https://privacy.apple.com/), request "Apple Media Services information", extract the zip, and use the `Apple Music Play Activity.csv` file.
+
+**YouTube Music:** Go to [Google Takeout](https://takeout.google.com/), select "YouTube and YouTube Music", ensure the format is set to JSON, extract the zip, and use the `watch-history.json` file.
 
 ## Duplicate Prevention
 

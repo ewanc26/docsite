@@ -1,10 +1,10 @@
 ---
-title: "@ewanc26/pkgs"
+title: '@ewanc26/pkgs'
 description: Ewan's personal package monorepo — language-agnostic workspace with TypeScript, Rust, and Python packages.
 date: 2026-03-24
 tags: [monorepo, pnpm, typescript, rust, python, atproto, library, tools]
 draft: false
-atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mghs3tnb6x25"
+atUri: 'at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mghs3tnb6x25'
 ---
 
 [`@ewanc26/pkgs`](https://github.com/ewanc26/pkgs) is a language-agnostic monorepo containing all of Ewan's publishable packages across multiple programming languages. It was created by extracting the `packages/` subdirectories from their original host repositories ([malachite](https://github.com/ewanc26/malachite) and [website](https://github.com/ewanc26/website)) and migrating the entire [svelte-standard-site](https://github.com/ewanc26/svelte-standard-site) repository — all with full git history preserved via `git subtree`. The standalone malachite repository has since been fully consolidated here too, with the CLI and web frontend split into separate packages.
@@ -15,34 +15,34 @@ The monorepo has since expanded to include Rust CLI tools and Python utilities, 
 
 ### TypeScript
 
-| Package | Version | Description |
-|---------|---------|-------------|
-| [`@ewanc26/tid`](/projects/tid) | 1.x | Zero-dependency AT Protocol TID generation |
-| [`@ewanc26/atproto`](/projects/atproto) | 0.x | AT Protocol service layer (profiles, posts, Standard.site, music status) |
-| [`@ewanc26/ui`](/projects/ui) | 0.x | Svelte 5 UI component library (cards, layout, stores, themes) |
-| [`@ewanc26/utils`](/projects/utils) | 0.x | Shared utilities (dates, numbers, URLs, validators, RSS) |
-| [`@ewanc26/noise`](/projects/noise) | 0.x | Generic deterministic value-noise generation — arbitrary dimensions, multi-octave FBM, multiple colour modes |
-| [`@ewanc26/noise-avatar`](/projects/noise-avatar) | 0.x | Deterministic value-noise avatar generation from a string seed — thin wrapper around `@ewanc26/noise` |
-| [`@ewanc26/bismuth`](/projects/bismuth) | 0.x | Convert `pub.leaflet` RTF-block documents (`site.standard.document` records) to Markdown — CLI and library |
-| [`@ewanc26/svelte-standard-site`](/projects/svelte-standard-site) | 0.x | SvelteKit library for `site.standard.*` AT Protocol records — design system, federated comments, publishing tools, and content verification |
-| [`@ewanc26/pds-landing`](/projects/pds-landing) | 2.x | Composable Svelte components for an ATProto PDS landing page — terminal-aesthetic UI with live status fetching |
-| [`@ewanc26/supporters`](/projects/supporters) | 0.x | SvelteKit component library for displaying Ko-fi supporters, backed by an ATProto PDS |
-| [`@ewanc26/wafrn-theme`](/projects/wafrn-theme) | 1.x | WAFRN CSS theme using the pds-landing Catppuccin terminal aesthetic — dark forest-green palette, JetBrains Mono |
-| [`@ewanc26/tangled-sync`](/projects/tangled-sync) | 1.x | CLI tool for syncing GitHub repos to Tangled with ATProto records |
-| [`@ewanc26/malachite`](/projects/malachite) | 0.x | CLI tool for importing Last.fm & Spotify history to AT Protocol as `fm.teal.alpha.feed.play` records |
-| [`malachite-web`](/projects/malachite) | 0.x | SvelteKit web frontend for Malachite — browser-based import with ATProto OAuth (private, not published to npm) |
+| Package                                                           | Version | Description                                                                                                                                 |
+| ----------------------------------------------------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`@ewanc26/tid`](/projects/tid)                                   | 1.x     | Zero-dependency AT Protocol TID generation                                                                                                  |
+| [`@ewanc26/atproto`](/projects/atproto)                           | 0.x     | AT Protocol service layer (profiles, posts, Standard.site, music status)                                                                    |
+| [`@ewanc26/ui`](/projects/ui)                                     | 0.x     | Svelte 5 UI component library (cards, layout, stores, themes)                                                                               |
+| [`@ewanc26/utils`](/projects/utils)                               | 0.x     | Shared utilities (dates, numbers, URLs, validators, RSS)                                                                                    |
+| [`@ewanc26/noise`](/projects/noise)                               | 0.x     | Generic deterministic value-noise generation — arbitrary dimensions, multi-octave FBM, multiple colour modes                                |
+| [`@ewanc26/noise-avatar`](/projects/noise-avatar)                 | 0.x     | Deterministic value-noise avatar generation from a string seed — thin wrapper around `@ewanc26/noise`                                       |
+| [`@ewanc26/bismuth`](/projects/bismuth)                           | 0.x     | Convert `pub.leaflet` RTF-block documents (`site.standard.document` records) to Markdown — CLI and library                                  |
+| [`@ewanc26/svelte-standard-site`](/projects/svelte-standard-site) | 0.x     | SvelteKit library for `site.standard.*` AT Protocol records — design system, federated comments, publishing tools, and content verification |
+| [`@ewanc26/pds-landing`](/projects/pds-landing)                   | 2.x     | Composable Svelte components for an ATProto PDS landing page — terminal-aesthetic UI with live status fetching                              |
+| [`@ewanc26/supporters`](/projects/supporters)                     | 0.x     | SvelteKit component library for displaying Ko-fi supporters, backed by an ATProto PDS                                                       |
+| [`@ewanc26/wafrn-theme`](/projects/wafrn-theme)                   | 1.x     | WAFRN CSS theme using the pds-landing Catppuccin terminal aesthetic — dark forest-green palette, JetBrains Mono                             |
+| [`@ewanc26/tangled-sync`](/projects/tangled-sync)                 | 1.x     | CLI tool for syncing GitHub repos to Tangled with ATProto records                                                                           |
+| [`@ewanc26/malachite`](/projects/malachite)                       | 0.x     | CLI tool for importing Last.fm, Spotify, Apple Music & YouTube Music history to AT Protocol as `fm.teal.alpha.feed.play` records            |
+| [`malachite-web`](/projects/malachite)                            | 0.x     | SvelteKit web frontend for Malachite — browser-based import with ATProto OAuth (private, not published to npm)                              |
 
 ### Rust
 
-| Package | Version | Description |
-|---------|---------|-------------|
-| [`nix-config-tools`](/projects/nix-config-tools) | 0.x | Management tools for nixos/nix-darwin configuration (flake-bump, health-check, gen-diff, server-config) |
+| Package                                          | Version | Description                                                                                             |
+| ------------------------------------------------ | ------- | ------------------------------------------------------------------------------------------------------- |
+| [`nix-config-tools`](/projects/nix-config-tools) | 0.x     | Management tools for nixos/nix-darwin configuration (flake-bump, health-check, gen-diff, server-config) |
 
 ### Python
 
-| Package | Version | Description |
-|---------|---------|-------------|
-| [`llm-analyser`](/projects/llm-analyser) | 0.x | Document analysis tool using Ollama LLM |
+| Package                                  | Version | Description                             |
+| ---------------------------------------- | ------- | --------------------------------------- |
+| [`llm-analyser`](/projects/llm-analyser) | 0.x     | Document analysis tool using Ollama LLM |
 
 ## Why a monorepo?
 
