@@ -1,148 +1,131 @@
 ---
-title: "Sigi"
-description: "A pure symbolic stack language — all syntax is punctuation, no alphanumeric keywords."
-date: 2026-04-10
-tags: [sigi, compiler, python, c, esolang]
+title: 'Sigi'
+description: 'A pure symbolic stack language that compiles to C or can be interpreted. All syntax is punctuation, no alphanumeric keywords.'
+date: 2026-06-08
+tags: [sigi, compiler, rust, c, esolang]
 draft: false
-atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mj6alrmuoi2p"
+atUri: 'at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mj6alrmuoi2p'
 ---
 
-[Sigi](https://github.com/ewanc26/sigi) is an esoteric stack language where all syntax consists of symbols and punctuation. No alphanumeric keywords anywhere.
+[Sigi](https://github.com/ewanc26/sigi) is an esoteric stack language where all syntax consists of symbols and punctuation. No alphanumeric keywords. User-defined names are prefixed with ".".
 
 **Character set**: `!@#$%^&*()-+=[]{}|;:'",.<>/?\~` plus digits `0-9`
 
 ## Installation
 
 ```sh
-pip install -e .
+# Ensure Rust and GCC are installed
+cargo build --release
 ```
-
-This installs the `sigic` compiler.
 
 ## Usage
 
 ```sh
+# Start interactive REPL
+sigic
+
 # Compile to C
 sigic hello.si -o hello.c
 
 # Compile and run immediately
 sigic hello.si --run
 
-# Debug: show tokens
+# Run using the reference interpreter
+sigic hello.si --interpret
+
+# Debug
 sigic hello.si --emit-tokens
+sigic hello.si --emit-ast
 ```
 
 ## Symbol reference
 
-| Symbol | Name | Effect |
-|--------|------|--------|
-| `!N` | PUSH | Push number N (int or float) |
-| `@` | DUP | Duplicate top of stack |
-| `#` | SWAP | Swap top two elements |
-| `$` | DROP | Discard top of stack |
-| `+` | ADD | Pop b, pop a → push a + b |
-| `-` | SUB | Pop b, pop a → push a - b |
-| `*` | MUL | Pop b, pop a → push a * b |
-| `/` | DIV | Pop b, pop a → push a / b |
-| `%` | MOD | Pop b, pop a → push fmod(a, b) |
-| `=` | EQ | Pop b, pop a → push 1 if equal, else 0 |
-| `<` | LT | Pop b, pop a → push 1 if a < b |
-| `>` | GT | Pop b, pop a → push 1 if a > b |
-| `~` | NOT | Pop a → push 1 if zero, else 0 |
-| `|` | PRINT | Pop and print as number |
-| `^` | PRINTC | Pop and print as character |
-| `?` | INPUT | Read number from stdin |
-| `:` | STORE | Pop address, pop value → store to var |
-| `<n>` | LOAD | Push value of variable n (digits 0-99) |
-| `[ body ]` | WHILE | Loop while stack top is nonzero |
-| `{ then ; else }` | IF-ELSE | Pop condition, execute then or else |
-| `{N body }` | FUNC | Define function N (0-99) |
-| `(N)` | CALL | Call function N |
-| `"text"` | STRING | Print characters |
-| `'x` | CHAR | Push character code |
-| `\` | COMMENT | Line comment (rest of line ignored) |
+| Symbol            | Name          | Effect                                        |
+| ----------------- | ------------- | --------------------------------------------- | ----------------------- |
+| `!N`              | PUSH          | Push number N (int or float)                  |
+| `@`               | DUP           | Duplicate top of stack                        |
+| `#`               | SWAP          | Swap top two elements                         |
+| `$`               | DROP          | Discard top of stack                          |
+| `+`               | ADD           | Pop b, pop a → push a + b                     |
+| `-`               | SUB           | Pop b, pop a → push a - b                     |
+| `*`               | MUL           | Pop b, pop a → push a \* b                    |
+| `/`               | DIV           | Pop b, pop a → push a / b                     |
+| `%`               | MOD           | Pop b, pop a → push fmod(a, b)                |
+| `=`               | EQ            | Pop b, pop a → push 1 if equal, else 0        |
+| `<`               | LT            | Pop b, pop a → push 1 if a < b                |
+| `>`               | GT            | Pop b, pop a → push 1 if a > b                |
+| `~`               | NOT           | Pop a → push 1 if zero, else 0                |
+| `                 | `             | PRINT                                         | Pop and print as number |
+| `^`               | PRINTC        | Pop and print as character                    |
+| `?`               | INPUT         | Read number from stdin                        |
+| `:`               | STORE         | Pop address, pop value → store to var         |
+| `:.name`          | STOREN        | Pop value → store to named variable           |
+| `.name`           | LOADN         | Push value of named variable or call function |
+| `<n>`             | LOAD          | Push value of variable n (digits 0-99)        |
+| `[ body ]`        | WHILE         | Loop while stack top is nonzero               |
+| `{ then ; else }` | IF-ELSE       | Pop condition, execute then or else           |
+| `{N body }`       | FUNC          | Define function N (0-99)                      |
+| `{.name body }`   | FUNCN         | Define named function                         |
+| `(N)`             | CALL          | Call function N                               |
+| `(.name)`         | CALLN         | Call named function                           |
+| `"text"`          | STRING        | Print characters                              |
+| `'x`              | CHAR          | Push character code                           |
+| `\`               | COMMENT       | Line comment                                  |
+| `/* body */`      | BLOCK COMMENT | Multi-line comment                            |
+| `S`               | SIN           | Pop a → push sin(a)                           |
+| `C`               | COS           | Pop a → push cos(a)                           |
+| `T`               | TAN           | Pop a → push tan(a)                           |
+| `R`               | SQRT          | Pop a → push sqrt(a)                          |
+| `P`               | POW           | Pop exp, pop base → push pow(base, exp)       |
+| `F`               | FLOOR         | Pop a → push floor(a)                         |
+| `L`               | LOG           | Pop a → push log(a)                           |
+| `E`               | EXP           | Pop a → push exp(a)                           |
+| `M`               | ABS           | Pop a → push fabs(a)                          |
+| `N`               | ATAN2         | Pop y, pop x → push atan2(y, x)               |
+| `W`               | RAND          | Push random 0.0-1.0                           |
+| `X`               | EXIT          | Pop code → exit program                       |
+| `Z`               | TIME          | Push current time in seconds                  |
+| `_`               | AINIT         | Pop id, pop size → initialize array           |
+| `K`               | AFREE         | Pop id → free array                           |
+| `O`               | FILE_OPEN     | Pop mode, pop len, pop chars → fd             |
+| `G`               | FILE_READ     | Pop fd, pop size → push bytes, read_len       |
+| `H`               | FILE_WRITE    | Pop fd, pop size, pop data → bytes_written    |
+| `Y`               | FILE_CLOSE    | Pop fd → close                                |
+| `A`               | ALOAD         | Pop idx, pop id → push array[idx]             |
+| `a`               | ASTORE        | Pop idx, pop id, pop val → array[idx] = val   |
+| `U`               | USLEEP        | Pop microseconds → sleep                      |
 
-## Data model
+## Robustness Features
 
-- All values are 64-bit IEEE 754 doubles
-- Stack depth: 1000 by default
-- 100 variables: `vars[0]`–`vars[99]`
+- **Static Analysis**: Catches undefined function calls and redefinitions.
+- **Detailed Error Reporting**: Includes line/column context and source pointers.
+- **Dual Execution**: Supports C compilation or direct interpretation via Rust interpreter.
+- **System-Level Operations**: Supports explicit memory management and file I/O.
 
 ## Examples
 
-### Hello World
+### Named Identifiers
 
 ```
-"Hello, World!\n"
+{.greet "Hello!\n"}
+(.greet)
+
+!42 :.answer
+.answer |  \ prints 42
 ```
 
-### Arithmetic
+### File I/O
 
 ```
-!3 !4 + |     \ prints 7
-!10 !3 - |    \ prints 7
-!4 !5 * |     \ prints 20
+!116 !101 !115 !116 !46 !116 !120 !116 !8 !1 O :.my_fd
+!116 !101 !115 !116 !4 .my_fd H $
+.my_fd Y
 ```
 
-### Stack operations
+## Design
 
-```
-!5 @ + |      \ 10 (DUP then ADD)
-!1 !2 # | |   \ 2 then 1 (SWAP)
-!1 !2 !3 $ | | |  \ 2 then 1 (DROP)
-```
+Sigi is deliberately minimal. Every operation is a single character. There are no reserved words—only punctuation.
 
-### Variables
+The language is stack-based with postfix notation, making parsing trivial.
 
-```
-!42 !0 :       \ store 42 in var 0
-0 |            \ print 42
-
-!7 !1 :        \ store 7 in var 1
-1 !2 * !1 :    \ var[1] *= 2
-```
-
-### Functions
-
-```
-{0 "Hi\n"}     \ define function 0
-{1 !42 |}      \ define function 1
-
-(0)            \ calls fn 0
-(1)            \ calls fn 1
-```
-
-### Control flow
-
-```
-!1 { "yes" ; "no" }    \ prints "yes"
-!0 { "yes" ; "no" }    \ prints "no"
-```
-
-### While loops
-
-```
-!5 [ @ | !1 - ] $      \ prints 5 4 3 2 1
-```
-
-Loop semantics: peek at stack top. If zero, exit. Otherwise execute body. Body must leave updated counter on stack.
-
-### Factorial
-
-```
-!5 !4 * !3 * !2 * !1 * |    \ prints 120
-```
-
-## Project layout
-
-```
-sigi/
-  lexer.py      – tokeniser
-  parser.py     – parser → opcodes
-  codegen_c.py  – C code generator
-examples/       – sample .si programs
-```
-
-## Licence
-
-AGPL 3.0
+Inspired by Forth, Joy, and other concatenative languages.
