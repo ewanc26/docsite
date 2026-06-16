@@ -4,6 +4,7 @@ description: A modular, high-performance Rust framework for generating construct
 date: 2026-06-16
 tags: [rust, conlang, language, generator]
 draft: false
+atUri: 'at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mogr5menqi2f'
 ---
 
 [esoterica](https://github.com/ewanc26/esoterica) is a modular, high-performance Rust framework for generating constructed languages (conlangs). It allows users to create consistent languages by composing independent linguistic components: phonology, morphology, and syntax.
