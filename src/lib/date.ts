@@ -1,4 +1,8 @@
 /**
+ * Date formatting utilities for project documentation pages.
+ */
+
+/**
  * Format a YYYY-MM-DD date string using the browser/system locale,
  * falling back to en-GB if unavailable.
  */

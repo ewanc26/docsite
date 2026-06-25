@@ -6,12 +6,18 @@ import rehypeSlug from 'rehype-slug';
 import rehypeStringify from 'rehype-stringify';
 import type { Root } from 'mdast';
 
+/**
+ * Markdown rendering and table-of-contents extraction for documentation pages.
+ */
+
 export interface TocEntry {
 	level: number;
 	text: string;
 	id: string;
 }
 
+// Unified pipeline renders markdown to HTML — rehype-slug adds id attributes
+// to headings so the ToC can anchor-link into the prose
 const processor = unified()
 	.use(remarkParse)
 	.use(remarkGfm)
@@ -24,6 +30,8 @@ export async function renderMarkdown(markdown: string): Promise<string> {
 	const result = await processor.process(markdown);
 	return String(result);
 }
+
+// ── Table of contents ──────────────────────────────────────────────────────
 
 /** Extract h2/h3 headings from raw markdown for the table of contents. */
 export function extractToc(markdown: string): TocEntry[] {

@@ -1,4 +1,8 @@
 <script lang="ts">
+	/**
+	 * SEO meta-tag component: renders Open Graph, Twitter Card, and
+	 * fediverse:creator meta tags into <svelte:head>.
+	 */
 	import type { SiteMetadata } from '$lib/helper/metaTags';
 
 	interface Props {
@@ -9,6 +13,7 @@
 
 	let { meta, siteMeta, fediverseCreator }: Props = $props();
 
+	// Merge page-level meta with site defaults — page values take precedence
 	const finalMeta = $derived({
 		title: meta.title || siteMeta.title,
 		description: meta.description || siteMeta.description,
