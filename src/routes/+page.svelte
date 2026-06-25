@@ -1,3 +1,5 @@
+<!-- Homepage — terminal-style landing with quick links to projects -->
+
 <svelte:head>
 	<title>home | ewan's docs</title>
 	<meta name="description" content="Central documentation hub for ewan's projects." />

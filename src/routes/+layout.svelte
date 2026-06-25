@@ -1,4 +1,8 @@
 <script lang="ts">
+	/**
+	 * Root layout: terminal-themed shell with sidebar nav, mobile drawer, and
+	 * SEO meta tags shared across all pages.
+	 */
 	import './layout.css';
 	import { page } from '$app/stores';
 	import { Menu, X, Coffee, Globe } from '@lucide/svelte';
@@ -9,6 +13,7 @@
 	let { children, data }: { children: any; data: LayoutData } = $props();
 	let menuOpen = $state(false);
 
+	// Close mobile sidebar when navigating to a new page
 	$effect(() => {
 		$page.url.pathname;
 		menuOpen = false;
@@ -30,7 +35,7 @@
 <MetaTags meta={siteMeta} {siteMeta} {fediverseCreator} />
 
 <div class="shell">
-	<!-- Titlebar -->
+	<!-- ── Titlebar ────────────────────────────────────────────────────── -->
 	<header
 		class="area-titlebar flex items-center gap-2 border-b border-[color-mix(in_srgb,var(--color-green)_15%,transparent)] bg-[var(--color-surface-0)] px-5 py-2 text-[0.8em] text-[var(--color-green)]"
 	>
@@ -52,7 +57,7 @@
 		</button>
 	</header>
 
-	<!-- Mobile overlay -->
+	<!-- ── Mobile overlay ─────────────────────────────────────────────── -->
 	{#if menuOpen}
 		<div
 			class="fixed inset-0 z-[199] bg-black/50"
@@ -61,7 +66,7 @@
 		></div>
 	{/if}
 
-	<!-- Sidebar -->
+	<!-- ── Sidebar ─────────────────────────────────────────────────────── -->
 	<nav
 		class="area-sidebar flex flex-col gap-6 border-r border-[color-mix(in_srgb,var(--color-green)_12%,transparent)] bg-[var(--color-mantle)] p-5"
 		class:open={menuOpen}
@@ -133,7 +138,7 @@
 		</div>
 	</nav>
 
-	<!-- Main -->
+	<!-- ── Main ────────────────────────────────────────────────────────── -->
 	<main class="area-main flex justify-center overflow-x-hidden">
 		<div
 			class="w-full max-w-[1200px] min-w-0 px-[clamp(1.2rem,4vw,3rem)] py-[clamp(1.5rem,4vw,3rem)]"
@@ -142,7 +147,7 @@
 		</div>
 	</main>
 
-	<!-- Footer -->
+	<!-- ── Footer ──────────────────────────────────────────────────────────── -->
 	<footer
 		class="area-footer border-t border-[color-mix(in_srgb,var(--color-green)_10%,transparent)] p-4 text-center text-[0.75em] text-[color-mix(in_srgb,var(--color-green)_35%,transparent)]"
 	>

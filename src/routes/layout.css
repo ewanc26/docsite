@@ -4,6 +4,8 @@
 @import './css/fonts.css';
 
 /* ─── design tokens ──────────────────────────────────────────────────────── */
+/* Catppuccin-inspired dark green palette — monochrome terminal aesthetic
+   with green accents for links, headings, and interactive elements. */
 :root {
 	--font-mono: 'JetBrains Mono', monospace;
 
@@ -20,6 +22,7 @@
 	--color-yellow: #f9e2af;
 }
 
+/* ── reset & base typography ────────────────────────────────────────────────── */
 @layer base {
 	*,
 	*::before,

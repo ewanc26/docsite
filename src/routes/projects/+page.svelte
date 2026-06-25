@@ -1,4 +1,5 @@
 <script lang="ts">
+	/** Projects index — lists all documentation posts sorted by date. */
 	import { formatDate } from '$lib/date';
 	import type { PageData } from './$types';
 	let { data }: { data: PageData } = $props();
@@ -28,6 +29,7 @@
 
 <hr class="my-5 border-0 border-t border-[color-mix(in_srgb,var(--color-green)_12%,transparent)]" />
 
+<!-- ── Post list or empty state ──────────────────────────────────────── -->
 {#if data.posts.length === 0}
 	<p class="text-[0.88em] text-[var(--color-overlay-0)] italic">
 		no docs yet — add markdown files to <code
