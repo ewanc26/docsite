@@ -1,4 +1,8 @@
 <script lang="ts">
+	/**
+	 * Individual documentation post page: renders prose content alongside
+	 * a sticky table-of-contents sidebar for multi-section articles.
+	 */
 	import { formatDate } from '$lib/date';
 	import type { PageData } from './$types';
 	let { data }: { data: PageData } = $props();
@@ -20,6 +24,8 @@
 	<meta name="twitter:description" content={data.post.description} />
 	<!-- sequoia inject stamps the at-uri link tag here -->
 </svelte:head>
+
+<!-- ── Article content ──────────────────────────────────────────────────── -->
 
 <div class="flex w-full items-start gap-10">
 	<!-- Article — min-w-0 prevents flex child overflowing -->

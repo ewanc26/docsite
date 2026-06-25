@@ -3,8 +3,13 @@ import { renderMarkdown, extractToc } from '$lib/format';
 import { error } from '@sveltejs/kit';
 import type { EntryGenerator, PageServerLoad } from './$types';
 
+// Prerender every documentation post by slug
 export const entries: EntryGenerator = () => listPosts().map(({ slug }) => ({ slug }));
 
+/**
+ * Load a single documentation post: raw metadata, rendered HTML, and
+ * a table of contents extracted from its headings.
+ */
 export const load: PageServerLoad = async ({ params }) => {
 	try {
 		const post = getPost(params.slug);

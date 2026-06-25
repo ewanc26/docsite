@@ -1,3 +1,4 @@
+# Pre-commit hooks run prettier on every staged file
 repos:
   - repo: local
     hooks:
