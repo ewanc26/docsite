@@ -1,5 +1,8 @@
 import { PUBLIC_SITE_TITLE, PUBLIC_SITE_DESCRIPTION, PUBLIC_SITE_URL } from '$env/static/public';
 
+/**
+ * Site metadata used across all pages for SEO and social sharing.
+ */
 export interface SiteMetadata {
 	title: string;
 	description: string;
@@ -11,7 +14,7 @@ export interface SiteMetadata {
 }
 
 /**
- * Default metadata for the docsite.
+ * Default metadata for the docsite — populated from environment variables.
  */
 export const defaultSiteMeta: SiteMetadata = {
 	title: PUBLIC_SITE_TITLE,

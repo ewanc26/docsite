@@ -1,4 +1,5 @@
 {
+  # Nix devshell for docsite — Node.js 22 + pnpm for local development
   description = "docsite — Sequoia-powered documentation site";
 
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
