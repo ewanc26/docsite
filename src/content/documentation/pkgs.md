@@ -4,7 +4,7 @@ description: Ewan's personal package monorepo — language-agnostic workspace wi
 date: 2026-03-24
 tags: [monorepo, pnpm, typescript, rust, python, atproto, library, tools]
 draft: false
-atUri: 'at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mghs3tnb6x25'
+atUri: 'at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mghqug32j725'
 ---
 
 [`@ewanc26/pkgs`](https://github.com/ewanc26/pkgs) is a language-agnostic monorepo containing all of Ewan's publishable packages across multiple programming languages. It was created by extracting the `packages/` subdirectories from their original host repositories ([malachite](https://github.com/ewanc26/malachite) and [website](https://github.com/ewanc26/website)) and migrating the entire [svelte-standard-site](https://github.com/ewanc26/svelte-standard-site) repository — all with full git history preserved via `git subtree`. The standalone malachite repository has since been fully consolidated here too, with the CLI and web frontend split into separate packages.
