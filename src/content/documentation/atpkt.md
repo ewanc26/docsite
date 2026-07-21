@@ -25,7 +25,7 @@ Dependency specification for Gradle environments:
 
 ```kotlin
 dependencies {
-    implementation("uk.ewancroft:atpkt:1.0.0")
+    implementation("uk.ewancroft:atpkt:0.1.0")
 }
 ```
 
