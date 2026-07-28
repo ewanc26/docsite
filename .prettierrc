@@ -1,5 +1,4 @@
 {
-	// Tabs for indentation, single quotes, no trailing commas — ewanc26 convention
 	"useTabs": true,
 	"singleQuote": true,
 	"trailingComma": "none",
