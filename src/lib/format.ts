@@ -37,6 +37,10 @@ export async function renderMarkdown(markdown: string): Promise<string> {
 export function extractToc(markdown: string): TocEntry[] {
 	const tree = unified().use(remarkParse).parse(markdown) as Root;
 	const entries: TocEntry[] = [];
+	// github-slugger de-duplicates repeated headings by suffixing an incrementing
+	// counter (`foo`, `foo-1`, `foo-2`). rehype-slug does this in the rendered
+	// HTML, so the ToC must do it too or repeated headings all anchor to the first.
+	const occurrences = new Map<string, number>();
 
 	for (const node of tree.children) {
 		if (node.type !== 'heading' || node.depth < 2 || node.depth > 3) continue;
@@ -46,12 +50,14 @@ export function extractToc(markdown: string): TocEntry[] {
 			.join('');
 		// Match github-slugger exactly (used by rehype-slug):
 		// replace each whitespace char individually (no collapse), strip non-word chars
-		const id = text
+		const base = text
 			.toLowerCase()
 			.replace(/[^\w\s-]/g, '')
 			.trim()
 			.replace(/\s/g, '-');
-		entries.push({ level: node.depth, text, id });
+		const seen = occurrences.get(base) ?? 0;
+		occurrences.set(base, seen + 1);
+		entries.push({ level: node.depth, text, id: seen === 0 ? base : `${base}-${seen}` });
 	}
 
 	return entries;
