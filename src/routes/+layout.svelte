@@ -8,9 +8,11 @@
 	import { Menu, X, Coffee, Globe } from '@lucide/svelte';
 	import type { LayoutData } from './$types';
 	import { MetaTags } from '$lib/components/seo';
-	import { defaultSiteMeta } from '$lib/helper/metaTags';
+	import { defaultSiteMeta, type SiteMetadata } from '$lib/helper/metaTags';
+	import type { PostMeta } from '$lib/posts';
+	import type { Snippet } from 'svelte';
 
-	let { children, data }: { children: any; data: LayoutData } = $props();
+	let { children, data }: { children: Snippet; data: LayoutData } = $props();
 	let menuOpen = $state(false);
 
 	// Close mobile sidebar when navigating to a new page
@@ -30,9 +32,40 @@
 	});
 
 	const siteMeta = defaultSiteMeta;
+
+	// The layout is the single source of truth for head metadata. Pages used to
+	// emit their own <title>/description/og:* tags, but because the layout renders
+	// first the site-wide defaults won and every document advertised the homepage
+	// description and URL to crawlers.
+	const post = $derived(($page.data as { post?: PostMeta }).post);
+
+	const pageMeta = $derived.by<SiteMetadata>(() => {
+		const path = $page.url.pathname;
+		const url = `${siteMeta.url.replace(/\/$/, '')}${path === '/' ? '' : path}`;
+
+		if (post) {
+			return {
+				title: `${post.title} | ${siteMeta.title}`,
+				description: post.description || siteMeta.description,
+				keywords: post.tags.length ? post.tags.join(', ') : siteMeta.keywords,
+				url,
+				image: siteMeta.image
+			};
+		}
+		if (path === '/projects') {
+			return {
+				title: `projects | ${siteMeta.title}`,
+				description: 'All projects and documentation published by ewan.',
+				keywords: siteMeta.keywords,
+				url,
+				image: siteMeta.image
+			};
+		}
+		return { ...siteMeta, title: `home | ${siteMeta.title}`, url };
+	});
 </script>
 
-<MetaTags meta={siteMeta} {siteMeta} {fediverseCreator} />
+<MetaTags meta={pageMeta} {siteMeta} {fediverseCreator} type={post ? 'article' : 'website'} />
 
 <div class="shell">
 	<!-- ── Titlebar ────────────────────────────────────────────────────── -->

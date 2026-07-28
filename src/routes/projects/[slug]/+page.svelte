@@ -8,20 +8,15 @@
 	let { data }: { data: PageData } = $props();
 </script>
 
+<!--
+	Title, description, canonical, og:* and twitter:* all come from the root
+	layout, which reads this page's `post` out of `page.data`. Only the
+	article-specific tags live here — duplicating the others made the layout's
+	site-wide defaults win, since they are rendered into <head> first.
+-->
 <svelte:head>
-	<title>{data.post.title} | ewan's docs</title>
-	<meta name="description" content={data.post.description} />
-	<meta property="og:title" content="{data.post.title} | ewan's docs" />
-	<meta property="og:description" content={data.post.description} />
-	<meta property="og:type" content="article" />
 	{#if data.post.date}<meta property="article:published_time" content={data.post.date} />{/if}
-	{#if data.post.tags.length}{#each data.post.tags as tag}<meta
-				property="article:tag"
-				content={tag}
-			/>{/each}{/if}
-	<meta name="twitter:card" content="summary" />
-	<meta name="twitter:title" content="{data.post.title} | ewan's docs" />
-	<meta name="twitter:description" content={data.post.description} />
+	{#each data.post.tags as tag}<meta property="article:tag" content={tag} />{/each}
 	<!-- sequoia inject stamps the at-uri link tag here -->
 </svelte:head>
 
