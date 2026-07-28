@@ -5,15 +5,6 @@
 	let { data }: { data: PageData } = $props();
 </script>
 
-<svelte:head>
-	<title>projects | ewan's docs</title>
-	<meta name="description" content="All projects and documentation published by ewan." />
-	<meta property="og:title" content="projects | ewan's docs" />
-	<meta property="og:description" content="All projects and documentation published by ewan." />
-	<meta name="twitter:title" content="projects | ewan's docs" />
-	<meta name="twitter:description" content="All projects and documentation published by ewan." />
-</svelte:head>
-
 <p class="mb-2 text-[0.72em] font-bold tracking-[0.12em] text-[var(--color-green)] uppercase">
 	projects
 </p>

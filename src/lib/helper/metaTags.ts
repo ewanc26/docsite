@@ -21,5 +21,7 @@ export const defaultSiteMeta: SiteMetadata = {
 	description: PUBLIC_SITE_DESCRIPTION,
 	keywords: 'ewan, docs, documentation, projects',
 	url: PUBLIC_SITE_URL,
-	image: '/og.png'
+	image: '/og.png',
+	imageWidth: 1200,
+	imageHeight: 630
 };

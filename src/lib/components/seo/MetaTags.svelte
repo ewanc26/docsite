@@ -9,17 +9,31 @@
 		meta: SiteMetadata;
 		siteMeta: SiteMetadata;
 		fediverseCreator?: string | null;
+		/** Open Graph object type — `article` for documentation pages. */
+		type?: string;
 	}
 
-	let { meta, siteMeta, fediverseCreator }: Props = $props();
+	let { meta, siteMeta, fediverseCreator, type = 'website' }: Props = $props();
+
+	/** Resolve a possibly-relative value against the site origin. */
+	function absolute(value: string, base: string): string {
+		try {
+			return new URL(value, base).href;
+		} catch {
+			return value;
+		}
+	}
 
 	// Merge page-level meta with site defaults — page values take precedence
 	const finalMeta = $derived({
 		title: meta.title || siteMeta.title,
 		description: meta.description || siteMeta.description,
 		keywords: meta.keywords || siteMeta.keywords,
-		url: meta.url || siteMeta.url,
-		image: meta.image || siteMeta.image,
+		// og:url, twitter:url and canonical must be absolute and page-specific
+		url: absolute(meta.url || siteMeta.url, siteMeta.url),
+		// og:image must be an absolute URL — relative paths are not resolved by
+		// most social crawlers
+		image: absolute(meta.image || siteMeta.image, siteMeta.url),
 		imageWidth: meta.imageWidth || siteMeta.imageWidth,
 		imageHeight: meta.imageHeight || siteMeta.imageHeight
 	});
@@ -29,7 +43,8 @@
 	<title>{finalMeta.title}</title>
 	<meta name="description" content={finalMeta.description} />
 	<meta name="keywords" content={finalMeta.keywords} />
-	<meta property="og:type" content="website" />
+	<link rel="canonical" href={finalMeta.url} />
+	<meta property="og:type" content={type} />
 	<meta property="og:url" content={finalMeta.url} />
 	<meta property="og:title" content={finalMeta.title} />
 	<meta property="og:description" content={finalMeta.description} />
