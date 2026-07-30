@@ -4,6 +4,7 @@ description: A .NET 8 VB.NET Windows Forms prototype simulating a PC-component o
 date: 2026-07-30
 tags: [vb.net, winforms, dotnet, prototype, desktop]
 draft: false
+atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mrvjrspnwm2f"
 ---
 
 [ECCL](https://github.com/ewanc26/ECCL) is a small Windows Forms desktop prototype for "Eye Crash Computers Ltd.", a fictional PC retailer — the name is a play on "I crash," a joke about computer crashes. It's a three-screen demonstration of a PC-building and checkout flow: log in, configure a custom build, then review an invoice. It's a practice/portfolio project, not production software — there is no real authentication, persistence, or payment processing anywhere in it.
