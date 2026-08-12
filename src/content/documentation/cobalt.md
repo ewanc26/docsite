@@ -4,6 +4,7 @@ description: A native AT Protocol / Bluesky client for the Nintendo Wii U, built
 date: 2026-08-12
 tags: [wiiu, c, atproto, bluesky, homebrew, game]
 draft: false
+atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3msv4i3ph622l"
 ---
 
 [cobalt](https://github.com/ewanc26/cobalt) is a native AT Protocol / Bluesky client for the Nintendo Wii U, built as Aroma homebrew with devkitPro/WUT and SDL2. It aims to feel like a Wii U app that happens to show Bluesky content — rounded tiles, the system's blues and whites, a real GamePad layout — rather than the Bluesky website rendered through the console's browser. Both screens are first-class: TV plus GamePad together, and Off-TV Play with the GamePad on its own.

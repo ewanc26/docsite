@@ -4,6 +4,7 @@ description: An esoteric programming language whose syntax is a constrained subs
 date: 2026-08-12
 tags: [esolang, compiler, cpp, c]
 draft: false
+atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3msv4i3fevk2l"
 ---
 
 [plainspeak](https://github.com/ewanc26/plainspeak) is a deterministic, non-ML esoteric programming language whose syntax is a constrained subset of English — "speak plainly to the computer". It compiles to C99 via a C++20 frontend, then hands off to the system C compiler for the native binary.

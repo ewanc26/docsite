@@ -4,6 +4,7 @@ description: Monthly GitHub Actions workflow that scans your repositories for mi
 date: 2026-08-12
 tags: [github-actions, automation, shell, tooling]
 draft: false
+atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3msv4i3vsc22l"
 ---
 
 [auto-sponsor-links](https://github.com/ewanc26/auto-sponsor-links) is a monthly GitHub Actions workflow that scans all non-archived, non-fork repositories owned by a given GitHub user or organisation, checks each README for an existing GitHub Sponsors badge, and opens a pull request adding Ko-fi and GitHub Sponsors links to any repository missing one.
