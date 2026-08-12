@@ -5,7 +5,7 @@
 	 */
 	import './layout.css';
 	import { page } from '$app/stores';
-	import { Menu, X, Coffee, Globe } from '@lucide/svelte';
+	import { Menu, X, Coffee, Globe, Heart } from '@lucide/svelte';
 	import type { LayoutData } from './$types';
 	import { MetaTags } from '$lib/components/seo';
 	import { defaultSiteMeta, type SiteMetadata } from '$lib/helper/metaTags';
@@ -169,6 +169,12 @@
 				target="_blank"
 				rel="noopener"
 				class="btn btn-ghost w-full"><Coffee size={14} />tip me on ko-fi</a
+			>
+			<a
+				href="https://github.com/sponsors/ewanc26"
+				target="_blank"
+				rel="noopener"
+				class="btn btn-ghost w-full"><Heart size={14} />github sponsors</a
 			>
 		</div>
 	</nav>
