@@ -13,7 +13,7 @@ atUri: 'at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mr6udvkbrx
 
 | project                                                 | what it is                                                                         |
 | ------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| [wolfram](https://github.com/ewanc26/wolfram)           | C11 SDK for AT Protocol, including OAuth, repositories, streaming, and Wii support |
+| [wolfram](https://github.com/ewanc26/wolfram)           | C23 SDK for AT Protocol, including OAuth, repositories, streaming, and Wii support |
 | [hasharium](https://github.com/ewanc26/hasharium)       | deterministic DID specimens and PDS-backed collections                             |
 | [website](https://github.com/ewanc26/website)           | personal site powered by AT Protocol records                                       |
 | [pkgs](https://github.com/ewanc26/pkgs)                 | publishing and migration tools for the decentralised web                           |

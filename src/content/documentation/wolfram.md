@@ -19,7 +19,7 @@ The optional `WOLFRAM_BUILD_SERVER` component is a generic XRPC server _framewor
 
 ## Protocol Parity
 
-The bundled Lexicon snapshot matches the 394 files in the upstream atproto repository. Generated C11 and OAuth-authenticated clients cover all 312 query/procedure endpoints, and dedicated streaming clients cover all three subscription endpoints.
+The bundled Lexicon snapshot matches the 394 files in the upstream atproto repository. Generated C23 and OAuth-authenticated clients cover all 312 query/procedure endpoints, and dedicated streaming clients cover all three subscription endpoints.
 
 ## Quick Start
 
