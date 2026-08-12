@@ -9,17 +9,39 @@
 :root {
 	--font-mono: 'JetBrains Mono', monospace;
 
-	--color-crust: #0d1210;
-	--color-mantle: #141c19;
-	--color-base: #1a2420;
-	--color-surface-0: #243028;
-	--color-surface-1: #2e3d34;
+	--color-crust: #0a0f0d;
+	--color-mantle: #101613;
+	--color-base: #161f1b;
+	--color-surface-0: #1c2622;
+	--color-surface-1: #26332c;
 	--color-overlay-0: #4d6b58;
-	--color-text: #cdd6f4;
+	--color-text: #e3eae6;
 	--color-subtext-0: #93b09a;
 	--color-green: #a6e3a1;
+	--color-green-dim: #7ec298;
 	--color-red: #f38ba8;
 	--color-yellow: #f9e2af;
+
+	/* borders */
+	--border-faint: color-mix(in srgb, var(--color-green) 8%, transparent);
+	--border-subtle: color-mix(in srgb, var(--color-green) 14%, transparent);
+	--border-strong: color-mix(in srgb, var(--color-green) 30%, transparent);
+
+	/* shadows — soft black depth + a faint green glow for accented elements */
+	--shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+	--shadow-md: 0 8px 24px -8px rgba(0, 0, 0, 0.55);
+	--shadow-lg: 0 20px 48px -16px rgba(0, 0, 0, 0.65);
+	--glow-green:
+		0 0 0 1px color-mix(in srgb, var(--color-green) 25%, transparent),
+		0 12px 32px -12px color-mix(in srgb, var(--color-green) 35%, transparent);
+
+	/* radii */
+	--radius-sm: 7px;
+	--radius-md: 12px;
+	--radius-lg: 18px;
+
+	/* motion */
+	--ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* ── reset & base typography ────────────────────────────────────────────────── */
@@ -36,21 +58,213 @@
 		overflow-x: hidden;
 		font-family: var(--font-mono);
 		font-size: clamp(13px, 3.5vw, 15px);
-		line-height: 1.6;
+		line-height: 1.65;
 		background-color: var(--color-crust);
 		color: var(--color-text);
+		scrollbar-color: var(--color-overlay-0) transparent;
 	}
 
 	body {
 		overflow-x: hidden;
 		min-height: 100dvh;
+		position: relative;
 	}
+
+	/* Ambient backdrop — a faint grid plus two soft glows, fixed behind all content.
+	   Pure CSS, no image assets, so it stays crisp at any density and costs nothing
+	   to ship. */
+	body::before {
+		content: '';
+		position: fixed;
+		inset: 0;
+		z-index: -1;
+		pointer-events: none;
+		background-image:
+			radial-gradient(
+				ellipse 900px 560px at 12% -8%,
+				color-mix(in srgb, var(--color-green) 10%, transparent),
+				transparent 60%
+			),
+			radial-gradient(
+				ellipse 700px 500px at 100% 15%,
+				color-mix(in srgb, var(--color-green) 6%, transparent),
+				transparent 55%
+			),
+			linear-gradient(color-mix(in srgb, var(--color-green) 4%, transparent) 1px, transparent 1px),
+			linear-gradient(
+				90deg,
+				color-mix(in srgb, var(--color-green) 4%, transparent) 1px,
+				transparent 1px
+			);
+		background-size:
+			100% 100%,
+			100% 100%,
+			44px 44px,
+			44px 44px;
+		-webkit-mask-image: linear-gradient(to bottom, black, black 60%, transparent 100%);
+		mask-image: linear-gradient(to bottom, black, black 60%, transparent 100%);
+	}
+
+	::selection {
+		background: color-mix(in srgb, var(--color-green) 35%, transparent);
+		color: var(--color-text);
+	}
+
+	::-webkit-scrollbar {
+		width: 10px;
+		height: 10px;
+	}
+	::-webkit-scrollbar-track {
+		background: transparent;
+	}
+	::-webkit-scrollbar-thumb {
+		background: color-mix(in srgb, var(--color-green) 18%, transparent);
+		border-radius: 99px;
+		border: 2px solid transparent;
+		background-clip: padding-box;
+	}
+	::-webkit-scrollbar-thumb:hover {
+		background: color-mix(in srgb, var(--color-green) 32%, transparent);
+		background-clip: padding-box;
+	}
+}
+
+/* ─── shared components (plain CSS — reused across routes) ───────────────── */
+.card {
+	background: color-mix(in srgb, var(--color-surface-0) 92%, transparent);
+	border: 1px solid var(--border-subtle);
+	border-radius: var(--radius-lg);
+	box-shadow: var(--shadow-sm);
+	transition:
+		transform 0.22s var(--ease-out),
+		border-color 0.22s var(--ease-out),
+		box-shadow 0.22s var(--ease-out),
+		background-color 0.22s var(--ease-out);
+}
+
+a.card:hover,
+.card.interactive:hover {
+	transform: translateY(-3px);
+	border-color: var(--border-strong);
+	box-shadow: var(--glow-green);
+	background: color-mix(in srgb, var(--color-surface-0) 100%, transparent);
+}
+
+.gradient-text {
+	background: linear-gradient(120deg, var(--color-green) 0%, #7dd8c0 55%, var(--color-green) 100%);
+	background-size: 200% auto;
+	-webkit-background-clip: text;
+	background-clip: text;
+	color: transparent;
+}
+
+.btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.4em;
+	border-radius: 999px;
+	padding: 0.55em 1.1em;
+	font-size: 0.85em;
+	font-weight: 600;
+	line-height: 1;
+	text-decoration: none;
+	white-space: nowrap;
+	transition:
+		transform 0.18s var(--ease-out),
+		box-shadow 0.18s var(--ease-out),
+		background-color 0.18s var(--ease-out),
+		border-color 0.18s var(--ease-out),
+		color 0.18s var(--ease-out);
+}
+.btn:hover {
+	transform: translateY(-1px);
+}
+.btn:active {
+	transform: translateY(0);
+}
+.btn-primary {
+	background: var(--color-green);
+	color: var(--color-crust);
+	border: 1px solid var(--color-green);
+	box-shadow: 0 8px 20px -8px color-mix(in srgb, var(--color-green) 55%, transparent);
+}
+.btn-primary:hover {
+	background: var(--color-green-dim);
+	border-color: var(--color-green-dim);
+}
+.btn-ghost {
+	background: color-mix(in srgb, var(--color-green) 6%, transparent);
+	color: var(--color-green);
+	border: 1px solid var(--border-strong);
+}
+.btn-ghost:hover {
+	background: color-mix(in srgb, var(--color-green) 14%, transparent);
+	border-color: color-mix(in srgb, var(--color-green) 55%, transparent);
+}
+
+.pill {
+	display: inline-flex;
+	align-items: center;
+	border-radius: 999px;
+	border: 1px solid var(--border-subtle);
+	background: color-mix(in srgb, var(--color-green) 7%, transparent);
+	color: var(--color-green);
+	font-size: 0.72em;
+	padding: 0.22em 0.7em;
+	line-height: 1.5;
+	white-space: nowrap;
+}
+
+/* ─── sidebar nav links — thin accent bar slides in on hover/active ──────── */
+.nav-link {
+	position: relative;
+	display: block;
+	padding: 0.32em 0 0.32em 0.85em;
+	font-size: 0.88em;
+	color: var(--color-subtext-0);
+	text-decoration: none;
+	border-radius: var(--radius-sm);
+	transition:
+		color 0.18s var(--ease-out),
+		background-color 0.18s var(--ease-out);
+}
+.nav-link::before {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 50%;
+	translate: 0 -50%;
+	width: 3px;
+	height: 0%;
+	border-radius: 999px;
+	background: var(--color-green);
+	transition:
+		height 0.18s var(--ease-out),
+		opacity 0.18s var(--ease-out);
+	opacity: 0;
+}
+.nav-link:hover {
+	color: var(--color-text);
+	background: color-mix(in srgb, var(--color-green) 6%, transparent);
+}
+.nav-link:hover::before {
+	height: 40%;
+	opacity: 0.5;
+}
+.nav-link[aria-current='page'] {
+	color: var(--color-green);
+	background: color-mix(in srgb, var(--color-green) 9%, transparent);
+	font-weight: 600;
+}
+.nav-link[aria-current='page']::before {
+	height: 60%;
+	opacity: 1;
 }
 
 /* ─── shell grid (grid-template-areas can't be done with Tailwind utilities) */
 .shell {
 	display: grid;
-	grid-template-columns: 220px minmax(0, 1fr);
+	grid-template-columns: 236px minmax(0, 1fr);
 	grid-template-rows: auto 1fr auto;
 	grid-template-areas:
 		'titlebar titlebar'
@@ -95,7 +309,7 @@
 		height: 100dvh;
 		z-index: 200;
 		transform: translateX(-100%);
-		transition: transform 0.25s ease;
+		transition: transform 0.3s var(--ease-out);
 		overflow-y: auto;
 		padding-top: 3.5rem;
 	}
@@ -113,7 +327,7 @@
 	--tw-prose-links: var(--color-green);
 	--tw-prose-code: var(--color-green);
 	--tw-prose-pre-bg: var(--color-surface-0);
-	--tw-prose-hr: color-mix(in srgb, var(--color-green) 15%, transparent);
+	--tw-prose-hr: var(--border-subtle);
 	--tw-prose-quotes: var(--color-subtext-0);
 	--tw-prose-bold: var(--color-text);
 	--tw-prose-counters: var(--color-overlay-0);
@@ -125,15 +339,59 @@
 	overflow-wrap: break-word;
 }
 
-.prose :where(table) {
-	display: block;
-	overflow-x: auto;
-	max-width: 100%;
+.prose :where(h1, h2, h3, h4) {
+	letter-spacing: -0.01em;
+	font-weight: 700;
+	scroll-margin-top: 5rem;
+}
+
+.prose :where(h2) {
+	padding-top: 0.4em;
+	border-top: 1px solid var(--border-faint);
+	margin-top: 2.2em !important;
+}
+.prose :where(h2:first-child) {
+	border-top: none;
+	margin-top: 0 !important;
+}
+
+.prose a {
+	text-underline-offset: 3px;
+	text-decoration-color: color-mix(in srgb, var(--color-green) 45%, transparent);
+	transition: text-decoration-color 0.18s var(--ease-out);
+}
+.prose a:hover {
+	text-decoration-color: var(--color-green);
+}
+
+.prose :where(code):not(pre code) {
+	background: color-mix(in srgb, var(--color-green) 10%, transparent);
+	border: 1px solid var(--border-faint);
+	border-radius: 5px;
+	padding: 0.15em 0.4em;
+	font-size: 0.88em;
 }
 
 .prose pre {
 	max-width: 100%;
 	overflow-x: auto;
+	border: 1px solid var(--border-subtle);
+	border-radius: var(--radius-md);
+	box-shadow: var(--shadow-sm);
+}
+
+.prose blockquote {
+	border-left-color: var(--border-strong);
+	background: color-mix(in srgb, var(--color-green) 4%, transparent);
+	border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+	padding: 0.6em 1em;
+}
+
+.prose :where(table) {
+	display: block;
+	overflow-x: auto;
+	max-width: 100%;
+	border-radius: var(--radius-sm);
 }
 
 .prose ul li::marker {
