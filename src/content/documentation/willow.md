@@ -4,6 +4,7 @@ description: A native SwiftUI Bluesky / AT Protocol client targeting iOS and mac
 date: 2026-08-12
 tags: [swift, swiftui, ios, macos, atproto, bluesky]
 draft: false
+atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3msv4i36fbc2l"
 ---
 
 [willow](https://github.com/ewanc26/willow) is a native SwiftUI Bluesky / AT Protocol client targeting iOS and macOS from one shared codebase.

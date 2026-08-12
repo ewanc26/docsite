@@ -4,6 +4,7 @@ description: An isometric 3D platformer built with Godot 4.7 and C#, with option
 date: 2026-08-12
 tags: [godot, csharp, game, platformer, atproto, procedural-generation]
 draft: false
+atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3msv4i3j32s2l"
 ---
 
 [isolith](https://github.com/ewanc26/isolith) is an isometric 3D platformer built with Godot 4.7 and C#. Jump between floating stone platforms, collect shards, and avoid the spikes. It's a game first — it plays offline, keeps its own local history, and needs no account — but can optionally sync your run stats into your own AT Protocol repo via [wolfram](https://github.com/ewanc26/wolfram).

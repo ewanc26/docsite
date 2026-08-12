@@ -4,6 +4,7 @@ description: A Dadaist oracle bot for Bluesky — a real-time word-level Markov 
 date: 2026-08-12
 tags: [bluesky, atproto, c, bot, markov, firehose]
 draft: false
+atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3msv4i3rxak2l"
 ---
 
 [bluesky-dadaist](https://github.com/ewanc26/bluesky-dadaist) is a Dadaist oracle bot for Bluesky. It listens to the AT Protocol firehose, builds a word-level Markov chain from real posts in real time, and replies to mentions with surreal "oracle" text sampled from live social chatter. Written in C using the [wolfram](https://github.com/ewanc26/wolfram) SDK for AT Protocol, with libuv for event-loop dispatch.

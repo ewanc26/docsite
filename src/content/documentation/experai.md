@@ -4,6 +4,7 @@ description: A small language model training toolkit in Rust using the Candle ML
 date: 2026-08-12
 tags: [rust, machine-learning, candle, atproto, cli]
 draft: false
+atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3msv4i3mra22l"
 ---
 
 [experai](https://github.com/ewanc26/experai) is a small language model training toolkit built in Rust on the [Candle](https://github.com/huggingface/candle) ML framework, with CUDA/Metal acceleration. It can train on local JSONL data or directly on Bluesky content via the AT Protocol — either a specific user's posts through the REST API, or the live Jetstream firehose.

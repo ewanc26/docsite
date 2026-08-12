@@ -4,6 +4,7 @@ description: A minimal top-down RPG starter template for Godot 4.7 with the .NET
 date: 2026-08-12
 tags: [godot, csharp, game, template, rpg]
 draft: false
+atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3msv4i3d6lk2l"
 ---
 
 [rpg](https://github.com/ewanc26/rpg) is a minimal top-down RPG starter built for Godot 4.7 with the .NET (C#) build. It's a from-scratch scaffold rather than a fork of an existing template — a survey of existing options found nothing both Godot-Mono and RPG-specific (the well-known "Open RPG" demo is GDScript; existing C# templates are generic, not RPG-oriented).
