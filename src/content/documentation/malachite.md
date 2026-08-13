@@ -1,6 +1,6 @@
 ---
 title: Malachite
-description: Import your Last.fm and Spotify listening history to the AT Protocol network using the fm.teal.alpha.feed.play lexicon.
+description: Import your Last.fm and Spotify listening history to the AT Protocol network using the fm.teal.feed.play lexicon.
 date: 2026-03-15
 tags: [malachite, atproto, lastfm, spotify, apple-music, youtube-music, tools]
 draft: false
@@ -9,7 +9,7 @@ atUri: 'at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfyqfjxlo6
 
 > **Note:** The standalone [malachite](https://github.com/ewanc26/malachite) repository has been archived. Development continues in the [`@ewanc26/pkgs`](https://github.com/ewanc26/pkgs) monorepo — CLI at [`packages/malachite/`](https://github.com/ewanc26/pkgs/tree/main/packages/malachite), web frontend at [`packages/malachite-web/`](https://github.com/ewanc26/pkgs/tree/main/packages/malachite-web).
 
-Malachite is a tool for importing your Last.fm, Spotify, Apple Music, and YouTube Music listening history to the AT Protocol network as `fm.teal.alpha.feed.play` records. It's designed to be safe, resumable, and smart about rate limits — so you don't accidentally hammer your PDS.
+Malachite is a tool for importing your Last.fm, Spotify, Apple Music, and YouTube Music listening history to the AT Protocol network as `fm.teal.feed.play` records. It's designed to be safe, resumable, and smart about rate limits — so you don't accidentally hammer your PDS.
 
 The name is a deliberate nod to the `teal` lexicon it publishes to: malachite is a greenish-blue copper mineral associated with preservation and transformation, sitting squarely in that teal/green colour range.
 
@@ -36,9 +36,9 @@ Malachite comes in two forms:
 
 No installation required. Open [malachite.croft.click](https://malachite.croft.click) and follow the wizard:
 
-1. **Choose a mode** — Last.fm, Spotify, combined, sync, or deduplicate
+1. **Choose a mode** — Last.fm, Spotify, combined, sync, deduplicate, or polish
 2. **Sign in** — via ATProto OAuth (recommended; redirects to your PDS and back, your credentials are never shared with Malachite) or an app password
-3. **Upload your export** — CSV or JSON, parsed entirely in the browser (skipped in deduplicate mode)
+3. **Upload your export** — CSV or JSON, parsed entirely in the browser (skipped in deduplicate and polish modes)
 4. **Options** — optionally enable dry run, reverse chronological order, or skip the Teal duplicate check
 5. **Run** — records are published directly to your PDS with automatic rate-limit handling
 
@@ -129,6 +129,9 @@ pnpm --filter @ewanc26/malachite start -- -i lastfm.csv -m sync -y
 # Remove duplicates from your Teal feed
 pnpm --filter @ewanc26/malachite start -- -m deduplicate
 
+# Migrate legacy fm.teal.alpha.feed.play scrobbles into fm.teal.feed.play
+pnpm --filter @ewanc26/malachite start -- -m polish
+
 # Preview without publishing
 pnpm --filter @ewanc26/malachite start -- -i lastfm.csv --dry-run
 
@@ -153,6 +156,23 @@ pnpm --filter @ewanc26/malachite start -- --logout -h did:plc:xxxx
 | Combined    | `-m combined`         | Merge all sources with deduplication           |
 | Sync        | `-m sync`             | Skip records that already exist on Teal        |
 | Deduplicate | `-m deduplicate`      | Remove duplicate records already on Teal       |
+| Polish      | `-m polish`           | Migrate legacy `fm.teal.alpha.feed.play` scrobbles into `fm.teal.feed.play` |
+
+## Polish Migration
+
+`-m polish` is a migration subtool: it moves legacy `fm.teal.alpha.feed.play` scrobbles — written before Malachite switched to the production `fm.teal.feed.play` namespace — into the production collection, then removes the legacy copies.
+
+- **rkey-preserving backfill** — each backfilled record keeps its original rkey; only its `$type` is rewritten.
+- **Deduplication by rkey** — legacy records whose rkey already exists in production are dropped directly rather than backfilled.
+- **Failure safety** — backfill failures are reported and the affected legacy copies are retained, so re-running polish finishes the job without ever losing data.
+- **Dry run** — `--dry-run` (or the web wizard's dry-run toggle) analyzes both collections via CAR export and reports the plan without writing anything.
+- **Confirmation** — the CLI prompts before any deletion.
+
+To preview a migration without touching your repository:
+
+```bash
+pnpm --filter @ewanc26/malachite start -- -m polish --dry-run
+```
 
 ## Command Line Options
 
@@ -255,13 +275,13 @@ OAuth sessions are saved automatically after `--oauth-login` and refresh automat
 
 ## Record Format
 
-Each scrobble is published as an `fm.teal.alpha.feed.play` record. Required fields are `trackName`, `artists`, `playedTime`, `submissionClientAgent`, and `musicServiceBaseDomain`. Last.fm imports also include MusicBrainz IDs when available.
+Each scrobble is published as an `fm.teal.feed.play` record. Required fields are `trackName`, `artists`, `playedTime`, `submissionClientAgent`, and `musicServiceBaseDomain`. Last.fm imports also include MusicBrainz IDs when available.
 
 Example Last.fm record:
 
 ```json
 {
-	"$type": "fm.teal.alpha.feed.play",
+	"$type": "fm.teal.feed.play",
 	"trackName": "Paint My Masterpiece",
 	"artists": [{ "artistName": "Cjbeards", "artistMbId": "c8d4f4bf-..." }],
 	"releaseName": "Masquerade",
@@ -321,7 +341,7 @@ See `CONTRIBUTING.md` in the package for the `src/core/` contract if you want to
 
 ## Lexicon
 
-Malachite publishes to the `fm.teal.alpha` lexicon. The schema definitions live in `/lexicons/fm.teal.alpha/` in the repository.
+Malachite publishes to the `fm.teal` lexicon. The schema definitions live in `/lexicons/fm.teal/` in the repository. Plays use the production `fm.teal.feed.play` collection; legacy `fm.teal.alpha.feed.play` records are migrated into it by polish mode.
 
 ## License
 
