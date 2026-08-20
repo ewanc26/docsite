@@ -4,6 +4,7 @@ description: Shared Svelte landing page layout, CSS, and components for the *-we
 date: 2026-08-20
 tags: [svelte, ui, library, landing-page, pkgs]
 draft: false
+atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mtjafaqwrx27"
 ---
 
 [@ewanc26/landing-ui](https://github.com/ewanc26/pkgs/tree/main/packages/landing-ui) is the shared layout every `@ewanc26/*-web` tool site is built on — Jasper, Malachite, Opal, Bismuth, and Tourmaline all render through the same `LandingLayout` and `LandingPage` components. Each site supplies its own name, logo, copy, and CSS custom properties (`--accent`, `--bg`, `--surface`, etc.); the structure, spacing, and interaction patterns come from here.

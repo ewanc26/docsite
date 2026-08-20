@@ -4,6 +4,7 @@ description: The AT Protocol tools directory — a free, browser-based hub linki
 date: 2026-08-20
 tags: [atproto, directory, svelte, tools, pkgs]
 draft: false
+atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mtjafatmpx27"
 ---
 
 [croft.click](https://croft.click) is the directory site for Ewan's AT Protocol import and analysis tools — Jasper, Malachite, Bismuth, Opal, and Tourmaline. Every tool is free, runs entirely in the browser, and moves data onto the AT Protocol without a middleman server. croft.click exists to make that toolkit discoverable from one place, and to show it's actually being used.
