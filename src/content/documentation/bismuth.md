@@ -1,7 +1,7 @@
 ---
 title: '@ewanc26/bismuth'
 description: Convert richtext-block documents from the Standard.site ecosystem (Leaflet, Pckt, Offprint) to Markdown — available as both a CLI tool and a TypeScript library.
-date: 2026-03-24
+date: 2026-08-20
 tags: [typescript, atproto, cli, library, pkgs]
 draft: false
 atUri: 'at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mhrd6j4ag22f'
@@ -72,6 +72,12 @@ bismuth --did did:plc:abc123 pckt-post.json
 # Multi-page Leaflet document — custom page separator
 bismuth --page-break $'\n<!-- page -->\n' doc.json
 ```
+
+## Web Interface
+
+Bismuth also has a browser-based interface at [bismuth.croft.click](https://bismuth.croft.click) — no installation required. Paste or upload a `site.standard.document` JSON payload and it converts to Markdown entirely in the browser; nothing is sent to a server. The web app uses [`@ewanc26/bismuth`](https://github.com/ewanc26/pkgs/tree/main/packages/bismuth) as an npm dependency for the actual conversion logic, and shares its landing page layout with the other [croft.click](/projects/croft-click) tools via [`@ewanc26/landing-ui`](/projects/landing-ui).
+
+Source: [`packages/bismuth-web`](https://github.com/ewanc26/pkgs/tree/main/packages/bismuth-web) in the monorepo.
 
 ## Library
 
