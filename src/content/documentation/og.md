@@ -4,6 +4,7 @@ description: Dynamic OpenGraph image generator with noise backgrounds, bold typo
 date: 2026-08-20
 tags: [typescript, svelte, image-generation, library, pkgs]
 draft: false
+atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mtjafamvux27"
 ---
 
 [@ewanc26/og](https://github.com/ewanc26/pkgs/tree/main/packages/og) generates OpenGraph images on the fly — bold typography, ALL CAPS site names, and a unique [@ewanc26/noise](/projects/noise) background seeded per page. Built on [Satori](https://github.com/vercel/satori) for the actual rendering, so it works in SvelteKit endpoints, edge runtimes, and plain build scripts alike, with zero native dependencies.
