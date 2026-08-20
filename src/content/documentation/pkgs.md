@@ -1,7 +1,7 @@
 ---
 title: '@ewanc26/pkgs'
 description: Ewan's personal package monorepo — language-agnostic workspace with TypeScript, Rust, and Python packages.
-date: 2026-03-24
+date: 2026-08-20
 tags: [monorepo, pnpm, typescript, rust, python, atproto, library, tools]
 draft: false
 atUri: 'at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mghqug32j725'
@@ -9,28 +9,38 @@ atUri: 'at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mghqug32j7
 
 [`@ewanc26/pkgs`](https://github.com/ewanc26/pkgs) is a language-agnostic monorepo containing all of Ewan's publishable packages across multiple programming languages. It was created by extracting the `packages/` subdirectories from their original host repositories ([malachite](https://github.com/ewanc26/malachite) and [website](https://github.com/ewanc26/website)) and migrating the entire [svelte-standard-site](https://github.com/ewanc26/svelte-standard-site) repository — all with full git history preserved via `git subtree`. The standalone malachite repository has since been fully consolidated here too, with the CLI and web frontend split into separate packages.
 
-The monorepo has since expanded to include Rust CLI tools and Python utilities, making it a unified workspace for all reusable code.
+The monorepo has since expanded to include Rust CLI tools, Python utilities, and a growing family of browser-based AT Protocol import/analysis tools — Jasper, Opal, Bismuth, Malachite, and Tourmaline — each with a CLI or library package plus a `-web` frontend, discoverable together at [croft.click](/projects/croft-click).
 
 ## Packages
 
 ### TypeScript
 
 | Package                                                           | Version | Description                                                                                                                                 |
-| ----------------------------------------------------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| ------------------------------------------------------------------ | ------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
 | [`@ewanc26/tid`](/projects/tid)                                   | 1.x     | Zero-dependency AT Protocol TID generation                                                                                                  |
 | [`@ewanc26/atproto`](/projects/atproto)                           | 0.x     | AT Protocol service layer (profiles, posts, Standard.site, music status)                                                                    |
 | [`@ewanc26/ui`](/projects/ui)                                     | 0.x     | Svelte 5 UI component library (cards, layout, stores, themes)                                                                               |
+| [`@ewanc26/landing-ui`](/projects/landing-ui)                     | 0.x     | Shared landing page layout and CSS for the `*-web` tool sites                                                                                |
 | [`@ewanc26/utils`](/projects/utils)                               | 0.x     | Shared utilities (dates, numbers, URLs, validators, RSS)                                                                                    |
 | [`@ewanc26/noise`](/projects/noise)                               | 0.x     | Generic deterministic value-noise generation — arbitrary dimensions, multi-octave FBM, multiple colour modes                                |
 | [`@ewanc26/noise-avatar`](/projects/noise-avatar)                 | 0.x     | Deterministic value-noise avatar generation from a string seed — thin wrapper around `@ewanc26/noise`                                       |
-| [`@ewanc26/bismuth`](/projects/bismuth)                           | 0.x     | Convert `pub.leaflet` RTF-block documents (`site.standard.document` records) to Markdown — CLI and library                                  |
+| [`@ewanc26/og`](/projects/og)                                     | 0.x     | Dynamic OpenGraph image generation with noise backgrounds — SvelteKit endpoints, edge runtimes, or plain build scripts                       |
+| [`@ewanc26/bismuth`](/projects/bismuth)                           | 0.x     | Convert `pub.leaflet` / `blog.pckt` / `app.offprint` richtext-block documents (`site.standard.document` records) to Markdown — CLI and library |
+| [`bismuth-web`](/projects/bismuth)                                | 0.x     | Browser-based converter at [bismuth.croft.click](https://bismuth.croft.click) (private, not published to npm)                               |
 | [`@ewanc26/svelte-standard-site`](/projects/svelte-standard-site) | 0.x     | SvelteKit library for `site.standard.*` AT Protocol records — design system, federated comments, publishing tools, and content verification |
 | [`@ewanc26/pds-landing`](/projects/pds-landing)                   | 2.x     | Composable Svelte components for an ATProto PDS landing page — terminal-aesthetic UI with live status fetching                              |
 | [`@ewanc26/supporters`](/projects/supporters)                     | 0.x     | SvelteKit component library for displaying Ko-fi supporters, backed by an ATProto PDS                                                       |
 | [`@ewanc26/wafrn-theme`](/projects/wafrn-theme)                   | 1.x     | WAFRN CSS theme using the pds-landing Catppuccin terminal aesthetic — dark forest-green palette, JetBrains Mono                             |
 | [`@ewanc26/tangled-sync`](/projects/tangled-sync)                 | 1.x     | CLI tool for syncing GitHub repos to Tangled with ATProto records                                                                           |
-| [`@ewanc26/malachite`](/projects/malachite)                       | 0.x     | CLI tool for importing Last.fm, Spotify, Apple Music & YouTube Music history to AT Protocol as `fm.teal.alpha.feed.play` records            |
-| [`malachite-web`](/projects/malachite)                            | 0.x     | SvelteKit web frontend for Malachite — browser-based import with ATProto OAuth (private, not published to npm)                              |
+| [`@ewanc26/malachite`](/projects/malachite)                       | 0.x     | CLI tool for importing Last.fm, Spotify, Apple Music, YouTube Music & ListenBrainz history to AT Protocol as `fm.teal.feed.play` records     |
+| [`malachite-web`](/projects/malachite)                            | 0.x     | SvelteKit web frontend for Malachite at [malachite.croft.click](https://malachite.croft.click) — browser-based import with ATProto OAuth (private, not published to npm) |
+| [`@ewanc26/jasper`](/projects/jasper)                             | 0.x     | Convert Instagram data exports into posts, stories, and videos on Grain or Spark — CLI and library                                           |
+| [`jasper-web`](/projects/jasper)                                  | 0.x     | Browser-based importer at [jasper.croft.click](https://jasper.croft.click) (private, not published to npm)                                  |
+| [`@ewanc26/opal`](/projects/opal)                                 | 0.x     | Convert Twitter, Mastodon, Threads & Nostr posts to AT Protocol Bluesky posts — CLI and library                                              |
+| [`opal-web`](/projects/opal)                                      | 0.x     | Browser-based converter at [opal.croft.click](https://opal.croft.click) (private, not published to npm)                                     |
+| [`tourmaline`](/projects/tourmaline)                              | 0.x     | AT Protocol scrobble analyser for Teal.fm listening history at [tourmaline.croft.click](https://tourmaline.croft.click) (private, not published to npm) |
+| [`@ewanc26/croft-click`](/projects/croft-click)                   | 1.x     | The [croft.click](https://croft.click) tools directory (private, not published to npm)                                                      |
+| [`@ewanc26/croft-click-core`](https://github.com/ewanc26/pkgs/tree/main/packages/croft-click-core) | 0.x | Shared core logic (publishing, rate limiting, sync, data conversion) behind the croft.click import tools                                    |
 
 ### Rust
 
@@ -61,16 +71,23 @@ The packages share overlapping concerns — `@ewanc26/ui` depends on `@ewanc26/n
 pnpm add @ewanc26/tid
 pnpm add @ewanc26/atproto
 pnpm add @ewanc26/ui
+pnpm add @ewanc26/landing-ui
 pnpm add @ewanc26/utils
 pnpm add @ewanc26/noise
 pnpm add @ewanc26/noise-avatar
+pnpm add @ewanc26/og
 pnpm add @ewanc26/bismuth
 pnpm add @ewanc26/svelte-standard-site
 pnpm add @ewanc26/pds-landing
 pnpm add @ewanc26/supporters
 pnpm add @ewanc26/wafrn-theme
 pnpm add @ewanc26/tangled-sync
+pnpm add @ewanc26/malachite
+pnpm add @ewanc26/jasper
+pnpm add @ewanc26/opal
 ```
+
+The `-web` sites, `tourmaline`, `croft-click`, and `croft-click-core` are private and not published to npm — they're deployed apps and internal shared logic, not libraries meant for external use.
 
 ### Rust tools
 
@@ -138,7 +155,7 @@ git tag bismuth/v0.1.0
 git push origin bismuth/v0.1.0
 ```
 
-The `NPM_TOKEN` secret must be set in the repository's GitHub Actions secrets. `malachite-web` is private and not published. Rust and Python packages are not published automatically.
+The `NPM_TOKEN` secret must be set in the repository's GitHub Actions secrets. The `-web` frontends, `tourmaline`, `croft-click`, and `croft-click-core` are private and not published. Rust and Python packages are not published automatically.
 
 ## Licence
 

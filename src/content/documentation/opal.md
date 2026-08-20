@@ -125,7 +125,7 @@ Opal publishes records sequentially via `com.atproto.repo.createRecord` and moni
 
 ## Record Keys
 
-Published records use TID-based record keys derived from each post's original timestamp via [`@ewanc26/tid`](/documentation/tid). This ensures chronological sort order and monotonicity — even if posts share the same timestamp, the TID clock advances.
+Published records use TID-based record keys derived from each post's original timestamp via [`@ewanc26/tid`](/projects/tid). This ensures chronological sort order and monotonicity — even if posts share the same timestamp, the TID clock advances.
 
 ## Using as a Library
 
