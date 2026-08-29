@@ -68,7 +68,9 @@ numlangc hello.num --run --cc clang
 | `/` | pop b, pop a → push a ÷ b |
 | `%` | pop b, pop a → push fmod(a, b) |
 
-### Comparison *(push 1.0 = true, 0.0 = false)*
+### Comparison
+
+Comparisons push `1.0` for true and `0.0` for false.
 
 | Code | Meaning |
 |------|---------|

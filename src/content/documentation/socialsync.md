@@ -54,4 +54,4 @@ atUri: 'at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mr6udttmr7
 
 ## License
 
-AGPL-3.0-only. See [LICENSE](LICENSE).
+AGPL-3.0-only. See [LICENSE](https://github.com/ewanc26/jollywhoppers-socialsync/blob/main/LICENSE).

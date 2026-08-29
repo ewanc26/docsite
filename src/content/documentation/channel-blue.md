@@ -82,6 +82,6 @@ sd:/
 
 ## Licence
 
-Channel Blue is licensed under the **GNU Affero General Public License v3.0 or later** — see [LICENSE](LICENSE).
+Channel Blue is licensed under the **GNU Affero General Public License v3.0 or later** — see [LICENSE](https://github.com/ewanc26/channel-blue/blob/main/LICENSE).
 
 The `wolfram` SDK it links against is MIT-licensed.
