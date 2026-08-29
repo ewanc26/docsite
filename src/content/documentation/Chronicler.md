@@ -107,4 +107,4 @@ cd Chronicler
 
 ## Licence
 
-AGPL-3.0. See [LICENSE](LICENSE).
+AGPL-3.0. See [LICENSE](https://github.com/ewanc26/Chronicler/blob/main/LICENSE).

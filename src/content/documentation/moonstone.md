@@ -71,7 +71,7 @@ PDS_CRAWLERS=
 
 ## NixOS
 
-See [`nix/module.nix`](./nix/module.nix). Add to `nix-config`:
+See [`nix/module.nix`](https://github.com/ewanc26/moonstone/blob/main/nix/module.nix). Add to `nix-config`:
 
 ```nix
 inputs.moonstone.url = "github:ewanc26/moonstone";
