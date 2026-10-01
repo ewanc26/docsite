@@ -33,4 +33,4 @@ atUri: 'at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mr6udvkbrx
 
 - Handle: [`at://ewancroft.uk`](https://bsky.app/profile/ewancroft.uk)
 - DID: `did:plc:ofrbh253gwicbkc5nktqepol`
-- PDS: [`pds.croft.click`](https://pds.croft.click)
+- PDS: [`eurosky.social`](https://eurosky.social) (formerly self-hosted at `pds.croft.click`)
