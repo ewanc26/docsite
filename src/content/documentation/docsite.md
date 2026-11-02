@@ -20,8 +20,9 @@ Posts are also published as `site.standard.document` records on the AT Protocol 
 | Route | Description |
 |-------|-------------|
 | `/` | Landing page with a brief intro and quick links |
-| `/projects` | Index of all non-draft documentation posts, sorted by date |
+| `/projects` | Searchable, tag-filterable card grid of all non-draft documentation posts, sorted by date |
 | `/projects/[slug]` | Individual documentation page with rendered Markdown and table of contents |
+| `/sitemap.xml` | Prerendered sitemap covering the homepage, project index, and every published doc |
 
 ## Quick Start
 
@@ -80,6 +81,7 @@ Content here.
   "publicDir": "./static",
   "outputDir": "./dist",
   "pathPrefix": "/projects",
+  "identity": "your-handle.example",
   "publicationUri": "at://did:plc:.../site.standard.publication/..."
 }
 ```

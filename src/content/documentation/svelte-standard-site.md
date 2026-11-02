@@ -9,12 +9,12 @@ atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfyqfhun3o
 
 [@ewanc26/svelte-standard-site](https://github.com/ewanc26/pkgs/tree/main/packages/svelte-standard-site) is a SvelteKit component library for the [Standard.site](https://standard.site/) protocol and [Leaflet](https://leaflet.pub) — specs for storing longform content on AT Protocol. It supports reading content from AT Protocol, publishing to it, federated Bluesky comments, native Leaflet comments, recommendations, subscriptions, content verification, and a complete design system.
 
-Part of the [`@ewanc26/pkgs`](/projects/pkgs) monorepo.
+The canonical source is the [`@ewanc26/pkgs`](/projects/pkgs) monorepo, where it is currently at v0.2.5. The standalone [`ewanc26/svelte-standard-site`](https://github.com/ewanc26/svelte-standard-site) repository is a historical copy at v0.1.0; issues and pull requests should go to the monorepo.
 
 ## Installation
 
 ```bash
-pnpm add @ewanc26/svelte-standard-site zod
+pnpm add @ewanc26/svelte-standard-site
 ```
 
 Requires `svelte >= 5` and `@sveltejs/kit >= 2` as peer dependencies.
@@ -22,9 +22,10 @@ Requires `svelte >= 5` and `@sveltejs/kit >= 2` as peer dependencies.
 ## Features
 
 - **Reading** — Fetch `site.standard.document`, `site.standard.publication`, and `pub.leaflet.*` records from AT Protocol
-- **Writing** — Publish and manage documents via `StandardSitePublisher`
-- **Document Rendering** — Full support for all block types including ordered lists, footnotes, and rich text facets
-- **Extended Themes** — RGBA colors, background images, custom fonts, and comprehensive theme support
+- **Writing** — Publish and manage documents and publications via `StandardSitePublisher`
+- **Document rendering** — Render native Leaflet content with block and page components, including ordered lists, footnotes, and rich text facets
+- **Markdown rendering** — Render Markdown content with `<MarkdownRenderer>`
+- **Extended themes** — RGBA colours, page backgrounds, background images, custom heading and body fonts, and configurable page width
 - **Comments** — Federated Bluesky replies via `<Comments />` and native Leaflet comments via `<CommentsSection />`
 - **Recommendations** — Like/recommend documents with the `<RecommendButton />` component
 - **Subscriptions** — Subscribe to publications via `site.standard.graph.subscription`
@@ -113,6 +114,7 @@ The library provides comprehensive rendering for all Leaflet block types:
 | Component | Description |
 |-----------|-------------|
 | `<DocumentRenderer>` | Master component for rendering full documents |
+| `<MarkdownRenderer>` | Render Markdown content |
 | `<LinearDocumentRenderer>` | Linear document layout |
 | `<CanvasRenderer>` | Canvas-based documents |
 | `<BlockRenderer>` | Individual block rendering |
@@ -125,9 +127,13 @@ The library provides comprehensive rendering for all Leaflet block types:
 | `<MathBlock>` | KaTeX math rendering |
 | `<ImageBlock>` | Images with aspect ratio |
 | `<BlockquoteBlock>` | Quotations |
+| `<HorizontalRuleBlock>` | Horizontal rules |
+| `<IframeBlock>` | Embedded iframes |
+| `<WebsiteBlock>` | Website link cards |
 | `<BskyPostBlock>` | Embedded Bluesky posts |
 | `<PollBlock>` | Interactive polls |
 | `<ButtonBlock>` | Call-to-action buttons |
+| `<PageBlock>` | Nested document pages |
 
 ### Rich Text Facets
 
@@ -165,9 +171,13 @@ import { ThemeProvider, extendedThemeToCssVars } from '@ewanc26/svelte-standard-
 
 const theme = {
   backgroundColor: { r: 255, g: 255, b: 255 }, // or RGBA
-  accentColor: { r: 99, g: 102, b: 241 },
-  fontFamily: 'Inter',
-  headingFontFamily: 'Playfair Display',
+  pageBackground: { r: 250, g: 250, b: 247 },
+  primary: { r: 99, g: 102, b: 241 },
+  accentBackground: { r: 99, g: 102, b: 241 },
+  accentText: { r: 255, g: 255, b: 255 },
+  headingFont: 'Playfair Display',
+  bodyFont: 'Inter',
+  pageWidth: 720,
   backgroundImage: {
     url: 'https://example.com/bg.jpg',
     opacity: 0.3
@@ -187,20 +197,34 @@ import {
 } from '@ewanc26/svelte-standard-site';
 
 // Convert colors
-colorToCSS({ r: 255, g: 0, b: 0 }); // 'rgb(255 0 0)'
-rgbaToCSS({ r: 255, g: 0, b: 0, a: 0.5 }); // 'rgba(255, 0, 0, 0.5)'
+colorToCSS({ r: 255, g: 0, b: 0 }); // 'rgb(255, 0, 0)'
+rgbaToCSS({ r: 255, g: 0, b: 0, a: 50 }); // 'rgba(255, 0, 0, 0.5)'
 
 // Generate CSS variables
 const vars = extendedThemeToCssVars(theme);
 
 // Get Google Fonts URL for custom fonts
-const fontUrl = getGoogleFontsUrl(['Inter:wght@400;700', 'Playfair Display:wght@700']);
+const fontUrl = getGoogleFontsUrl({
+  headingFont: 'Playfair Display',
+  bodyFont: 'Inter'
+});
 ```
 
 ## UI Components
 
 | Component | Description |
 |-----------|-------------|
+| `<DocumentCard>` | Document card with cover, title, description, metadata, and tags |
+| `<PublicationCard>` | Publication summary card with icon, description, and site link |
+| `<StandardSiteLayout>` | Page shell wiring theme, header, and footer together |
+| `<ThemeToggle>` | Light/dark mode toggle |
+| `<DateDisplay>` | Formatted publication date |
+| `<TagList>` | Tag pills for a document or publication |
+| `<ThemedContainer>` | Themed layout container |
+| `<ThemedText>` | Themed text element with opacity and accent variants |
+| `<ThemedCard>` | Themed card surface, optionally headless |
+| `<Comment>` | Single native Leaflet comment with replies |
+| `<CommentsSection>` | Threaded native Leaflet comments |
 | `<Avatar>` | User avatar with initials fallback |
 | `<Toast>` | Toast notifications (success/error/info/warning) |
 | `<Watermark>` | Publication watermark |
@@ -215,7 +239,7 @@ const fontUrl = getGoogleFontsUrl(['Inter:wght@400;700', 'Playfair Display:wght@
 | `@ewanc26/svelte-standard-site` | Components, client, stores, types, utilities |
 | `.../publisher` | `StandardSitePublisher` for writing records |
 | `.../content` | Markdown transformation utilities |
-| `.../comments` | Bluesky comment fetching utilities |
+| `.../comments` | Native Leaflet comment utilities (fetching, threading, parsing) |
 | `.../verification` | `.well-known` and ownership verification helpers |
 | `.../schemas` | Zod schemas and `COLLECTIONS` constant |
 | `.../config/env` | `getConfigFromEnv()` SvelteKit helper |
@@ -234,9 +258,19 @@ await publisher.publishDocument({ site, title, content, publishedAt });
 await publisher.updateDocument(rkey, { ... });
 await publisher.deleteDocument(rkey);
 
-// Manage blob assets
-await publisher.uploadBlob(file, mimeType);
-await publisher.deleteBlob(cid);
+// List documents (default limit: 100)
+await publisher.listDocuments();
+```
+
+### Publication Operations
+
+```typescript
+await publisher.publishPublication({ ... });
+await publisher.updatePublication(rkey, { ... });
+await publisher.deletePublication(rkey);
+
+// List publications (default limit: 100)
+await publisher.listPublications();
 ```
 
 ### Comment Operations
@@ -278,22 +312,33 @@ await publisher.isSubscribed(publicationUri);
 
 ## Environment Variables
 
-```env
-PUBLIC_ATPROTO_DID=did:plc:your-did-here
-PUBLIC_PUBLICATION_RKEY=3abc123xyz
+Reading uses the variables in `.env.example`:
 
-# For publishing (never commit)
-ATPROTO_APP_PASSWORD=xxxx-xxxx-xxxx-xxxx
+```env
+# Required: your AT Protocol DID
+PUBLIC_ATPROTO_DID=did:plc:your-did-here
+
+# Optional: custom PDS endpoint (auto-resolved if unset)
+# PUBLIC_ATPROTO_PDS=https://your-pds.example.com
+
+# Optional: cache TTL in milliseconds (default: 300000)
+# PUBLIC_CACHE_TTL=300000
+```
+
+Publishing also reads credentials from the process environment. Never commit them:
+
+```env
 ATPROTO_HANDLE=you.bsky.social
+ATPROTO_APP_PASSWORD=xxxx-xxxx-xxxx-xxxx
 ```
 
 ## Tech Stack
 
-Svelte 5, SvelteKit 2, Tailwind CSS 4, `@atproto/api`, Zod, Vitest.
+Svelte 5, SvelteKit 2, Tailwind CSS 4, `@bsky/sdk`, `@atproto/lex`, Shiki 4, KaTeX, Zod, Vitest.
 
 ## Customizing Components
 
-All components support style overrides via the `class` prop. For deeper customization, use render snippets.
+Most components accept a `class` prop for style overrides. For deeper customization, use render snippets.
 
 ### DocumentCard with Custom Layout
 

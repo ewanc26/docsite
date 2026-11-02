@@ -1,65 +1,68 @@
 ---
 title: bluesky-avatar-updater
-description: Automatically update your Bluesky avatar (and banner) every hour based on the time of day.
+description: Rotate your Bluesky avatar (and optionally banner) every hour from a CID map. Written in Rust; unmaintained.
 date: 2026-04-11
-tags: [bluesky, atproto, python, automation]
+tags: [bluesky, atproto, rust, automation, unmaintained]
 draft: false
 atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfyqfpgwyo25"
 ---
 
-[bluesky-avatar-updater](https://github.com/ewanc26/bluesky-avatar-updater) is a Python script that swaps your Bluesky profile avatar — and optionally your banner — based on the current hour. Each hour maps to a blob CID stored in a JSON config file. The script sets up its own cron job to run hourly, handles log rotation, and performs an API health check on each run.
+[bluesky-avatar-updater](https://github.com/ewanc26/bluesky-avatar-updater) is a Rust tool that swaps your Bluesky profile avatar — and optionally your banner — based on the current hour. Each hour maps to a blob CID stored in a JSON config file. It fetches the blob metadata from your PDS, updates the profile record, writes logs, and installs an hourly cron job so it can run unattended.
 
 Inspired by [@dame.is](https://bsky.app/profile/dame.is)'s post on building an automated dynamic avatar.
 
+## Status
+
+Unmaintained — the repository carries a "No Maintenance Intended" badge.
+
 ## Setup
 
-Requires Python 3.6+, a virtual environment, and a Linux/macOS host (developed on macOS, intended for Linux deployment).
+Requires Rust 1.85+ and Cargo. No Python environment is needed.
 
 ```bash
-git clone git@github.com:ewanc26/bluesky-avatar-updater
+git clone https://github.com/ewanc26/bluesky-avatar-updater.git
 cd bluesky-avatar-updater
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
+cargo build --release
 ```
 
-Create `assets/.env`:
+Create `assets/.env` (a `.env` in the repository root is also read):
 
 ```env
-ENDPOINT=your_endpoint
-HANDLE=your_handle
+ENDPOINT=https://bsky.social
+HANDLE=your_handle.bsky.social
 PASSWORD=your_app_password
-DID=your_did
-UPDATE_BANNER=true
+DID=did:plc:your_did
+UPDATE_BANNER=false
 ```
 
-Create `assets/cids.json` mapping each hour to blob CIDs:
+Create `assets/cids.json` mapping each hour to blob CIDs. The `banner` field is optional per hour:
 
 ```json
 {
-  "00": { "avatar": "bafkrei...", "banner": "bafkrei..." },
-  "01": { "avatar": "bafkrei...", "banner": "bafkrei..." }
+  "00": { "avatar": "cid_for_midnight", "banner": "banner_cid_for_midnight" },
+  "01": { "avatar": "cid_for_1am", "banner": "banner_cid_for_1am" }
 }
 ```
 
-Run the script:
+Run it:
 
 ```bash
-python -u ./src/main.py
+cargo run --release
 ```
 
-On first run, the script will install a cron job to execute itself at the top of every hour.
+After building, the binary can also be run directly with `./target/release/bluesky-avatar-updater`.
 
-## What It Does on Each Run
+On startup it:
 
-1. Verifies it's running inside a virtual environment
-2. Loads credentials from `assets/.env`
-3. Reads the CID map from `assets/cids.json`
-4. Checks the current hour and selects the right blob CIDs
-5. Performs an API health check on the configured endpoint
-6. Authenticates via AT Protocol and updates the profile
-7. Writes logs to a rotating file in `logs/` (14-day rotation, 5 backups, 30-day deletion)
-8. Installs/updates the cron job
+1. Adds `0 * * * * /path/to/binary` to your crontab if the binary is not already listed
+2. Loads environment variables from `.env` or `assets/.env`
+3. Validates `ENDPOINT`, `HANDLE`, `PASSWORD`, and `DID`, and normalises the endpoint to HTTPS
+4. Checks the endpoint's `xrpc/_health` route
+5. Reads the CID map from `assets/cids.json`
+6. Selects the avatar and optional banner for the current hour
+7. Logs in with the app password and reads the current profile record, keeping its CID for a `swap_record` update
+8. Fetches blob metadata from `com.atproto.sync.getBlob` and updates the avatar; updates the banner only when `UPDATE_BANNER=true` and a banner CID exists
+9. Writes the profile record and logs to daily-rolled files under `logs/`
 
 ## Licence
 

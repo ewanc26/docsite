@@ -27,7 +27,7 @@ The Markov model uses an internal mutex to serialise access between the firehose
 - A C23 compiler (gcc ≥ 14, clang ≥ 18, or Apple clang)
 - CMake ≥ 3.20
 - libuv ≥ 1.0
-- The [Wolfram SDK](https://github.com/ewanc26/wolfram) checked out at `../wolfram`
+- The [Wolfram SDK](https://github.com/ewanc26/wolfram) — fetched automatically by CMake and pinned to the released `v0.22.0` tag
 - A Bluesky account with an app password
 
 ## Build
@@ -36,6 +36,8 @@ The Markov model uses an internal mutex to serialise access between the firehose
 cmake -S . -B build
 cmake --build build
 ```
+
+Then run `./build/bluesky_dadaist` with the environment variables below exported.
 
 ## Configuration
 

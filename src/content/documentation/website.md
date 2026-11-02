@@ -1,33 +1,31 @@
 ---
 title: website
-description: Source code for ewancroft.uk — a personal site powered by AT Protocol, built with SvelteKit 5 and Tailwind CSS 4.
+description: Source code for ewancroft.uk — a personal site powered by AT Protocol, built with SvelteKit 2, Svelte 5, and Tailwind CSS 4.
 date: 2026-04-11
 tags: [atproto, sveltekit, personal-site, standard-site, teal-fm]
 draft: false
 atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfyqfgh24625"
 ---
 
-[website](https://github.com/ewanc26/website) is the source code for [ewancroft.uk](https://ewancroft.uk). It's a fully AT Protocol-integrated personal site built with SvelteKit 5, Tailwind CSS 4, and Svelte 5 Runes. While the repository includes Ewan-specific configuration, the codebase is designed to be adapted for anyone running their own AT Protocol-powered site.
+[website](https://github.com/ewanc26/website) is the source code for [ewancroft.uk](https://ewancroft.uk). It's an AT Protocol-native personal site built with SvelteKit 2, Svelte 5 runes, and Tailwind CSS 4. The blog's authoritative content lives in AT Protocol records rather than local Markdown files, and the site renders Standard.site and Leaflet documents with a Markdown compatibility fallback.
 
-The app is a single SvelteKit project. All shared packages (@ewanc26/atproto, @ewanc26/ui, @ewanc26/utils, etc.) live in the separate [@ewanc26/pkgs](/projects/pkgs) monorepo and are consumed as published npm dependencies.
+The app is a single SvelteKit project. It consumes shared packages such as [@ewanc26/atproto](/projects/atproto) from the separate [@ewanc26/pkgs](/projects/pkgs) monorepo as published npm dependencies; the rest of the site's code lives in this repository.
 
 ## Features at a Glance
 
-**AT Protocol integration** — Bluesky profile (avatar, banner, bio, pronouns, follower counts), Standard.site blog posts, [teal.fm](https://teal.fm) music status, [kibun.social](https://kibun.social) mood status, [Tangled](https://tangled.org) repositories, and [Linkat](https://linkat.blue) link board — all fetched live with configurable in-memory caching via [@ewanc26/atproto](/projects/atproto).
+**AT Protocol-native blog** — Discovers publications and documents from the configured DID, associates posts with a Standard.site publication, and renders native `pub.leaflet.blocks.*` content with dedicated Svelte components. UTF-8 byte-indexed facets support formatting, links, mentions, IDs, code, highlights, and footnotes. Embedded posts and publications are hydrated from AT Protocol records, while a Markdown representation remains available for older or non-JavaScript clients.
 
-**Supporters** — Ko-fi and GitHub Sponsors webhook integration via [@ewanc26/supporters](/projects/supporters). Events from both platforms are stored as records on the ATProto PDS and surfaced in a unified chronological timeline. Ko-fi events use the `<KofiSupporters>` and `<LunarContributors>` components; GitHub sponsorship events use `<GitHubSponsors>`.
+**Bluesky feed and profile** — The homepage shows the latest non-reply posts, including text, image galleries, link cards, video, and quote posts. Profile data and verification badges are fetched from Bluesky and Constellation, and the "Elsewhere" shelf is built from the profile's `app.bsky.actor.link` records.
 
-**Noise avatars** — Deterministic value-noise profile pictures generated client-side from a string seed via [@ewanc26/noise-avatar](/projects/noise-avatar).
+**GitHub activity** — Pinned repositories, a year of contributions, total commits, a language breakdown, and a profile summary. Setting `GITHUB_TOKEN` enables the GraphQL pinned-items API and commit totals; without it, the public GitHub profile is used as a fallback.
 
-**Content system** — Multi-publication Standard.site support with friendly URL slugs, per-publication RSS 2.0 feeds, an `/archive` page, and redirects from `/{slug}/{rkey}` to the full document on Standard.site.
+**Music, mood, and shelves** — Now-playing and recent plays from teal.fm with artwork lookup, a kibun mood status, Popfeed review shelves (watching, reading, playing, listening), and shipped apps sourced from atstore listings.
 
-**Bluesky post display** — Latest non-reply posts with full thread context, quoted post embedding, image galleries, external link cards, HLS.js video streaming, and real-time like/repost counts via Constellation API.
+**Seasonal design** — The risograph-inspired palette is generated in OKLCH from the Wheel of the Year, interpolating between sabbat hues and refreshing hourly. Halftone and pixel moons, an almanac, flat surfaces, and two spot inks carry the visual system.
 
-**Music integration** — Album artwork via a cascading server-side proxy: MusicBrainz Cover Art Archive → iTunes → Deezer → Last.fm → AT Protocol blob fallback. All with smart caching and CORS-free via `/api/artwork`.
+**Sound and easter eggs** — A Web Audio ambience engine responds to season, moon phase, time of day, scroll and pointer activity, reading mode, and tab visibility. Wolf mode rewrites page text while preserving numbers, abbreviations, and interactive elements; other eggs include the Monday, idle, three-toast, heritage, and Happy Mac pieces.
 
-**Theming** — 12 colour themes (Sage, Monochrome, Slate, Ruby, Coral, Sunset, Amber, Forest, Teal, Ocean, Lavender, Rose) using OKLCH colour space, system preference detection, and persistent selection — configured in [@ewanc26/ui](/projects/ui).
-
-**Fun bits** — Wolf mode (converts page text to wolf sounds while preserving numbers, abbreviations, and interactive elements), decimal clock, Happy Mac easter egg, scroll-to-top button.
+**Feeds, sharing, and metadata** — `/rss.xml` is the canonical RSS feed, with legacy feed paths redirecting to it. The site also provides `/sitemap.xml`, dynamic Open Graph images, share buttons, a table of contents, native Leaflet comments via AT Protocol OAuth, backlink avatars, and Standard.site recommendations and subscriptions.
 
 ## Quick Start
 
@@ -35,28 +33,25 @@ The app is a single SvelteKit project. All shared packages (@ewanc26/atproto, @e
 git clone git@github.com:ewanc26/website
 cd website
 pnpm install
-cp .env .env.local
+cp .env.example .env
 ```
 
-Edit `.env.local`:
+Edit `.env`:
 
 ```ini
 PUBLIC_ATPROTO_DID=did:plc:your-did-here
-PUBLIC_SITE_TITLE=Your Site Title
-PUBLIC_SITE_URL=https://yoursite.com
-# Optional: ActivityPub / Fediverse
-# PUBLIC_AP_INSTANCE_URL=https://ap.example.com
-# PUBLIC_AP_USERNAME=yourname
-# Optional: Ko-fi webhook integration
-# KOFI_PAGE_ID=your-kofi-page-id
-# KOFI_VERIFICATION_TOKEN=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-# ATPROTO_APP_PASSWORD=xxxx-xxxx-xxxx-xxxx
-# Optional: GitHub Sponsors webhook
-# GITHUB_USERNAME=your-github-username
-# GITHUB_WEBHOOK_SECRET=your-webhook-secret
+PUBLIC_LEAFLET_BLOG_PUBLICATION=your-blog-publication-rkey
+
+# Optional: GitHub project data
+GITHUB_USERNAME=your-github-username
+GITHUB_TOKEN=
+
+# Site metadata
+PUBLIC_SITE_TITLE="Your Site Title"
+PUBLIC_SITE_DESCRIPTION="Your site description."
 ```
 
-Configure publication slugs in `src/lib/data/slug-mappings.ts`, then:
+Then:
 
 ```bash
 pnpm dev
@@ -67,79 +62,46 @@ pnpm dev
 | Variable | Required | Description |
 |----------|----------|-------------|
 | `PUBLIC_ATPROTO_DID` | Yes | Your AT Protocol DID |
-| `PUBLIC_SITE_TITLE` | No | Site title for SEO |
-| `PUBLIC_SITE_DESCRIPTION` | No | Site description for SEO |
-| `PUBLIC_SITE_KEYWORDS` | No | Comma-separated keywords for SEO |
-| `PUBLIC_SITE_URL` | No | Canonical site URL |
-| `PUBLIC_BLOG_FALLBACK_URL` | No | Redirect here if a document isn't found (omit to 404) |
-| `PUBLIC_LOCAL_SLINGSHOT_URL` | No | Local Slingshot instance URL (default: `http://localhost:3000`) |
-| `PUBLIC_SLINGSHOT_URL` | No | Public Slingshot fallback URL (default: `https://slingshot.microcosm.blue`) |
-| `PUBLIC_AP_INSTANCE_URL` | No | Full URL of your ActivityPub instance (e.g. `https://ap.example.com`) |
-| `PUBLIC_AP_USERNAME` | No | Your username on the AP instance |
-| `PUBLIC_CORS_ALLOWED_ORIGINS` | No | Comma-separated CORS origins for `/api/` |
-| `PUBLIC_KOFI_PAGE_ID` | No | Your Ko-fi page ID (e.g. `ewancroft`) |
-| `KOFI_VERIFICATION_TOKEN` | No | Ko-fi webhook verification token |
-| `PUBLIC_GITHUB_USERNAME` | No | Your GitHub username for the Sponsors profile link |
-| `GITHUB_WEBHOOK_SECRET` | No | HMAC secret for verifying GitHub Sponsors webhook payloads |
-| `ATPROTO_APP_PASSWORD` | No | ATProto app password for writing supporter records |
-| `CACHE_TTL_PROFILE` | No | Profile cache TTL in seconds (default: 60) |
-| `CACHE_TTL_SITE_INFO` | No | Site info TTL (default: 120) |
-| `CACHE_TTL_LINKS` | No | Links TTL (default: 60) |
-| `CACHE_TTL_MUSIC_STATUS` | No | Music status TTL (default: 10) |
-| `CACHE_TTL_KIBUN_STATUS` | No | Mood status TTL (default: 15) |
-| `CACHE_TTL_TANGLED_REPOS` | No | Tangled repos TTL (default: 60) |
-| `CACHE_TTL_BLOG_POSTS` | No | Blog posts TTL (default: 30) |
-| `CACHE_TTL_PUBLICATIONS` | No | Publications TTL (default: 60) |
-| `CACHE_TTL_INDIVIDUAL_POST` | No | Individual post TTL (default: 60) |
-| `CACHE_TTL_IDENTITY` | No | Identity resolution TTL in seconds (default: 1440) |
+| `PUBLIC_LEAFLET_BLOG_PUBLICATION` | Yes | Record key of the Standard.site publication used for the blog |
+| `GITHUB_USERNAME` | No | GitHub username for project and activity data (defaults to `ewanc26`) |
+| `GITHUB_TOKEN` | No | Enables the GitHub GraphQL pinned-items API and commit totals; the public profile is used otherwise |
+| `PUBLIC_SITE_TITLE` | No | Site title used in the header and as a suffix for subpage titles |
+| `PUBLIC_SITE_DESCRIPTION` | No | Default SEO description |
+
+Canonical URLs for pages, Open Graph metadata, the RSS feed, and the sitemap are derived from the request origin, so no site-URL variable is required.
 
 ## Dependencies
 
-The site consumes these packages from the [@ewanc26/pkgs](/projects/pkgs) monorepo:
-
-| Package | Description |
-|---------|-------------|
-| [@ewanc26/atproto](/projects/atproto) | AT Protocol service layer — profile, posts, documents, status records, cache, agents |
-| [@ewanc26/ui](/projects/ui) | Svelte component library — layout, cards, UI primitives, stores, theme config |
-| [@ewanc26/utils](/projects/utils) | Utility functions — date/number formatting, URL helpers, validators, RSS generation |
-| [@ewanc26/noise-avatar](/projects/noise-avatar) | Deterministic value-noise avatar generation |
-| [@ewanc26/supporters](/projects/supporters) | Ko-fi and GitHub Sponsors display components backed by ATProto PDS, with a unified event timeline |
-| [@ewanc26/tid](/projects/tid) | Zero-dependency AT Protocol TID generation |
+The site consumes [@ewanc26/atproto](/projects/atproto) from the [@ewanc26/pkgs](/projects/pkgs) monorepo as its shared AT Protocol service layer. Other direct dependencies include `@atproto/lex`, `@atproto/oauth-client-browser`, `@lucide/svelte`, Satori with `@resvg/resvg-wasm` for Open Graph images, Fontsource packages, and a Unified/remark/rehype Markdown pipeline.
 
 ## Publication System
 
-Map friendly slugs to Standard.site publication rkeys in `src/lib/data/slug-mappings.ts`:
+Set `PUBLIC_LEAFLET_BLOG_PUBLICATION` to the record key of the Standard.site publication that backs the blog. That publication drives the homepage writing list, the `/blog` index, and individual post routes.
 
-```typescript
-export const slugMappings: SlugMapping[] = [
-  { slug: 'blog', publicationRkey: '3m3x4bgbsh22k', platform: 'standard.site' }
-];
-```
+Posts use date-based URLs of the form `/blog/:year/:month/:day/:slug`, derived from the publication date and title. Legacy `/blog/:rkey` URLs redirect to the canonical dated path. The blog index supports search and tag filtering.
 
-This creates routes at `/blog`, `/blog/{rkey}`, and `/blog/rss`.
+`/rss.xml` is the canonical feed. The older `/rss`, `/feed`, `/feed.xml`, `/atom.xml`, `/blog/rss`, `/blog/rss.xml`, and `/blog/feed` paths redirect there.
 
 ## Well-Known Routes
 
-All `/.well-known/` endpoints are dynamic server routes driven by env vars — there are no static files for identity resolution.
+**`/.well-known/atproto-did`** — Returns `PUBLIC_ATPROTO_DID` as plain text, binding the domain to the account's DID.
 
-**`/.well-known/atproto-did`** — Returns `PUBLIC_ATPROTO_DID` as plain text. This is how AT Protocol resolves your DID from your domain handle.
-
-**`/.well-known/webfinger`** — Accepts a `resource` query parameter and returns a JRD JSON response. Valid resources are `acct:{username}@{ap-instance}`, `acct:{username}@{site-domain}`, and `https://{ap-instance}/@{username}`. The response is proxied live from the AP instance with the site-domain alias (`acct:{username}@{site-domain}`) injected before returning. Returns `400` if `resource` is missing, `404` if the resource is not recognised, and `502` if the upstream AP instance is unreachable. Requires `PUBLIC_AP_INSTANCE_URL`, `PUBLIC_AP_USERNAME`, and `PUBLIC_SITE_URL`.
-
-**`fediverse:creator` metatag** — When `PUBLIC_AP_INSTANCE_URL` and `PUBLIC_AP_USERNAME` are set, a `fediverse:creator` metatag is injected into every page via the `MetaTags` component.
+**`/.well-known/site.standard.publication`** — Returns the full AT URI of the configured blog publication, or `404` when the DID or publication key is missing.
 
 ## Custom Lexicons Used
 
-- `uk.ewancroft.site.info` — Site metadata (tech stack, credits, privacy statement)
-- `blue.linkat.board` — Link board
-- `fm.teal.alpha.actor.status` + `fm.teal.alpha.feed.play` — Music status
+- `site.standard.*` — Publications, documents, subscriptions, and recommendations
+- `pub.leaflet.*` — Structured content, blocks, comments, and recommendations
+- `app.bsky.actor.profile`, `app.bsky.feed.post`, `app.bsky.actor.link`, and `app.bsky.graph.verification` — Profile, posts, profile links, and verification badges
+- `fm.teal.actor.status` and `fm.teal.feed.play` — Now-playing music and scrobble history
 - `social.kibun.status` — Mood status
-- `sh.tangled.repo` — Code repositories
-- `site.standard.*` — Longform content documents and publications
+- `social.popfeed.feed.review` — Popfeed review shelves
+- `fyi.atstore.listing.detail` — Shipped app listings
+- `uk.ewancroft.site.info` — Site metadata, including tech stack, credits, and privacy statement
 
 ## Tech Stack
 
-SvelteKit 2.53+ with Svelte 5, Tailwind CSS 4, `@atproto/api` v0.18.21+, HLS.js, `@lucide/svelte`, Vite 7, TypeScript 5.9+. Deployed on Vercel via `@sveltejs/adapter-vercel`.
+SvelteKit 2.70+ with Svelte 5 runes, Tailwind CSS 4, Vite 8, TypeScript 6, `@atproto/lex`, and `@atproto/oauth-client-browser`. Open Graph images are generated with Satori and `@resvg/resvg-wasm`, and Markdown is processed with Unified, remark, and rehype. Deployed on Vercel via `@sveltejs/adapter-vercel`.
 
 ## Licence
 

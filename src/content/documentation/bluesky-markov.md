@@ -1,13 +1,13 @@
 ---
 title: bluesky-markov
-description: A Bluesky bot that generates and posts Markov chain text based on a source account's posts. Unmaintained.
+description: A Rust bot that generates and posts Markov chain text based on a source account's posts. Unmaintained.
 date: 2026-04-11
-tags: [bluesky, bot, python, markov, unmaintained]
+tags: [bluesky, bot, rust, markov, unmaintained]
 draft: false
 atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfyqfo6i3625"
 ---
 
-[bluesky-markov](https://github.com/ewanc26/bluesky-markov) is a Python bot that fetches posts from a source Bluesky account, trains a Markov chain on them, generates new text, and posts it to a destination account at random intervals.
+[bluesky-markov](https://github.com/ewanc26/bluesky-markov) is a Rust bot that fetches posts from a source Bluesky account, trains a Markov chain on them, generates new text, and posts it to a destination account at random intervals between 30 minutes and 3 hours.
 
 ## Status
 
@@ -15,12 +15,12 @@ Unmaintained.
 
 ## Setup
 
+Requires Rust 1.85+.
+
 ```bash
 git clone git@github.com:ewanc26/bluesky-markov
 cd bluesky-markov
-python3 -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
+cargo build --release
 ```
 
 Create `.env` in the project root:
@@ -37,16 +37,16 @@ BSKY_HOST_URL=https://bsky.social
 Run:
 
 ```bash
-python src/main.py
+cargo run --release
 ```
 
 ## Structure
 
-- `src/main.py` — Orchestration
-- `src/bsky_api.py` — Bluesky API interactions
-- `src/clean.py` — Text cleaning and preprocessing
-- `src/markov_gen.py` — Markov chain generation
-- `src/time_utils.py` — Random interval scheduling
+- `src/main.rs` — Entry point, orchestration, and logging
+- `src/bsky.rs` — Bluesky login, DID resolution, and API interactions
+- `src/clean.rs` — Text cleaning and preprocessing
+- `src/markov_gen.rs` — Post retrieval, Markov chain training, and text generation
+- `src/time.rs` — Random interval scheduling
 
 Logs are written to `log/general.log`.
 

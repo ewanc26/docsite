@@ -1,7 +1,7 @@
 ---
 title: '@ewanc26/pkgs'
 description: Ewan's personal package monorepo — language-agnostic workspace with TypeScript, Rust, and Python packages.
-date: 2026-08-20
+date: 2026-11-02
 tags: [monorepo, pnpm, typescript, rust, python, atproto, library, tools]
 draft: false
 atUri: 'at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mghqug32j725'
@@ -39,6 +39,7 @@ The monorepo has since expanded to include Rust CLI tools, Python utilities, and
 | [`@ewanc26/opal`](/projects/opal)                                 | 0.x     | Convert Twitter, Mastodon, Threads & Nostr posts to AT Protocol Bluesky posts — CLI and library                                              |
 | [`opal-web`](/projects/opal)                                      | 0.x     | Browser-based converter at [opal.croft.click](https://opal.croft.click) (private, not published to npm)                                     |
 | [`tourmaline`](/projects/tourmaline)                              | 0.x     | AT Protocol scrobble analyser for Teal.fm listening history at [tourmaline.croft.click](https://tourmaline.croft.click) (private, not published to npm) |
+| [`@ewanc26/rock-tumbl`](https://github.com/ewanc26/pkgs/tree/main/packages/rock-tumbl) | 0.x | Convert Tumblr blog exports into Standard.site documents — CLI and library, with optional publishing to a PDS                    |
 | [`@ewanc26/croft-click`](/projects/croft-click)                   | 1.x     | The [croft.click](https://croft.click) tools directory (private, not published to npm)                                                      |
 | [`@ewanc26/croft-click-core`](https://github.com/ewanc26/pkgs/tree/main/packages/croft-click-core) | 0.x | Shared core logic (publishing, rate limiting, sync, data conversion) behind the croft.click import tools                                    |
 
@@ -85,6 +86,7 @@ pnpm add @ewanc26/tangled-sync
 pnpm add @ewanc26/malachite
 pnpm add @ewanc26/jasper
 pnpm add @ewanc26/opal
+pnpm add @ewanc26/rock-tumbl
 ```
 
 The `-web` sites, `tourmaline`, `croft-click`, and `croft-click-core` are private and not published to npm — they're deployed apps and internal shared logic, not libraries meant for external use.
