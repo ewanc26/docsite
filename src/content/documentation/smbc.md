@@ -4,6 +4,7 @@ description: A native C port of the original NES Super Mario Bros., translated r
 date: 2026-11-02
 tags: [c, nes, super-mario-bros, game, port, sdl2]
 draft: false
+atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mzdpjzkbaz2b"
 ---
 
 [SMB.C](https://github.com/ewanc26/smbc) is a native C port of the original NES *Super Mario Bros.*, translated routine by routine from its disassembly. The goal is to run the game as a normal native program on supported hosts — not to emulate a NES console and not to require a ROM at runtime.
