@@ -4,6 +4,7 @@ description: A native Bluesky client for the Nintendo 3DS, built with libctru an
 date: 2026-11-02
 tags: [3ds, c, atproto, bluesky, homebrew, game]
 draft: false
+atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mzdpjzrqk32m"
 ---
 
 [Indigo](https://github.com/ewanc26/indigo) is a native Bluesky client for the Nintendo 3DS. **Version 0.15.0** is a normal 3DS homebrew application — libctru for the platform, citro2d/citro3d for GPU-backed rendering, and [Wolfram](https://github.com/ewanc26/wolfram) for the AT Protocol — not a port of [Cobalt](/projects/cobalt) and not a browser wrapped around a web app. It is designed around the console's own two-screen layout: the top screen is for reading, the bottom screen is for doing.

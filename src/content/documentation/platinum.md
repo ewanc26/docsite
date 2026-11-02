@@ -4,6 +4,7 @@ description: A native Bluesky client for Classic Mac OS 9, with a small Node bri
 date: 2026-11-02
 tags: [macos9, retro, c, atproto, bluesky, desktop]
 draft: false
+atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mzdpjzlksd2f"
 ---
 
 [Platinum](https://github.com/ewanc26/platinum) is a Bluesky client for Classic Mac OS 9. It is the Mac OS 9 member of the same family as [Cobalt](/projects/cobalt) on the Wii U and [Indigo](/projects/indigo) on the 3DS, built on [Wolfram](https://github.com/ewanc26/wolfram) for the AT Protocol work. It is not a browser pointed at a web app: it is a C89 application named after the Platinum appearance, intended to look like it belongs in a System Folder.

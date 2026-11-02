@@ -4,6 +4,7 @@ description: A procedural voxel dungeon crawler in C# and Godot 4, built around 
 date: 2026-11-02
 tags: [csharp, godot, game, voxel, dungeon-crawler, procedural]
 draft: false
+atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mzdpjzxtit2j"
 ---
 
 [Hollowfall](https://github.com/ewanc26/Hollowfall) is a procedural voxel dungeon crawler in C# on .NET 10 and Godot 4. You fight through seeded, multi-floor dungeons in first person, cross gaps by firing pairs of linked portals, and follow a small Scottish-folklore story told in the margins.
