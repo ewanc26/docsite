@@ -7,16 +7,18 @@ draft: false
 atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfyqfq7cc625"
 ---
 
-[atproto-snake](https://github.com/ewanc26/atproto-snake) is a browser-based Snake game built with SvelteKit that uses AT Protocol for authentication and saves your high score directly to your PDS.
+[atproto-snake](https://github.com/ewanc26/atproto-snake) is a browser-based Snake game built with SvelteKit that uses AT Protocol for authentication and saves your high score directly to your PDS. Login is available through browser OAuth (recommended) or an app password.
 
 ## How to Play
 
-1. Log in with your AT Protocol handle, app password, and optionally your PDS URL
-2. The game starts after a short countdown
-3. Use arrow keys to steer the snake; swipe on touch devices
-4. Eat food (green squares) to grow and score points
+1. Log in with your AT Protocol handle using OAuth, or switch to the App Password tab and enter your handle and app password
+2. The game starts after a three-second countdown
+3. Use the arrow keys or WASD to steer the snake; swipe on touch devices; press Space to pause
+4. Eat the red food to grow and score points
 5. Avoid walls and your own tail
-6. Scores above zero are automatically submitted to AT Protocol on game over
+6. On game over, positive scores are written to your PDS as `uk.ewancroft.snake.score` records (best-effort; write failures are logged)
+
+The OAuth flow requests only the `atproto repo:uk.ewancroft.snake.score` scope, so it can write score records but nothing else in your repository.
 
 ## Setup
 
@@ -35,15 +37,16 @@ npm run build
 
 ## Project Structure
 
-- `src/lib/auth/` — AT Protocol authentication logic
-- `src/lib/snake/` — Core game logic
-- `src/routes/` — Login and game pages
+- `src/lib/auth/` — OAuth and app-password authentication logic
+- `src/lib/snake/` — Core game logic and canvas renderer
+- `src/routes/` — Landing, login, game, and game-over pages
 - `src/lib/components/` — Reusable Svelte components
-- `static/client-metadata.json` — OAuth client metadata
+- `static/client-metadata.json` — Production OAuth client metadata
+- `static/lexicons/uk/ewancroft/snake/score.json` — Score record lexicon
 
 ## Tech Stack
 
-SvelteKit, Tailwind CSS, AT Protocol (`@atproto/api`), Vite.
+SvelteKit, Tailwind CSS 4, `@atproto/lex`, `@bsky/sdk`, `@atproto/oauth-client-browser`, and Vite. The client-only app builds with `@sveltejs/adapter-vercel` using a Node.js 22 runtime.
 
 ## Licence
 

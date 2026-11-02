@@ -33,6 +33,7 @@ hosts/
     └── modules/
         ├── cloudflare-tunnel.nix   — outbound tunnel, ingress rules for both services
         ├── pds.nix                 — bluesky-pds + nginx vhost
+        ├── pds-gatekeeper.nix      — TOTP 2FA proxy for PDS auth endpoints
         └── mastodon.nix            — Mastodon + nginx vhost overrides
 ```
 

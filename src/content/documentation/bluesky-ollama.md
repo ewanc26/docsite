@@ -1,26 +1,26 @@
 ---
 title: bluesky-ollama
-description: An AI-powered Bluesky bot that uses a local Ollama model to generate posts in the style of a source account.
+description: An AI-powered Bluesky bot, in Python and Rust, that uses a local Ollama model to generate posts in the style of a source account.
 date: 2026-04-11
-tags: [bluesky, bot, python, ollama, ai]
+tags: [bluesky, bot, python, rust, ollama, ai]
 draft: false
 atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mfyqfneyng25"
 ---
 
-[bluesky-ollama](https://github.com/ewanc26/bluesky-ollama) is a Python bot that fetches recent posts from a source Bluesky account, feeds them to a locally-running Ollama model, and posts the AI-generated result to a destination account. It combines the Bluesky API integration from [bluesky-markov](./bluesky-markov) with local LLM generation.
+[bluesky-ollama](https://github.com/ewanc26/bluesky-ollama) fetches recent posts from a source Bluesky account, feeds them to a locally-running Ollama model, and posts the generated result to a destination account. It combines the Bluesky API integration from [bluesky-markov](./bluesky-markov) with local LLM generation. The repository contains two independent implementations: the Python entrypoint documented in the README and Nix dev shell (`src/main.py`), and a separate Rust binary with similar behaviour (`Cargo.toml`, `src/main.rs`).
 
 ## Features
 
-- Fetches and cleans posts from any source Bluesky account
+- Fetches and cleans posts from any source Bluesky account (the Python version paginates through the source's posts)
 - Generates new posts via Ollama (default model: `llama3.2`)
-- Rate limiting that respects Bluesky's API quotas (5,000 points/hour, 35,000/day)
-- Content validation: rejects empty, placeholder, repetitive, or spam-like output
+- A local post-rate guard derived from Bluesky's API limits (5,000 points/hour, 35,000/day), capped at 1,600 posts/hour and 11,000/day
+- Content validation: rejects empty or short output, over-limit text, repetitive phrasing, placeholder strings, excessive punctuation, all-caps posts, and posts with too many URLs
 - Dry-run mode for testing generation without publishing
 - Random posting intervals (30 minutes to 3 hours)
 
 ## Setup
 
-Requires Python 3 and [Ollama](https://ollama.com/) running locally.
+The Python implementation requires Python 3.x and [Ollama](https://ollama.com/) running locally.
 
 ```bash
 git clone git@github.com:ewanc26/bluesky-ollama
@@ -30,6 +30,8 @@ source venv/bin/activate
 pip install -r requirements.txt
 ollama pull llama3.2
 ```
+
+The Rust implementation needs a Rust toolchain and is built with `cargo build --release`.
 
 Create `.env`:
 
@@ -59,15 +61,23 @@ python src/main.py -m mistral
 python src/main.py --dry-run -m llama3.3
 ```
 
+The Rust binary accepts the same `-m`/`--model` and `--dry-run` options:
+
+```bash
+cargo run --release -- --dry-run -m llama3.3
+```
+
 ## Structure
 
-- `src/main.py` — Orchestration and scheduling
+- `src/main.py` — Python orchestration, inline content validation and rate limiting, scheduling
 - `src/bsky_api.py` — Bluesky API interactions
-- `src/ollama_gen.py` — Ollama post generation and content validation
+- `src/ollama_gen.py` — Ollama post generation
 - `src/clean.py` — Text cleaning utilities
-- `src/time_utils.py` — Rate limiting and interval scheduling
+- `src/time_utils.py` — Interval scheduling
+- `src/validator.rs`, `src/rate_limiter.rs`, and the other `src/*.rs` files — the separate Rust implementation
+- `src/content_validator.py`, `src/rate_limiter.py` — unused standalone Python alternatives; `main.py` defines its own validator and rate limiter
 
-Logs are written to `log/general.log`.
+The Python implementation writes to `log/general.log`; the Rust implementation rolls logs daily under `log/`.
 
 ## Licence
 

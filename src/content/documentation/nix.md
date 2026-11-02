@@ -8,6 +8,8 @@ atUri: 'at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mo7b3gkaab
 
 # nix
 
+> **Archived:** This repository is archived on GitHub and is no longer actively maintained.
+
 Systematic infrastructure-as-code for macOS and Linux environments.
 
 ## 01. Purpose
@@ -22,19 +24,29 @@ Defines and enforces reproducible system states across personal and server infra
 
 ## 03. Key Components
 
-- **Darwin Modules**: macOS-specific system and application configurations.
-- **NixOS Modules**: Server-side definitions for PDS and web hosting.
-- **Home Manager**: User-level dotfile orchestration.
+- **Darwin Modules**: macOS system and application configuration for `macmini`.
+- **NixOS Modules**: Host and service definitions for the laptop and server, including Forgejo, Nextcloud, Immich, Jellyfin, and Vaultwarden.
+- **Home Manager**: Shared user environment across macOS and Linux.
+- **Options Layer**: Typed defaults in `modules/options.nix`, with per-host overrides.
 
 ## 04. Integration
 
-Deployment via standard flake activation:
+Deployment via flake activation:
 
 ```bash
-nix run .#deploy
+# NixOS
+sudo nixos-rebuild switch --flake .#laptop
+sudo nixos-rebuild switch --flake .#server
+
+# macOS (after the first nix-darwin install)
+sudo darwin-rebuild switch --flake .#macmini
 ```
+
+First-time macOS installs use `sudo nix run nix-darwin -- switch --flake .#macmini`.
 
 ## 05. System Status
 
-- **Status**: Active / Production
+- **Status**: Archived — repository no longer maintained
+- **Hosts**: `macmini` and `laptop` remain the active configurations; the server configuration is retained with its PDS disabled.
+- **PDS**: Decommissioned 2026-10-01 after the account moved to `eurosky.social`.
 - **Consistency**: High (Flake-locked)

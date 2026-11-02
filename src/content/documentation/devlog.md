@@ -16,21 +16,25 @@ Provides a public, high-integrity record of architectural iterations and project
 
 ## 02. Technical Stack
 
-- **Framework**: SvelteKit
-- **Deployment**: Sequoia
-- **Styling**: TailwindCSS (clinical configuration)
+- **Framework**: SvelteKit + Svelte 5
+- **Content**: Markdown via unified (remark + rehype)
+- **Styling**: Tailwind CSS 4 with `@tailwindcss/typography`
+- **Publishing**: Sequoia to AT Protocol
+- **Deployment**: Vercel
 
 ## 03. Key Components
 
-- **Log Parser**: Translates Markdown entries into structured temporal views.
-- **Feed Generator**: Automated RSS/Atom generation for update tracking.
-- **Integrity Checker**: Ensures consistency between GitHub releases and log entries.
+- **Entry Loader**: Reads Markdown frontmatter, strips date prefixes, and sorts entries newest-first.
+- **Markdown Renderer**: Renders GFM content and extracts a table of contents from the heading structure.
+- **Search & Tags**: Client-side entry search and tag filtering, with tag colours derived from an FNV-1a hash.
+- **Feed & Sitemap**: Prerendered RSS 2.0 feed at `/rss.xml` and a sitemap at `/sitemap.xml`.
+- **Social Cards**: Per-entry Open Graph images generated at `/api/og`.
 
 ## 04. Integration
 
-Accessed via `devlog.croft.click`.
+Published at `devlog.croft.click`. Entries are written to `eurosky.social` via Sequoia as `site.standard.document` records; the site is the web frontend for those records.
 
 ## 05. System Status
 
 - **Status**: Production
-- **Performance**: Static generation (Lighthouse: 100/100)
+- **Deployment**: Vercel

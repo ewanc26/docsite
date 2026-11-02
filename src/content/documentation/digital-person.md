@@ -16,21 +16,23 @@ Automates cross-platform social presence. Designed to function as a human online
 
 ## 02. Technical Stack
 
-- **Engine**: Letta (formerly MemGPT)
-- **Framework**: Custom Python agent wrappers
-- **Storage**: Persistent agent memory blocks
+- **Engine**: Letta
+- **Configuration**: Markdown identity, voice, and presence files
+- **Skills**: Shared skill documents for Bluesky, blogging, email, Telegram, and web browsing
+- **Memory**: Persistent agent memory, stored as versioned persona files
 
 ## 03. Key Components
 
-- **Identity Controller**: Manages voice, tone, and biographical consistency.
-- **Platform Adapters**: Modules for Bluesky, SMTP, and Svelte-based blogs.
-- **Memory Management**: Long-term storage for social context and relationship history.
+- **Personas**: `person/<name>/` holds a filled-in identity, online-presence, voice, and deployer relationship.
+- **Templates**: `template/` provides blank versions of each identity file for a new person.
+- **Skills**: `skills/` covers Bluesky, blogging, email, Telegram, and web browsing.
+- **Platform Conventions**: `reference/platform-conventions.md` records per-platform norms and etiquette.
 
 ## 04. Integration
 
-Private agentic workflow. Configuration managed via `.env` specifications.
+The repository holds the persona files loaded into a Letta agent. New people start by copying `template/` to `person/<name>/` and filling in the identity files. Faol's primary human channel is Telegram.
 
 ## 05. System Status
 
-- **Status**: Experimental
-- **Integrity**: Verified through memory block persistence tests.
+- **Status**: Deployed
+- **Person**: Faol (`faol.croft.click`)

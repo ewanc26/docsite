@@ -13,33 +13,52 @@ atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3mj7zf7lykp
 
 For client setup instructions, see **[SETUP.md](https://github.com/ewanc26/website-comm-template/blob/main/SETUP.md)**.
 
+## What's included
+
+- **Config-driven site** — site name, tagline, author, contact addresses, social links, and navigation all live in `src/lib/config.ts`.
+- **Responsive navigation** — a sticky desktop nav and an accessible mobile menu that closes on route change, Escape, or an outside click.
+- **Automatic light/dark palette** — semantic colour tokens switch with `prefers-color-scheme`.
+- **Contact form** — server-side validation, a honeypot, and a per-IP in-memory rate limit (three submissions per ten minutes). [Resend](https://resend.com) is the default provider, and the sender is isolated in `src/lib/email.ts` so it can be swapped.
+- **Sitemap and robots** — both are generated routes. The sitemap is derived from `navLinks`, and `PUBLIC_SITE_URL` overrides the configured origin for absolute URLs.
+- **Server rendering** — `adapter-auto` produces an SSR deployment on supported hosts, which the contact form's server action requires.
+
 ## Project structure
 
 ```
 src/
   lib/
     components/
-      Nav.svelte      ← sticky top nav, mobile-responsive
-      Footer.svelte   ← copyright + social links
-    config.ts         ← ✏️  edit this first for every commission
-    email.ts          ← contact form email sender (swap provider here)
+      Nav.svelte          ← sticky top nav, mobile-responsive
+      Footer.svelte       ← copyright, licence attribution, social links
+    config.ts             ← ✏️  edit this first for every commission
+    email.ts              ← contact form email sender (swap provider here)
+    siteUrl.ts            ← resolves the canonical origin for sitemap/robots
     index.ts
   routes/
-    +layout.svelte    ← wraps all pages with Nav + Footer
-    +page.svelte      ← homepage
-    layout.css        ← Tailwind entry point
+    +layout.svelte        ← wraps all pages with Nav + Footer
+    +page.svelte          ← homepage
+    layout.css            ← Tailwind entry point
     about/
       +page.svelte
     contact/
       +page.svelte
-static/               ← put images, fonts, etc. here
+      +page.server.ts     ← form action: validation, rate limit, send
+    robots.txt/
+      +server.ts
+    sitemap.xml/
+      +server.ts
+static/                   ← put images, fonts, etc. here
 ```
+
+## Configuration
+
+Set `site.url` in `src/lib/config.ts` to the live domain without a trailing slash, or set `PUBLIC_SITE_URL` in the deployment environment. For the contact form, set `RESEND_API_KEY`, then configure `contactEmailTo` and `contactEmailFrom` (or the `CONTACT_EMAIL_TO` and `CONTACT_EMAIL_FROM` environment overrides). See `.env.example` for the full set.
 
 ## Adding a new page
 
 1. Create a folder under `src/routes/`, e.g. `src/routes/portfolio/`
 2. Add a `+page.svelte` file inside it
-3. Add a matching entry to `navLinks` in `src/lib/config.ts`
+3. Add a matching entry to `navLinks` in `src/lib/config.ts` — this also adds the page to the sitemap
 
 ## Recreate from scratch
 

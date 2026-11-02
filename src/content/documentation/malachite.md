@@ -256,6 +256,13 @@ Malachite handles this automatically:
 - Pauses 24 hours between days for large imports
 - Scales immediately back to maximum speed after a quota reset
 
+### Danger Zone
+
+For testing or imports on a PDS you control, `--danger-zone` disables Malachite's
+15% quota headroom. The PDS still enforces its own limit, but this mode can
+exhaust the shared quota and rate-limit every user on that PDS. It requires
+typing `DANGER` interactively, or passing `--yes` in automation.
+
 ## File Storage
 
 All CLI data is stored in `~/.malachite/`:
