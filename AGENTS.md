@@ -20,4 +20,4 @@ a home for all my repositories documentation
 
 ## Recent history
 
-Sync AGENTS.md from zincfox; Sync AGENTS.md from zincfox; Sync CONTRIBUTING.md from zincfox; Sync CONTRIBUTING.md from zincfox; fix: restore deployable documentation build (#4)
+fix: restore deployable documentation build (#4)

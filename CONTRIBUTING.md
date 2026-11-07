@@ -16,4 +16,4 @@ a home for all my repositories documentation
 
 ## Recent direction
 
-Recent commits: Sync AGENTS.md from zincfox; Sync AGENTS.md from zincfox; Sync CONTRIBUTING.md from zincfox; Sync CONTRIBUTING.md from zincfox; fix: restore deployable documentation build (#4)
+Recent commits: fix: restore deployable documentation build (#4)
