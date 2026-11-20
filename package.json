@@ -14,7 +14,7 @@
 		"format": "prettier --write ."
 	},
 	"dependencies": {
-		"@lucide/svelte": "^0.575.0",
+		"@lucide/svelte": "^1.72.0",
 		"gray-matter": "^4.0.3",
 		"hls.js": "^1.6.15",
 		"rehype-slug": "^6.0.0",
