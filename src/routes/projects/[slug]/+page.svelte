@@ -54,8 +54,9 @@
 		<a
 			href="/projects"
 			class="mb-4 inline-flex items-center gap-1 text-[0.78em] text-[var(--color-subtext-0)] no-underline transition-colors hover:text-[var(--color-green)]"
-			>← all docs</a
 		>
+			← all docs
+		</a>
 
 		<h1 class="mb-2 text-[1.7em] leading-[1.25] font-bold tracking-tight text-[var(--color-green)]">
 			{data.post.title}
@@ -83,8 +84,9 @@
 		<a
 			href="/projects"
 			class="text-[0.85em] text-[var(--color-subtext-0)] no-underline transition-colors hover:text-[var(--color-green)]"
-			>← all docs</a
 		>
+			← all docs
+		</a>
 	</div>
 
 	<!-- ToC -->
@@ -102,8 +104,10 @@
 							<a
 								href="#{entry.id}"
 								class="nav-link {entry.level === 3 ? 'pl-6! text-[0.92em] opacity-80' : ''}"
-								aria-current={entry.id === activeId ? 'page' : undefined}>{entry.text}</a
+								aria-current={entry.id === activeId ? 'page' : undefined}
 							>
+								{entry.text}
+							</a>
 						</li>
 					{/each}
 				</ul>

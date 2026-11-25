@@ -28,7 +28,7 @@ Content goes here.
 
 ## Development setup
 
-You'll need Node.js (20.19+ is Vite 7's floor; 24.x matches the rest of ewan's monorepo) and pnpm.
+You'll need Node.js (22.17+ is SvelteKit 3's floor; 24.x matches the rest of ewan's monorepo) and pnpm.
 
 ```sh
 git clone https://github.com/ewanc26/docsite.git
@@ -42,14 +42,14 @@ Every push to `main` triggers a redeploy on Vercel, and all routes prerender at 
 
 ## Commands
 
-| Command | What it does |
-| --- | --- |
-| `pnpm dev` | Run the dev server |
-| `pnpm build` | Production build |
+| Command        | What it does                         |
+| -------------- | ------------------------------------ |
+| `pnpm dev`     | Run the dev server                   |
+| `pnpm build`   | Production build                     |
 | `pnpm preview` | Preview the production build locally |
-| `pnpm check` | svelte-check type checking |
-| `pnpm format` | Prettier (code/config files) |
-| `pnpm lint` | Prettier check |
+| `pnpm check`   | svelte-check type checking           |
+| `pnpm format`  | Prettier (code/config files)         |
+| `pnpm lint`    | Prettier check                       |
 
 ## Before opening a pull request
 

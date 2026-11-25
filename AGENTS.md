@@ -23,6 +23,7 @@ A home for all my repositories documentation
 fix: restore deployable documentation build (#4)
 
 <!-- allowed-agents -->
+
 ## Allowed agents
 
 Only **Claude** (Anthropic) and **Mistral** (Mistral AI) may be used as coding agents in this repository. This rule supersedes any earlier agent-attribution guidance in this file.

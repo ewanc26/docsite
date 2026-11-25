@@ -13,8 +13,10 @@
 <!-- ── Hero ──────────────────────────────────────────────────────────────── -->
 <div class="mb-2 text-[0.85em]">
 	<span class="text-[var(--color-green)]">ewan@ewancroft.uk</span><span
-		class="text-[var(--color-subtext-0)]">:~/projects</span
-	><span class="text-[var(--color-overlay-0)]"> $</span>
+		class="text-[var(--color-subtext-0)]"
+	>
+		:~/projects
+	</span><span class="text-[var(--color-overlay-0)]"> $</span>
 	<span class="text-[var(--color-text)] opacity-80"> ls --docs</span>
 </div>
 
@@ -30,22 +32,26 @@
 		href="https://atproto.com"
 		target="_blank"
 		rel="noopener"
-		class="text-[var(--color-green)] underline underline-offset-[3px]">ATProto</a
+		class="text-[var(--color-green)] underline underline-offset-[3px]"
 	>
+		ATProto
+	</a>
 	and the Bluesky ecosystem. Every doc here is published to the AT Protocol via
 	<a
 		href="https://sequoia.pub"
 		target="_blank"
 		rel="noopener"
-		class="text-[var(--color-green)] underline underline-offset-[3px]">Sequoia</a
-	>.
+		class="text-[var(--color-green)] underline underline-offset-[3px]"
+	>
+		Sequoia
+	</a>.
 </p>
 
 <div class="mb-8 flex flex-wrap items-center gap-3">
 	<a href="/projects" class="btn btn-primary">browse all projects<ArrowRight size={14} /></a>
-	<a href="https://github.com/ewanc26" target="_blank" rel="noopener" class="btn btn-ghost"
-		><Github size={14} />github</a
-	>
+	<a href="https://github.com/ewanc26" target="_blank" rel="noopener" class="btn btn-ghost">
+		<Github size={14} />github
+	</a>
 	<div class="ml-auto flex gap-2 max-sm:ml-0">
 		<span class="pill">{posts.length} projects documented</span>
 		<span class="pill">{tagCount} tags</span>
@@ -62,8 +68,9 @@
 	<a
 		href="/projects"
 		class="text-[0.8em] text-[var(--color-subtext-0)] no-underline transition-colors hover:text-[var(--color-green)]"
-		>view all →</a
 	>
+		view all →
+	</a>
 </div>
 
 <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -106,8 +113,9 @@
 				target={link.ext ? '_blank' : undefined}
 				rel={link.ext ? 'noopener' : undefined}
 				class="text-[0.88em] text-[var(--color-subtext-0)] no-underline transition-colors hover:text-[var(--color-green)]"
-				>{link.label}</a
 			>
+				{link.label}
+			</a>
 		</li>
 	{/each}
 </ul>
