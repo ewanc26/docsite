@@ -1,10 +1,11 @@
 <!-- Homepage — terminal-style hero with quick links and a snapshot of recent docs -->
 <script lang="ts">
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 	import { formatDate } from '$lib/date';
-	import { ArrowRight, Github } from '@lucide/svelte';
+	import { ArrowRight } from '@lucide/svelte';
+	import Github from '$lib/components/GithubIcon.svelte';
 
-	const posts = $derived($page.data.posts ?? []);
+	const posts = $derived(page.data.posts ?? []);
 	const featured = $derived(posts.slice(0, 6));
 	const tagCount = $derived(new Set(posts.flatMap((p: { tags: string[] }) => p.tags)).size);
 </script>
