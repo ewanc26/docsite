@@ -4,6 +4,7 @@ description: Reproducible configuration for the services hosted from /Volumes/St
 date: 2026-11-11
 tags: [infrastructure, docker, nix, macos, self-hosting, devops]
 draft: false
+atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3n33vrndyqw2v"
 ---
 
 [server-infrastructure](https://github.com/ewanc26/server-infrastructure) is reproducible configuration for the services hosted from `/Volumes/Storage/Server` on macOS using OrbStack, Docker Compose and a system `launchd` daemon.

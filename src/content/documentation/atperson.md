@@ -4,6 +4,7 @@ description: An experiment in building a persistent digital entity on the AT Pro
 date: 2026-11-13
 tags: [c, cpp, atproto, ai, experiment, digital-entity]
 draft: false
+atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3n33vrnb46626"
 ---
 
 [ATperson](https://github.com/ewanc26/atperson) is an experiment in building a persistent digital entity on the [AT Protocol](https://atproto.com/) that starts with effectively nothing and develops its own learned state through experience. It does not wrap an LLM in a biography: it starts without a seeded vocabulary, personality, ideology, preferences, opinions or life story. What it knows has to come from observations, and the state produced by those observations has to be durable, inspectable and reconstructable.

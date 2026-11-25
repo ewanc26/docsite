@@ -4,6 +4,7 @@ description: A native teal.fm client for iOS and Android that reads the plays al
 date: 2026-11-23
 tags: [swift, kotlin, atproto, teal-fm, music, ios, android, client]
 draft: false
+atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3n33vrmzrw32h"
 ---
 
 [Fathom](https://github.com/ewanc26/fathom) is a native teal.fm client for iOS and Android. It reads the plays already in your AT Protocol repo and turns them into a listening dashboard: what is playing now, what today has been, top artists, releases and tracks over 7 days, 30 days or all time, and the full history grouped by the day you actually had.

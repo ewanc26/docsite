@@ -4,6 +4,7 @@ description: A customisable voice synthesis engine written in C++20 that makes s
 date: 2026-11-25
 tags: [cpp, audio, speech, synthesis, cli, library]
 draft: false
+atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3n33vrmsdd62v"
 ---
 
 [Formant](https://github.com/ewanc26/formant) is a customisable voice synthesis engine written in C++20. It makes speech from sine waves only. It is a library first and a command-line tool second: embed it in a game, a robot, an accessibility tool or anything else that needs a voice without shipping a speech model, audio samples or a large runtime.

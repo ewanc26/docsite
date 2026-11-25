@@ -4,6 +4,7 @@ description: A Facebook-inspired Bluesky client for iOS, Android and the web —
 date: 2026-11-25
 tags: [typescript, react-native, expo, atproto, bluesky, client, ios, android, web]
 draft: false
+atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3n33vrmtth62h"
 ---
 
 [Balla](https://github.com/ewanc26/balla) renders Bluesky the way Facebook reads: your friends' posts as cards on a home feed, newest first, with no algorithm deciding what you see. It is independent software, not an official Bluesky client, and is not affiliated with, endorsed by or sponsored by Bluesky Social PBC or Meta Platforms, Inc. Facebook-era styling is a visual reference only.

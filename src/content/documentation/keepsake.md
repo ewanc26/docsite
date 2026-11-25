@@ -4,6 +4,7 @@ description: A text-based RPG in C++ where your AT Protocol DID is the save file
 date: 2026-11-23
 tags: [cpp, rpg, atproto, game, text-adventure]
 draft: false
+atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3n33vrmya362h"
 ---
 
 [Keepsake](https://github.com/ewanc26/keepsake) is a text-based RPG in C++ where your AT Protocol DID is the save file.

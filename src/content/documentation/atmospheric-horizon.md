@@ -4,6 +4,7 @@ description: "AT Protocol (Bluesky) integration for Horizon, the Rust rewrite of
 date: 2026-11-25
 tags: [rust, minecraft, atproto, bluesky, mod, game]
 draft: false
+atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3n33vrmvbb626"
 ---
 
 [atmospheric-horizon](https://github.com/ewanc26/atmospheric-horizon) is AT Protocol (Bluesky) integration for [Horizon](https://playhorizon.dev), the Rust rewrite of Minecraft: Java Edition. It posts text and screenshots, replies to and reacts to posts, and reads notifications, profiles and public graph data without leaving the game.

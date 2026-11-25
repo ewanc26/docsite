@@ -4,6 +4,7 @@ description: A native C++20 artificial-life simulation of an autonomous society 
 date: 2026-10-14
 tags: [cpp, simulation, artificial-life, neural-network, game, sdl2]
 draft: false
+atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3n33vrngusm2e"
 ---
 
 [Pixel Society](https://github.com/ewanc26/pixel-society) is a native C++20 artificial-life simulation of an autonomous society. **Set the starting conditions; let the pixels decide what happens next.** Seed a landscape, choose its terrain shape, scale, population, resources, cooperation and hazard level, then watch citizens forage, build, farm, share, form new generations and struggle to survive. Once the simulation begins, the interface only observes.

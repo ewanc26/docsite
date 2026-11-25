@@ -4,6 +4,7 @@ description: An arcade shooter with seeded, Balatro-inspired blinds, shop choice
 date: 2026-11-13
 tags: [c, cpp, game, sdl2, arcade, neural-network, seeded]
 draft: false
+atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3n33vrn4qm62h"
 ---
 
 [Smol Invaders](https://github.com/ewanc26/smolinvaders) (the `space-invaders` directory) is an arcade shooter with seeded, Balatro-inspired blinds, shop choices and run-local relics. The simulation is C23; the windowed UI is C++23 with SDL2 and SDL2_ttf.

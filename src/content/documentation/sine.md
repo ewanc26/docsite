@@ -4,6 +4,7 @@ description: An LLM-powered music recommendation system built around your listen
 date: 2026-11-13
 tags: [python, llm, music, recommendation, local-first, cli]
 draft: false
+atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3n33vrn67fd2s"
 ---
 
 [Sine](https://github.com/ewanc26/sine) is an LLM-powered music recommendation system built around your listening history. It takes listening data from one or more music services or imports, builds a structured picture of what you listen to, and uses a language model to recommend music based on that history.

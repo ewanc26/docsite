@@ -4,6 +4,7 @@ description: A DAW where everything is a graph — music arranged from mathemati
 date: 2026-10-15
 tags: [typescript, svelte, audio, daw, music, web-audio, python]
 draft: false
+atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3n33vrnfgtf2v"
 ---
 
 [mathmusic](https://github.com/ewanc26/mathmusic) is a DAW where everything is a graph. Music is arranged from mathematical curves: each clip plays a curve `y = f(x)`, read left to right as time, with its height mapped to pitch. Sounds, envelopes, automation and effects are formulas too, and every one of them is drawn as a graph while you edit it.

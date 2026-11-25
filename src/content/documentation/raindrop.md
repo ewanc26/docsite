@@ -4,6 +4,7 @@ description: A Firefox fork with first-class support for the AT Protocol and its
 date: 2026-11-23
 tags: [firefox, atproto, browser, c, rust, mozilla]
 draft: false
+atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3n33vrmwq532s"
 ---
 
 [raindrop](https://github.com/ewanc26/raindrop) is a Firefox fork that has first-class support for the AT Protocol and its URI schema.

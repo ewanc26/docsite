@@ -4,6 +4,7 @@ description: A playable, offline C++20 city builder where a small neural network
 date: 2026-11-13
 tags: [cpp, game, city-builder, neural-network, sdl2, simulation]
 draft: false
+atUri: "at://did:plc:ofrbh253gwicbkc5nktqepol/site.standard.document/3n33vrn3ai62v"
 ---
 
 [Tidemind](https://github.com/ewanc26/tidemind) is a playable, offline **C++20 city builder** where a small neural network learns what makes a neighbourhood a good home. Build an isometric estuary town, connect its streets, balance food, water, energy, jobs and money, and grow from 24 settlers to an independent town. Different households value gardens, employment and the coast differently; their learned preferences determine where they move.
