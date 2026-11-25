@@ -8,7 +8,7 @@ draft: false
 
 [shut](https://github.com/ewanc26/shut) is a Bluesky labeller for incel language. It watches new posts and profile edits and labels the ones using that vocabulary with `incel-language`. Subscribers have labelled content hidden by default, and can change the setting to warn or show it.
 
-No public instance is running yet, so there is no account to subscribe to.
+To use it, open [@shut.croft.click](https://bsky.app/profile/shut.croft.click) on Bluesky and subscribe to the labeller. Labelling started on 25 November 2026; earlier posts are not covered. The website is at [shut.croft.click](https://shut.croft.click).
 
 ## What gets labelled
 
