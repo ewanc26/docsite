@@ -11,3 +11,6 @@ bun.lockb
 # Authored prose — reformatting rewrites frontmatter quoting, tables and code
 # fences, which dirties every published AT Protocol record
 /src/content/
+
+# Written by repository metadata normalisation
+.github/dependabot.yml
