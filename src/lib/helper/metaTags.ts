@@ -1,4 +1,4 @@
-import { PUBLIC_SITE_TITLE, PUBLIC_SITE_DESCRIPTION, PUBLIC_SITE_URL } from '$env/static/public';
+import { PUBLIC_SITE_TITLE, PUBLIC_SITE_DESCRIPTION, PUBLIC_SITE_URL } from '$app/env/public';
 
 /**
  * Site metadata used across all pages for SEO and social sharing.

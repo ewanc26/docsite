@@ -4,7 +4,7 @@
 	 * SEO meta tags shared across all pages.
 	 */
 	import './layout.css';
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 	import { Menu, X, Coffee, Globe, Heart } from '@lucide/svelte';
 	import type { LayoutData } from './$types';
 	import { MetaTags } from '$lib/components/seo';
@@ -17,7 +17,7 @@
 
 	// Close mobile sidebar when navigating to a new page
 	$effect(() => {
-		$page.url.pathname;
+		page.url.pathname;
 		menuOpen = false;
 	});
 
@@ -42,10 +42,10 @@
 	// emit their own <title>/description/og:* tags, but because the layout renders
 	// first the site-wide defaults won and every document advertised the homepage
 	// description and URL to crawlers.
-	const post = $derived(($page.data as { post?: PostMeta }).post);
+	const post = $derived((page.data as { post?: PostMeta }).post);
 
 	const pageMeta = $derived.by<SiteMetadata>(() => {
-		const path = $page.url.pathname;
+		const path = page.url.pathname;
 		const url = `${siteMeta.url.replace(/\/$/, '')}${path === '/' ? '' : path}`;
 
 		if (post) {
@@ -118,7 +118,7 @@
 					<a
 						href="/"
 						class="nav-link"
-						aria-current={$page.url.pathname === '/' ? 'page' : undefined}>home</a
+						aria-current={page.url.pathname === '/' ? 'page' : undefined}>home</a
 					>
 				</li>
 				<li>
@@ -137,7 +137,7 @@
 					<a
 						href="/projects"
 						class="nav-link"
-						aria-current={$page.url.pathname === '/projects' ? 'page' : undefined}>all projects</a
+						aria-current={page.url.pathname === '/projects' ? 'page' : undefined}>all projects</a
 					>
 				</li>
 			</ul>
@@ -153,7 +153,7 @@
 							href="/projects/{post.slug}"
 							class="nav-link truncate"
 							title={post.title}
-							aria-current={$page.url.pathname === `/projects/${post.slug}` ? 'page' : undefined}
+							aria-current={page.url.pathname === `/projects/${post.slug}` ? 'page' : undefined}
 							>{post.title}</a
 						>
 					</li>
