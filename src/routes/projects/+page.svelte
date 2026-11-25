@@ -52,8 +52,10 @@
 		href="https://sequoia.pub"
 		target="_blank"
 		rel="noopener"
-		class="text-[var(--color-green)] underline underline-offset-[3px]">Sequoia</a
-	>.
+		class="text-[var(--color-green)] underline underline-offset-[3px]"
+	>
+		Sequoia
+	</a>.
 </p>
 
 <!-- ── Search ────────────────────────────────────────────────────────────── -->
@@ -86,14 +88,18 @@
 			class="pill cursor-pointer transition-colors {activeTag === tag
 				? 'border-[var(--color-green)]! bg-[var(--color-green)]! text-[var(--color-crust)]!'
 				: 'hover:border-[var(--border-strong)]'}"
-			onclick={() => toggleTag(tag)}>{tag}</button
+			onclick={() => toggleTag(tag)}
 		>
+			{tag}
+		</button>
 	{/each}
 	{#if activeTag || query}
 		<button
 			class="pill cursor-pointer border-[var(--color-red)]/40 text-[var(--color-red)] transition-colors hover:border-[var(--color-red)]"
-			onclick={clearFilters}>clear ×</button
+			onclick={clearFilters}
 		>
+			clear ×
+		</button>
 	{/if}
 </div>
 
@@ -106,8 +112,9 @@
 	<p class="text-[0.88em] text-[var(--color-overlay-0)] italic">
 		no docs yet — add markdown files to <code
 			class="rounded border border-[var(--border-subtle)] bg-[var(--color-surface-0)] px-1.5 py-0.5 text-[0.88em] text-[var(--color-green)]"
-			>src/content/documentation/</code
-		>.
+		>
+			src/content/documentation/
+		</code>.
 	</p>
 {:else if filtered.length === 0}
 	<p class="text-[0.88em] text-[var(--color-overlay-0)] italic">

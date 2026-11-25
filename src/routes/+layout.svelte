@@ -118,13 +118,15 @@
 					<a
 						href="/"
 						class="nav-link"
-						aria-current={page.url.pathname === '/' ? 'page' : undefined}>home</a
+						aria-current={page.url.pathname === '/' ? 'page' : undefined}
 					>
+						home
+					</a>
 				</li>
 				<li>
-					<a href="https://devlog.croft.click" target="_blank" rel="noopener" class="nav-link"
-						>devlog</a
-					>
+					<a href="https://devlog.croft.click" target="_blank" rel="noopener" class="nav-link">
+						devlog
+					</a>
 				</li>
 			</ul>
 		</div>
@@ -137,8 +139,10 @@
 					<a
 						href="/projects"
 						class="nav-link"
-						aria-current={page.url.pathname === '/projects' ? 'page' : undefined}>all projects</a
+						aria-current={page.url.pathname === '/projects' ? 'page' : undefined}
 					>
+						all projects
+					</a>
 				</li>
 			</ul>
 		</div>
@@ -154,28 +158,33 @@
 							class="nav-link truncate"
 							title={post.title}
 							aria-current={page.url.pathname === `/projects/${post.slug}` ? 'page' : undefined}
-							>{post.title}</a
 						>
+							{post.title}
+						</a>
 					</li>
 				{/each}
 			</ul>
 		</div>
 		<div class="mt-auto flex flex-col gap-1.5 border-t border-[var(--border-subtle)] pt-4">
-			<a href="https://ewancroft.uk" target="_blank" rel="noopener" class="btn btn-ghost w-full"
-				><Globe size={14} />my website</a
-			>
+			<a href="https://ewancroft.uk" target="_blank" rel="noopener" class="btn btn-ghost w-full">
+				<Globe size={14} />my website
+			</a>
 			<a
 				href="https://ko-fi.com/ewancroft"
 				target="_blank"
 				rel="noopener"
-				class="btn btn-ghost w-full"><Coffee size={14} />tip me on ko-fi</a
+				class="btn btn-ghost w-full"
 			>
+				<Coffee size={14} />tip me on ko-fi
+			</a>
 			<a
 				href="https://github.com/sponsors/ewanc26"
 				target="_blank"
 				rel="noopener"
-				class="btn btn-ghost w-full"><Heart size={14} />github sponsors</a
+				class="btn btn-ghost w-full"
 			>
+				<Heart size={14} />github sponsors
+			</a>
 		</div>
 	</nav>
 
@@ -197,24 +206,27 @@
 			target="_blank"
 			rel="noopener"
 			class="underline decoration-[color-mix(in_srgb,var(--color-green)_35%,transparent)] underline-offset-2 transition-colors hover:text-[var(--color-green)]"
-			>ewancroft.uk</a
 		>
+			ewancroft.uk
+		</a>
 		<span aria-hidden="true" class="opacity-40">·</span>
 		<a
 			href="https://github.com/ewanc26"
 			target="_blank"
 			rel="noopener"
 			class="underline decoration-[color-mix(in_srgb,var(--color-green)_35%,transparent)] underline-offset-2 transition-colors hover:text-[var(--color-green)]"
-			>github</a
 		>
+			github
+		</a>
 		<span aria-hidden="true" class="opacity-40">·</span>
 		<a
 			href="https://github.com/sponsors/ewanc26"
 			target="_blank"
 			rel="noopener"
 			class="underline decoration-[color-mix(in_srgb,var(--color-green)_35%,transparent)] underline-offset-2 transition-colors hover:text-[var(--color-green)]"
-			>GitHub Sponsors</a
 		>
+			GitHub Sponsors
+		</a>
 		<span aria-hidden="true" class="opacity-40">·</span>
 		published via
 		<a
@@ -222,8 +234,9 @@
 			target="_blank"
 			rel="noopener"
 			class="underline decoration-[color-mix(in_srgb,var(--color-green)_35%,transparent)] underline-offset-2 transition-colors hover:text-[var(--color-green)]"
-			>sequoia</a
 		>
+			sequoia
+		</a>
 		<span aria-hidden="true" class="opacity-40">·</span>
 		<span title="GDPR-compliant, cookie-free analytics">privacy-first analytics</span>
 	</footer>
